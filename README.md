@@ -9,13 +9,17 @@ Ce CMS est [Directus](https://directus.io/).
 
 # Installation en local
 
-## Base de données
+### Démarrage de la base de données
 
 Afin de pouvoir fonctionner, Directus a besoin d'une base de données PostgreSQL.
 
 Il est possible d'utiliser la procédure d'installation de la base décrite dans [le repository du site Plus fraîche ma ville](https://github.com/incubateur-ademe/plusfraichemaville-site).
 
 ⚠️ En production, les tables liés à Directus sont installées sur le schéma "directus" de la base de données
+
+### Configuration
+
+Afin de faire tourner le CMS en local, il faut copier créer à la racine du projet un fichier .env à partir de [ce fichier d'exemple](./.env.dist).
 
 ### Initialisation du schéma de la base
 Afin d'initialiser la base de données avec le schéma utilisé par Plus fraîche ma ville, il est nécessaire d'appliquer [le snapshot présent dans le repository](./db/snapshot.yaml) avec la commande suivante :
@@ -24,11 +28,8 @@ Afin d'initialiser la base de données avec le schéma utilisé par Plus fraîch
 npm exec directus schema apply ./db/snapshot.yaml
 ```
 
-## Configuration
 
-Afin de faire tourner le CMS en local, il faut copier créer à la racine du projet un fichier .env à partir de [ce fichier d'exemple](./.env.dist). 
-
-## Démarrage
+### Démarrage
 
 Démarrez ensuite le serveur en mode développement :
 
