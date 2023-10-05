@@ -1,1 +1,1 @@
-postdeploy: npm exec directus schema apply ./db/snapshot.yaml
+postdeploy: npx directus schema apply --yes ./db/snapshot.yaml
