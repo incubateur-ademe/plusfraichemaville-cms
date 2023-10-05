@@ -36,3 +36,13 @@ Démarrez ensuite le serveur en mode développement :
 ```shell
 pnpm start
 ```
+
+# Soumission d'un nouveau modèle de données
+
+Afin de répercuter les modifications du modèle de données faite en local sur les autres environnements, il faut d'abord mettre à jour le snapshot du modèle:
+
+```shell
+pnpm create-db-snapshot
+```
+
+Une fois ce modèle créé, il suffira de le push sur la branche "prod" pour qu'il soit automatiquement appliqué à la base CMS de production, à l'aide de la commande incluse dans le fichier [Procfile](./Procfile)

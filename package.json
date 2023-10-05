@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx directus start",
+    "create-db-snapshot": "npx directus schema snapshot --yes ./db/snapshot.yaml",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
