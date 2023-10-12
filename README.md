@@ -39,6 +39,8 @@ pnpm start
 
 # Soumission d'un nouveau modèle de données
 
+## Base de données
+
 Afin de répercuter les modifications du modèle de données faite en local sur les autres environnements, il faut d'abord mettre à jour le snapshot du modèle:
 
 ```shell
@@ -46,3 +48,9 @@ pnpm create-db-snapshot
 ```
 
 Une fois ce modèle créé, il suffira de le push sur la branche "prod" pour qu'il soit automatiquement appliqué à la base CMS de production, à l'aide de la commande incluse dans le fichier [Procfile](./Procfile)
+
+## Classe typescript
+
+Pour générer les classes Typescript à jour, on utilise le plugin [directus-extension-generate-types ](https://github.com/maltejur/directus-extension-generate-types)
+
+Les classes peuvent donc être récupérées dans l'interface de Directus avant d'être copiées dans [le repo du site](https://github.com/incubateur-ademe/plusfraichemaville-site).
