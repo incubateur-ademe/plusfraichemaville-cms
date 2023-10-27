@@ -41,7 +41,7 @@ pnpm start
 
 ## Base de données
 
-Afin de répercuter les modifications du modèle de données faite en local sur les autres environnements, il faut d'abord mettre à jour le snapshot du modèle:
+Afin de répercuter les modifications du modèle de données faites en local sur les autres environnements, il faut d'abord mettre à jour le snapshot du modèle:
 
 ```shell
 pnpm create-db-snapshot

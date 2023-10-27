@@ -48,29 +48,6 @@ collections:
       unarchive_value: null
     schema:
       name: aide_decision_etape_fiche_technique
-  - collection: aide_decision_step
-    meta:
-      accountability: all
-      archive_app_filter: true
-      archive_field: null
-      archive_value: null
-      collapse: open
-      collection: aide_decision_step
-      color: null
-      display_template: null
-      group: null
-      hidden: false
-      icon: null
-      item_duplication_fields: null
-      note: null
-      preview_url: null
-      singleton: false
-      sort: null
-      sort_field: null
-      translations: null
-      unarchive_value: null
-    schema:
-      name: aide_decision_step
   - collection: etape_mise_en_oeuvre
     meta:
       accountability: all
@@ -163,29 +140,6 @@ collections:
       unarchive_value: null
     schema:
       name: type_espace
-  - collection: type_place
-    meta:
-      accountability: all
-      archive_app_filter: true
-      archive_field: null
-      archive_value: null
-      collapse: open
-      collection: type_place
-      color: null
-      display_template: null
-      group: null
-      hidden: false
-      icon: null
-      item_duplication_fields: null
-      note: null
-      preview_url: null
-      singleton: false
-      sort: null
-      sort_field: null
-      translations: null
-      unarchive_value: null
-    schema:
-      name: type_place
 fields:
   - collection: aide_decision_etape
     field: date_created
@@ -354,7 +308,8 @@ fields:
       collection: aide_decision_etape
       conditions: null
       display: related-values
-      display_options: null
+      display_options:
+        template: '{{id}}-{{fiche_technique_id.titre}}'
       field: fiche_technique_id
       group: null
       hidden: false
@@ -529,47 +484,43 @@ fields:
       foreign_key_table: null
       foreign_key_column: null
   - collection: aide_decision_etape
-    field: type_espace_id
-    type: integer
+    field: slug
+    type: string
     meta:
       collection: aide_decision_etape
       conditions: null
-      display: related-values
-      display_options:
-        template: '{{id}} - {{nom}}'
-      field: type_espace_id
+      display: null
+      display_options: null
+      field: slug
       group: null
       hidden: false
-      interface: select-dropdown-m2o
-      note: Ne remplir que si etape parente est vide
-      options:
-        enableCreate: false
-        template: '{{id}} - {{nom}}'
+      interface: input
+      note: null
+      options: null
       readonly: false
-      required: false
-      sort: 9
-      special:
-        - m2o
+      required: true
+      sort: 13
+      special: null
       translations: null
       validation: null
       validation_message: null
       width: full
     schema:
-      name: type_espace_id
+      name: slug
       table: aide_decision_etape
-      data_type: integer
+      data_type: character varying
       default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
       is_nullable: true
       is_unique: false
       is_primary_key: false
       is_generated: false
       generation_expression: null
       has_auto_increment: false
-      foreign_key_table: type_espace
-      foreign_key_column: id
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: aide_decision_etape
     field: user_created
     type: uuid
@@ -802,240 +753,6 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
-  - collection: aide_decision_step
-    field: aide_decision_step_parent_id
-    type: integer
-    meta:
-      collection: aide_decision_step
-      conditions: null
-      display: null
-      display_options: null
-      field: aide_decision_step_parent_id
-      group: null
-      hidden: false
-      interface: select-dropdown-m2o
-      note: null
-      options:
-        template: '{{id}} - {{nom}}'
-      readonly: false
-      required: false
-      sort: 6
-      special:
-        - m2o
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: aide_decision_step_parent_id
-      table: aide_decision_step
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: aide_decision_step
-      foreign_key_column: id
-  - collection: aide_decision_step
-    field: description
-    type: text
-    meta:
-      collection: aide_decision_step
-      conditions: null
-      display: null
-      display_options: null
-      field: description
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 3
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: description
-      table: aide_decision_step
-      data_type: text
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: aide_decision_step
-    field: id
-    type: integer
-    meta:
-      collection: aide_decision_step
-      conditions: null
-      display: null
-      display_options: null
-      field: id
-      group: null
-      hidden: true
-      interface: input
-      note: null
-      options: null
-      readonly: true
-      required: false
-      sort: 1
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: id
-      table: aide_decision_step
-      data_type: integer
-      default_value: nextval('aide_decision_step_id_seq'::regclass)
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: false
-      is_unique: true
-      is_primary_key: true
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: true
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: aide_decision_step
-    field: image
-    type: uuid
-    meta:
-      collection: aide_decision_step
-      conditions: null
-      display: null
-      display_options: null
-      field: image
-      group: null
-      hidden: false
-      interface: file-image
-      note: null
-      options:
-        crop: false
-      readonly: false
-      required: false
-      sort: 4
-      special:
-        - file
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: image
-      table: aide_decision_step
-      data_type: uuid
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: directus_files
-      foreign_key_column: id
-  - collection: aide_decision_step
-    field: nom
-    type: string
-    meta:
-      collection: aide_decision_step
-      conditions: null
-      display: null
-      display_options: null
-      field: nom
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 2
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: nom
-      table: aide_decision_step
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: aide_decision_step
-    field: type_place_id
-    type: integer
-    meta:
-      collection: aide_decision_step
-      conditions: null
-      display: related-values
-      display_options:
-        template: '{{id}} - {{name}}'
-      field: type_place_id
-      group: null
-      hidden: false
-      interface: select-dropdown-m2o
-      note: null
-      options:
-        template: '{{id}} - {{name}}'
-      readonly: false
-      required: false
-      sort: 5
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: type_place_id
-      table: aide_decision_step
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: type_place
-      foreign_key_column: id
   - collection: etape_mise_en_oeuvre
     field: description
     type: text
@@ -1248,7 +965,7 @@ fields:
         softLength: 1000
       readonly: false
       required: true
-      sort: 9
+      sort: 10
       special: null
       translations: null
       validation: null
@@ -1260,6 +977,44 @@ fields:
       data_type: text
       default_value: null
       max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: fiche_technique
+    field: description_courte
+    type: string
+    meta:
+      collection: fiche_technique
+      conditions: null
+      display: null
+      display_options: null
+      field: description_courte
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 9
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: description_courte
+      table: fiche_technique
+      data_type: character varying
+      default_value: null
+      max_length: 255
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -1288,7 +1043,7 @@ fields:
         template: '{{etape_mise_en_oeuvre_id.titre}}'
       readonly: false
       required: false
-      sort: 11
+      sort: 12
       special:
         - m2m
       translations: null
@@ -1350,7 +1105,7 @@ fields:
         folder: a461ceb0-3f5c-46eb-ad2a-47a1c3591f95
       readonly: false
       required: false
-      sort: 10
+      sort: 11
       special:
         - file
       translations: null
@@ -1373,6 +1128,44 @@ fields:
       has_auto_increment: false
       foreign_key_table: directus_files
       foreign_key_column: id
+  - collection: fiche_technique
+    field: slug
+    type: string
+    meta:
+      collection: fiche_technique
+      conditions: null
+      display: null
+      display_options: null
+      field: slug
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 13
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: slug
+      table: fiche_technique
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: fiche_technique
     field: sort
     type: integer
@@ -1928,7 +1721,7 @@ fields:
       max_length: 255
       numeric_precision: null
       numeric_scale: null
-      is_nullable: true
+      is_nullable: false
       is_unique: true
       is_primary_key: false
       is_generated: false
@@ -1962,6 +1755,44 @@ fields:
       width: full
     schema:
       name: question_suivante
+      table: type_espace
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: type_espace
+    field: slug
+    type: string
+    meta:
+      collection: type_espace
+      conditions: null
+      display: null
+      display_options: null
+      field: slug
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 10
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: slug
       table: type_espace
       data_type: character varying
       default_value: null
@@ -2094,146 +1925,6 @@ fields:
       has_auto_increment: false
       foreign_key_table: directus_users
       foreign_key_column: id
-  - collection: type_place
-    field: aide_decision_step_id
-    type: alias
-    meta:
-      collection: type_place
-      conditions: null
-      display: null
-      display_options: null
-      field: aide_decision_step_id
-      group: null
-      hidden: false
-      interface: list-o2m
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 4
-      special:
-        - o2m
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-  - collection: type_place
-    field: id
-    type: integer
-    meta:
-      collection: type_place
-      conditions: null
-      display: null
-      display_options: null
-      field: id
-      group: null
-      hidden: true
-      interface: input
-      note: null
-      options: null
-      readonly: true
-      required: false
-      sort: 1
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: id
-      table: type_place
-      data_type: integer
-      default_value: nextval('type_place_id_seq'::regclass)
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: false
-      is_unique: true
-      is_primary_key: true
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: true
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: type_place
-    field: image
-    type: uuid
-    meta:
-      collection: type_place
-      conditions: null
-      display: null
-      display_options: null
-      field: image
-      group: null
-      hidden: false
-      interface: file-image
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 3
-      special:
-        - file
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: image
-      table: type_place
-      data_type: uuid
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: directus_files
-      foreign_key_column: id
-  - collection: type_place
-    field: name
-    type: string
-    meta:
-      collection: type_place
-      conditions: null
-      display: null
-      display_options: null
-      field: name
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options:
-        placeholder: nom du type d'espace
-        url: null
-      readonly: false
-      required: true
-      sort: 2
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: name
-      table: type_place
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
 relations:
   - collection: aide_decision_etape
     field: etape_parente_id
@@ -2275,27 +1966,6 @@ relations:
       foreign_key_table: directus_files
       foreign_key_column: id
       constraint_name: aide_decision_etape_image_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
-  - collection: aide_decision_etape
-    field: type_espace_id
-    related_collection: type_espace
-    meta:
-      junction_field: null
-      many_collection: aide_decision_etape
-      many_field: type_espace_id
-      one_allowed_collections: null
-      one_collection: type_espace
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: aide_decision_etape
-      column: type_espace_id
-      foreign_key_table: type_espace
-      foreign_key_column: id
-      constraint_name: aide_decision_etape_type_espace_id_foreign
       on_update: NO ACTION
       on_delete: SET NULL
   - collection: aide_decision_etape
@@ -2380,69 +2050,6 @@ relations:
       foreign_key_table: fiche_technique
       foreign_key_column: id
       constraint_name: aide_decision_etape_fiche_technique_fiche___6f443189_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
-  - collection: aide_decision_step
-    field: aide_decision_step_parent_id
-    related_collection: aide_decision_step
-    meta:
-      junction_field: null
-      many_collection: aide_decision_step
-      many_field: aide_decision_step_parent_id
-      one_allowed_collections: null
-      one_collection: aide_decision_step
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: aide_decision_step
-      column: aide_decision_step_parent_id
-      foreign_key_table: aide_decision_step
-      foreign_key_column: id
-      constraint_name: aide_decision_step_aide_decision_step_parent_id_foreign
-      on_update: NO ACTION
-      on_delete: NO ACTION
-  - collection: aide_decision_step
-    field: image
-    related_collection: directus_files
-    meta:
-      junction_field: null
-      many_collection: aide_decision_step
-      many_field: image
-      one_allowed_collections: null
-      one_collection: directus_files
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: aide_decision_step
-      column: image
-      foreign_key_table: directus_files
-      foreign_key_column: id
-      constraint_name: aide_decision_step_image_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
-  - collection: aide_decision_step
-    field: type_place_id
-    related_collection: type_place
-    meta:
-      junction_field: null
-      many_collection: aide_decision_step
-      many_field: type_place_id
-      one_allowed_collections: null
-      one_collection: type_place
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: aide_decision_step_id
-      sort_field: null
-    schema:
-      table: aide_decision_step
-      column: type_place_id
-      foreign_key_table: type_place
-      foreign_key_column: id
-      constraint_name: aide_decision_step_type_place_id_foreign
       on_update: NO ACTION
       on_delete: SET NULL
   - collection: fiche_technique
@@ -2613,24 +2220,3 @@ relations:
       constraint_name: type_espace_user_updated_foreign
       on_update: NO ACTION
       on_delete: NO ACTION
-  - collection: type_place
-    field: image
-    related_collection: directus_files
-    meta:
-      junction_field: null
-      many_collection: type_place
-      many_field: image
-      one_allowed_collections: null
-      one_collection: directus_files
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: type_place
-      column: image
-      foreign_key_table: directus_files
-      foreign_key_column: id
-      constraint_name: type_place_image_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
