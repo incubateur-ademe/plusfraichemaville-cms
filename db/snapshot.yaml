@@ -117,14 +117,37 @@ collections:
       unarchive_value: null
     schema:
       name: fiche_technique_etape_mise_en_oeuvre
-  - collection: type_espace
+  - collection: fiche_technique_objectif_developpement_durable
     meta:
       accountability: all
       archive_app_filter: true
       archive_field: null
       archive_value: null
       collapse: open
-      collection: type_espace
+      collection: fiche_technique_objectif_developpement_durable
+      color: null
+      display_template: null
+      group: null
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      name: fiche_technique_objectif_developpement_durable
+  - collection: objectif_developpement_durable
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: objectif_developpement_durable
       color: null
       display_template: null
       group: null
@@ -139,7 +162,7 @@ collections:
       translations: null
       unarchive_value: null
     schema:
-      name: type_espace
+      name: objectif_developpement_durable
 fields:
   - collection: aide_decision_etape
     field: date_created
@@ -1129,6 +1152,75 @@ fields:
       foreign_key_table: directus_files
       foreign_key_column: id
   - collection: fiche_technique
+    field: odd
+    type: alias
+    meta:
+      collection: fiche_technique
+      conditions: null
+      display: null
+      display_options:
+        template: >-
+          {{objectif_developpement_durable_id.numero_odd}} -
+          {{objectif_developpement_durable_id.description}}
+      field: odd
+      group: null
+      hidden: false
+      interface: list-m2m
+      note: null
+      options:
+        template: >-
+          {{objectif_developpement_durable_id.numero_odd}} -
+          {{objectif_developpement_durable_id.description}}
+      readonly: false
+      required: false
+      sort: 15
+      special:
+        - m2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: fiche_technique
+    field: potentiel_rafraichissement
+    type: integer
+    meta:
+      collection: fiche_technique
+      conditions: null
+      display: null
+      display_options: null
+      field: potentiel_rafraichissement
+      group: null
+      hidden: false
+      interface: input
+      note: Potentiel de rafraîchissement en degré
+      options:
+        max: 0
+        min: -15
+      readonly: false
+      required: false
+      sort: 14
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: potentiel_rafraichissement
+      table: fiche_technique
+      data_type: integer
+      default_value: 0
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: fiche_technique
     field: slug
     type: string
     meta:
@@ -1533,116 +1625,149 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
-  - collection: type_espace
-    field: date_created
-    type: timestamp
+  - collection: fiche_technique_objectif_developpement_durable
+    field: fiche_technique_id
+    type: integer
     meta:
-      collection: type_espace
+      collection: fiche_technique_objectif_developpement_durable
       conditions: null
-      display: datetime
-      display_options:
-        relative: true
-      field: date_created
-      group: null
-      hidden: true
-      interface: datetime
-      note: null
-      options: null
-      readonly: true
-      required: false
-      sort: 4
-      special:
-        - date-created
-      translations: null
-      validation: null
-      validation_message: null
-      width: half
-    schema:
-      name: date_created
-      table: type_espace
-      data_type: timestamp with time zone
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: type_espace
-    field: date_updated
-    type: timestamp
-    meta:
-      collection: type_espace
-      conditions: null
-      display: datetime
-      display_options:
-        relative: true
-      field: date_updated
-      group: null
-      hidden: true
-      interface: datetime
-      note: null
-      options: null
-      readonly: true
-      required: false
-      sort: 6
-      special:
-        - date-updated
-      translations: null
-      validation: null
-      validation_message: null
-      width: half
-    schema:
-      name: date_updated
-      table: type_espace
-      data_type: timestamp with time zone
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: type_espace
-    field: icone
-    type: uuid
-    meta:
-      collection: type_espace
-      conditions: null
-      display: image
+      display: null
       display_options: null
-      field: icone
+      field: fiche_technique_id
       group: null
-      hidden: false
-      interface: file-image
+      hidden: true
+      interface: null
       note: null
-      options:
-        crop: false
+      options: null
       readonly: false
-      required: true
-      sort: 8
-      special:
-        - file
+      required: false
+      sort: 2
+      special: null
       translations: null
       validation: null
       validation_message: null
       width: full
     schema:
-      name: icone
-      table: type_espace
-      data_type: uuid
+      name: fiche_technique_id
+      table: fiche_technique_objectif_developpement_durable
+      data_type: integer
       default_value: null
       max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: fiche_technique
+      foreign_key_column: id
+  - collection: fiche_technique_objectif_developpement_durable
+    field: id
+    type: integer
+    meta:
+      collection: fiche_technique_objectif_developpement_durable
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: fiche_technique_objectif_developpement_durable
+      data_type: integer
+      default_value: >-
+        nextval('fiche_technique_objectif_developpement_durable_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: fiche_technique_objectif_developpement_durable
+    field: objectif_developpement_durable_id
+    type: integer
+    meta:
+      collection: fiche_technique_objectif_developpement_durable
+      conditions: null
+      display: null
+      display_options: null
+      field: objectif_developpement_durable_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: objectif_developpement_durable_id
+      table: fiche_technique_objectif_developpement_durable
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: objectif_developpement_durable
+      foreign_key_column: id
+  - collection: objectif_developpement_durable
+    field: description
+    type: string
+    meta:
+      collection: objectif_developpement_durable
+      conditions: null
+      display: null
+      display_options: null
+      field: description
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: description
+      table: objectif_developpement_durable
+      data_type: character varying
+      default_value: null
+      max_length: 255
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -1651,13 +1776,13 @@ fields:
       is_generated: false
       generation_expression: null
       has_auto_increment: false
-      foreign_key_table: directus_files
-      foreign_key_column: id
-  - collection: type_espace
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: objectif_developpement_durable
     field: id
     type: integer
     meta:
-      collection: type_espace
+      collection: objectif_developpement_durable
       conditions: null
       display: null
       display_options: null
@@ -1677,9 +1802,9 @@ fields:
       width: full
     schema:
       name: id
-      table: type_espace
+      table: objectif_developpement_durable
       data_type: integer
-      default_value: nextval('type_espace_id_seq'::regclass)
+      default_value: nextval('objectif_developpement_durable_id_seq'::regclass)
       max_length: null
       numeric_precision: 32
       numeric_scale: 0
@@ -1691,37 +1816,39 @@ fields:
       has_auto_increment: true
       foreign_key_table: null
       foreign_key_column: null
-  - collection: type_espace
-    field: nom
-    type: string
+  - collection: objectif_developpement_durable
+    field: numero_odd
+    type: integer
     meta:
-      collection: type_espace
+      collection: objectif_developpement_durable
       conditions: null
       display: null
       display_options: null
-      field: nom
+      field: numero_odd
       group: null
       hidden: false
       interface: input
       note: null
-      options: null
+      options:
+        max: 17
+        min: 1
       readonly: false
       required: true
-      sort: 7
+      sort: 2
       special: null
       translations: null
       validation: null
       validation_message: null
       width: full
     schema:
-      name: nom
-      table: type_espace
-      data_type: character varying
+      name: numero_odd
+      table: objectif_developpement_durable
+      data_type: integer
       default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: false
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
       is_unique: true
       is_primary_key: false
       is_generated: false
@@ -1729,89 +1856,11 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
-  - collection: type_espace
-    field: question_suivante
-    type: string
-    meta:
-      collection: type_espace
-      conditions: null
-      display: null
-      display_options: null
-      field: question_suivante
-      group: null
-      hidden: false
-      interface: input
-      note: >-
-        Question qui sera posée pour faire les éventuels choix suivants dans le
-        module d'aide à la décision
-      options: null
-      readonly: false
-      required: false
-      sort: 9
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: question_suivante
-      table: type_espace
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: type_espace
-    field: slug
-    type: string
-    meta:
-      collection: type_espace
-      conditions: null
-      display: null
-      display_options: null
-      field: slug
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: true
-      sort: 10
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: slug
-      table: type_espace
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: type_espace
+  - collection: objectif_developpement_durable
     field: sort
     type: integer
     meta:
-      collection: type_espace
+      collection: objectif_developpement_durable
       conditions: null
       display: null
       display_options: null
@@ -1823,7 +1872,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 2
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -1831,7 +1880,7 @@ fields:
       width: full
     schema:
       name: sort
-      table: type_espace
+      table: objectif_developpement_durable
       data_type: integer
       default_value: null
       max_length: null
@@ -1845,86 +1894,6 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
-  - collection: type_espace
-    field: user_created
-    type: uuid
-    meta:
-      collection: type_espace
-      conditions: null
-      display: user
-      display_options: null
-      field: user_created
-      group: null
-      hidden: true
-      interface: select-dropdown-m2o
-      note: null
-      options:
-        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
-      readonly: true
-      required: false
-      sort: 3
-      special:
-        - user-created
-      translations: null
-      validation: null
-      validation_message: null
-      width: half
-    schema:
-      name: user_created
-      table: type_espace
-      data_type: uuid
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: directus_users
-      foreign_key_column: id
-  - collection: type_espace
-    field: user_updated
-    type: uuid
-    meta:
-      collection: type_espace
-      conditions: null
-      display: user
-      display_options: null
-      field: user_updated
-      group: null
-      hidden: true
-      interface: select-dropdown-m2o
-      note: null
-      options:
-        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
-      readonly: true
-      required: false
-      sort: 5
-      special:
-        - user-updated
-      translations: null
-      validation: null
-      validation_message: null
-      width: half
-    schema:
-      name: user_updated
-      table: type_espace
-      data_type: uuid
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: directus_users
-      foreign_key_column: id
 relations:
   - collection: aide_decision_etape
     field: etape_parente_id
@@ -2157,66 +2126,45 @@ relations:
       constraint_name: fiche_technique_etape_mise_en_oeuvre_fiche__7ace69a8_foreign
       on_update: NO ACTION
       on_delete: CASCADE
-  - collection: type_espace
-    field: icone
-    related_collection: directus_files
+  - collection: fiche_technique_objectif_developpement_durable
+    field: fiche_technique_id
+    related_collection: fiche_technique
     meta:
-      junction_field: null
-      many_collection: type_espace
-      many_field: icone
+      junction_field: objectif_developpement_durable_id
+      many_collection: fiche_technique_objectif_developpement_durable
+      many_field: fiche_technique_id
       one_allowed_collections: null
-      one_collection: directus_files
+      one_collection: fiche_technique
       one_collection_field: null
       one_deselect_action: nullify
-      one_field: null
+      one_field: odd
       sort_field: null
     schema:
-      table: type_espace
-      column: icone
-      foreign_key_table: directus_files
+      table: fiche_technique_objectif_developpement_durable
+      column: fiche_technique_id
+      foreign_key_table: fiche_technique
       foreign_key_column: id
-      constraint_name: type_espace_icone_foreign
+      constraint_name: fiche_technique_objectif_developpement_dur__76bee7e6_foreign
       on_update: NO ACTION
       on_delete: SET NULL
-  - collection: type_espace
-    field: user_created
-    related_collection: directus_users
+  - collection: fiche_technique_objectif_developpement_durable
+    field: objectif_developpement_durable_id
+    related_collection: objectif_developpement_durable
     meta:
-      junction_field: null
-      many_collection: type_espace
-      many_field: user_created
+      junction_field: fiche_technique_id
+      many_collection: fiche_technique_objectif_developpement_durable
+      many_field: objectif_developpement_durable_id
       one_allowed_collections: null
-      one_collection: directus_users
+      one_collection: objectif_developpement_durable
       one_collection_field: null
       one_deselect_action: nullify
       one_field: null
       sort_field: null
     schema:
-      table: type_espace
-      column: user_created
-      foreign_key_table: directus_users
+      table: fiche_technique_objectif_developpement_durable
+      column: objectif_developpement_durable_id
+      foreign_key_table: objectif_developpement_durable
       foreign_key_column: id
-      constraint_name: type_espace_user_created_foreign
+      constraint_name: fiche_technique_objectif_developpement_dur__1e7d7681_foreign
       on_update: NO ACTION
-      on_delete: NO ACTION
-  - collection: type_espace
-    field: user_updated
-    related_collection: directus_users
-    meta:
-      junction_field: null
-      many_collection: type_espace
-      many_field: user_updated
-      one_allowed_collections: null
-      one_collection: directus_users
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: type_espace
-      column: user_updated
-      foreign_key_table: directus_users
-      foreign_key_column: id
-      constraint_name: type_espace_user_updated_foreign
-      on_update: NO ACTION
-      on_delete: NO ACTION
+      on_delete: SET NULL
