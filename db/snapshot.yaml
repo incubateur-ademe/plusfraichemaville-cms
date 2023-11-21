@@ -1,5 +1,5 @@
 version: 1
-directus: 13.1.1
+directus: 14.1.1
 vendor: postgres
 collections:
   - collection: aide_decision_etape
@@ -23,6 +23,7 @@ collections:
       sort_field: null
       translations: null
       unarchive_value: null
+      versioning: false
     schema:
       name: aide_decision_etape
   - collection: aide_decision_etape_fiche_technique
@@ -46,6 +47,7 @@ collections:
       sort_field: null
       translations: null
       unarchive_value: null
+      versioning: false
     schema:
       name: aide_decision_etape_fiche_technique
   - collection: etape_mise_en_oeuvre
@@ -69,6 +71,7 @@ collections:
       sort_field: null
       translations: null
       unarchive_value: null
+      versioning: false
     schema:
       name: etape_mise_en_oeuvre
   - collection: fiche_technique
@@ -92,6 +95,7 @@ collections:
       sort_field: sort
       translations: null
       unarchive_value: draft
+      versioning: false
     schema:
       name: fiche_technique
   - collection: fiche_technique_etape_mise_en_oeuvre
@@ -115,6 +119,7 @@ collections:
       sort_field: null
       translations: null
       unarchive_value: null
+      versioning: false
     schema:
       name: fiche_technique_etape_mise_en_oeuvre
   - collection: fiche_technique_objectif_developpement_durable
@@ -138,6 +143,7 @@ collections:
       sort_field: null
       translations: null
       unarchive_value: null
+      versioning: false
     schema:
       name: fiche_technique_objectif_developpement_durable
   - collection: objectif_developpement_durable
@@ -161,8 +167,153 @@ collections:
       sort_field: sort
       translations: null
       unarchive_value: null
+      versioning: false
     schema:
       name: objectif_developpement_durable
+  - collection: retour_experience
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: status
+      archive_value: archived
+      collapse: open
+      collection: retour_experience
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: sort
+      translations: null
+      unarchive_value: draft
+      versioning: false
+    schema:
+      name: retour_experience
+  - collection: retour_experience_objectif_developpement_durable
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: retour_experience_objectif_developpement_durable
+      color: null
+      display_template: null
+      group: null
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: retour_experience_objectif_developpement_durable
+  - collection: retour_experience_solution_retour_experience
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: retour_experience_solution_retour_experience
+      color: null
+      display_template: null
+      group: null
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: retour_experience_solution_retour_experience
+  - collection: retour_experience_undefined
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: retour_experience_undefined
+      color: null
+      display_template: null
+      group: null
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: retour_experience_undefined
+  - collection: situation_retour_experience
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: situation_retour_experience
+      color: null
+      display_template: null
+      group: null
+      hidden: true
+      icon: null
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: sort
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: situation_retour_experience
+  - collection: solution_retour_experience
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: solution_retour_experience
+      color: null
+      display_template: null
+      group: null
+      hidden: true
+      icon: null
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: solution_retour_experience
 fields:
   - collection: aide_decision_etape
     field: date_created
@@ -1894,6 +2045,2479 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
+  - collection: retour_experience
+    field: calendrier
+    type: json
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: calendrier
+      group: null
+      hidden: false
+      interface: list
+      note: null
+      options:
+        fields:
+          - field: date
+            name: date
+            type: text
+            meta:
+              field: date
+              type: text
+              required: true
+              interface: input
+          - field: titre
+            name: titre
+            type: text
+            meta:
+              field: titre
+              type: text
+              required: true
+              interface: input
+          - field: description
+            name: description
+            type: text
+            meta:
+              field: description
+              type: text
+              required: true
+              interface: input-rich-text-html
+        template: '{{date}} -- {{titre}}'
+      readonly: false
+      required: false
+      sort: 16
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: calendrier
+      table: retour_experience
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: citation
+    type: json
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: citation
+      group: null
+      hidden: false
+      interface: list
+      note: null
+      options:
+        fields:
+          - field: texte
+            name: texte
+            type: text
+            meta:
+              field: texte
+              type: text
+              required: true
+              interface: input-rich-text-html
+              options:
+                folder: 6de6459d-2db6-4ee7-8b80-089df3530ff8
+          - field: auteur
+            name: auteur
+            type: string
+            meta:
+              field: auteur
+              type: string
+              required: true
+              interface: input
+        template: '{{auteur}}'
+      readonly: false
+      required: false
+      sort: 12
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: citation
+      table: retour_experience
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: climat_actuel
+    type: string
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: climat_actuel
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        allowOther: true
+        choices:
+          - text: Océanique
+            value: Océanique
+          - text: Méditerranéen
+            value: Méditerranéen
+          - text: Semi-aride
+            value: Semi-aride
+          - text: Semi-continental
+            value: Semi-continental
+      readonly: false
+      required: false
+      sort: 26
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: climat_actuel
+      table: retour_experience
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: climat_futur
+    type: string
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: climat_futur
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        allowOther: true
+        choices:
+          - text: Océanique
+            value: Océanique
+          - text: Méditerranéen
+            value: Méditerranéen
+          - text: Semi-aride
+            value: Semi-aride
+          - text: Semi-continental
+            value: Semi-continental
+      readonly: false
+      required: false
+      sort: 27
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: climat_futur
+      table: retour_experience
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: contact
+    type: text
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: contact
+      group: null
+      hidden: false
+      interface: input-rich-text-html
+      note: null
+      options:
+        folder: 6de6459d-2db6-4ee7-8b80-089df3530ff8
+      readonly: false
+      required: false
+      sort: 30
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: contact
+      table: retour_experience
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: cout
+    type: string
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: cout
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 28
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: cout
+      table: retour_experience
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: credits
+    type: text
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: credits
+      group: null
+      hidden: false
+      interface: input-rich-text-html
+      note: null
+      options:
+        folder: 6de6459d-2db6-4ee7-8b80-089df3530ff8
+      readonly: false
+      required: false
+      sort: 21
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: credits
+      table: retour_experience
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: date_created
+    type: timestamp
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: datetime
+      display_options:
+        relative: true
+      field: date_created
+      group: null
+      hidden: true
+      interface: datetime
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 7
+      special:
+        - date-created
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: date_created
+      table: retour_experience
+      data_type: timestamp with time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: date_updated
+    type: timestamp
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: datetime
+      display_options:
+        relative: true
+      field: date_updated
+      group: null
+      hidden: true
+      interface: datetime
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 9
+      special:
+        - date-updated
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: date_updated
+      table: retour_experience
+      data_type: timestamp with time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: description
+    type: text
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: description
+      group: null
+      hidden: false
+      interface: input-rich-text-html
+      note: null
+      options:
+        folder: 6de6459d-2db6-4ee7-8b80-089df3530ff8
+      readonly: false
+      required: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: description
+      table: retour_experience
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: difficultes
+    type: text
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: difficultes
+      group: null
+      hidden: false
+      interface: input-rich-text-html
+      note: null
+      options:
+        folder: 6de6459d-2db6-4ee7-8b80-089df3530ff8
+      readonly: false
+      required: false
+      sort: 18
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: difficultes
+      table: retour_experience
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: echelle
+    type: string
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: echelle
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        placeholder: Echelle du projet
+      readonly: false
+      required: false
+      sort: 24
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: echelle
+      table: retour_experience
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: financement
+    type: text
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: financement
+      group: null
+      hidden: false
+      interface: input-rich-text-html
+      note: null
+      options:
+        folder: 6de6459d-2db6-4ee7-8b80-089df3530ff8
+      readonly: false
+      required: false
+      sort: 17
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: financement
+      table: retour_experience
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: id
+    type: integer
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: retour_experience
+      data_type: integer
+      default_value: nextval('retour_experience_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: image_principale
+    type: uuid
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: image_principale
+      group: null
+      hidden: false
+      interface: file-image
+      note: null
+      options:
+        crop: false
+        folder: 6de6459d-2db6-4ee7-8b80-089df3530ff8
+      readonly: false
+      required: true
+      sort: 10
+      special:
+        - file
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: image_principale
+      table: retour_experience
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_files
+      foreign_key_column: id
+  - collection: retour_experience
+    field: odd
+    type: alias
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: odd
+      group: null
+      hidden: false
+      interface: list-m2m
+      note: null
+      options:
+        enableCreate: false
+        template: >-
+          {{objectif_developpement_durable_id.numero_odd}} -
+          {{objectif_developpement_durable_id.description}}
+      readonly: false
+      required: false
+      sort: 31
+      special:
+        - m2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: retour_experience
+    field: partenaires
+    type: text
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: partenaires
+      group: null
+      hidden: false
+      interface: input-rich-text-html
+      note: null
+      options:
+        folder: 6de6459d-2db6-4ee7-8b80-089df3530ff8
+      readonly: false
+      required: false
+      sort: 19
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: partenaires
+      table: retour_experience
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: porteur
+    type: string
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: porteur
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 29
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: porteur
+      table: retour_experience
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: region
+    type: string
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: region
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        allowNone: true
+        choices:
+          - text: Auvergne-Rhône-Alpes
+            value: FR-ARA
+          - text: Bourgogne-Franche-Comté
+            value: FR-BFC
+          - text: Bretagne
+            value: FR-BRE
+          - text: Centre-Val de Loire
+            value: FR-CVL
+          - text: Corse
+            value: FR-COR
+          - text: Grand Est
+            value: FR-GES
+          - text: Hauts-de-France
+            value: FR-HDF
+          - text: Île-de-France
+            value: FR-IDF
+          - text: Normandie
+            value: FR-NOR
+          - text: Nouvelle-Aquitaine
+            value: FR-NAQ
+          - text: Occitanie
+            value: FR-OCC
+          - text: Pays de la Loire
+            value: FR-PDL
+          - text: Provence-Alpes-Côte d'Azur
+            value: FR-PAC
+          - text: Guadeloupe
+            value: FR-GUA
+          - text: Guyane
+            value: FR-GUF
+          - text: Martinique
+            value: FR-GUF
+          - text: La Réunion
+            value: FR-LRE
+          - text: Mayotte
+            value: FR-MAY
+      readonly: false
+      required: false
+      sort: 11
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: region
+      table: retour_experience
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: ressources
+    type: text
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: ressources
+      group: null
+      hidden: false
+      interface: input-rich-text-html
+      note: null
+      options:
+        folder: 6de6459d-2db6-4ee7-8b80-089df3530ff8
+      readonly: false
+      required: false
+      sort: 20
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: ressources
+      table: retour_experience
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: situation_apres
+    type: integer
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: related-values
+      display_options:
+        template: null
+      field: situation_apres
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        enableSelect: false
+        template: '{{image.$thumbnail}}'
+      readonly: false
+      required: false
+      sort: 14
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: situation_apres
+      table: retour_experience
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: situation_retour_experience
+      foreign_key_column: id
+  - collection: retour_experience
+    field: situation_avant
+    type: integer
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{description}}'
+      field: situation_avant
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        enableSelect: false
+        template: '{{image.$thumbnail}}'
+      readonly: false
+      required: false
+      sort: 13
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: situation_avant
+      table: retour_experience
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: situation_retour_experience
+      foreign_key_column: id
+  - collection: retour_experience
+    field: slug
+    type: string
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: slug
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 32
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: slug
+      table: retour_experience
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: solutions
+    type: alias
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: solutions
+      group: null
+      hidden: false
+      interface: list-m2m
+      note: null
+      options:
+        enableLink: true
+        template: '{{solution_retour_experience_id.titre}}'
+      readonly: false
+      required: false
+      sort: 15
+      special:
+        - m2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: retour_experience
+    field: sort
+    type: integer
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sort
+      table: retour_experience
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: status
+    type: string
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: labels
+      display_options:
+        choices:
+          - text: $t:published
+            value: published
+            foreground: '#FFFFFF'
+            background: var(--primary)
+          - text: $t:draft
+            value: draft
+            foreground: '#18222F'
+            background: '#D3DAE4'
+          - text: $t:archived
+            value: archived
+            foreground: '#FFFFFF'
+            background: var(--warning)
+        showAsDot: true
+      field: status
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        choices:
+          - text: $t:published
+            value: published
+          - text: $t:draft
+            value: draft
+          - text: $t:archived
+            value: archived
+      readonly: false
+      required: false
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: status
+      table: retour_experience
+      data_type: character varying
+      default_value: draft
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: temporalite
+    type: string
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: temporalite
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        allowNone: true
+        allowOther: true
+        choices:
+          - text: Court terme
+            value: Court terme
+          - text: Moyen terme
+            value: Moyen terme
+          - text: Long terme
+            value: Long terme
+      readonly: false
+      required: false
+      sort: 25
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: temporalite
+      table: retour_experience
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: titre
+    type: string
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: titre
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: titre
+      table: retour_experience
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: types_espace
+    type: json
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: types_espace
+      group: null
+      hidden: false
+      interface: select-multiple-checkbox
+      note: null
+      options:
+        choices:
+          - text: Rond-point
+            value: rondpoint
+          - text: Bâtiment
+            value: batiment
+          - text: Parking
+            value: parking
+          - text: Rue
+            value: rue
+          - text: Place
+            value: place
+          - text: Cour d'école
+            value: ecole
+          - text: Parc et jardin
+            value: parc
+      readonly: false
+      required: false
+      sort: 22
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: types_espace
+      table: retour_experience
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: types_solution
+    type: json
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: types_solution
+      group: null
+      hidden: false
+      interface: select-multiple-checkbox
+      note: null
+      options:
+        choices:
+          - text: Verte
+            value: Verte
+          - text: Grise
+            value: Grise
+          - text: Bleue
+            value: Bleue
+          - text: Douce
+            value: Douce
+      readonly: false
+      required: false
+      sort: 23
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: types_solution
+      table: retour_experience
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience
+    field: user_created
+    type: uuid
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: user
+      display_options: null
+      field: user_created
+      group: null
+      hidden: true
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
+      readonly: true
+      required: false
+      sort: 6
+      special:
+        - user-created
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: user_created
+      table: retour_experience
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_users
+      foreign_key_column: id
+  - collection: retour_experience
+    field: user_updated
+    type: uuid
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: user
+      display_options: null
+      field: user_updated
+      group: null
+      hidden: true
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
+      readonly: true
+      required: false
+      sort: 8
+      special:
+        - user-updated
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: user_updated
+      table: retour_experience
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_users
+      foreign_key_column: id
+  - collection: retour_experience_objectif_developpement_durable
+    field: id
+    type: integer
+    meta:
+      collection: retour_experience_objectif_developpement_durable
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: retour_experience_objectif_developpement_durable
+      data_type: integer
+      default_value: >-
+        nextval('retour_experience_objectif_developpement_durable_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience_objectif_developpement_durable
+    field: objectif_developpement_durable_id
+    type: integer
+    meta:
+      collection: retour_experience_objectif_developpement_durable
+      conditions: null
+      display: null
+      display_options: null
+      field: objectif_developpement_durable_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: objectif_developpement_durable_id
+      table: retour_experience_objectif_developpement_durable
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: objectif_developpement_durable
+      foreign_key_column: id
+  - collection: retour_experience_objectif_developpement_durable
+    field: retour_experience_id
+    type: integer
+    meta:
+      collection: retour_experience_objectif_developpement_durable
+      conditions: null
+      display: null
+      display_options: null
+      field: retour_experience_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: retour_experience_id
+      table: retour_experience_objectif_developpement_durable
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: retour_experience
+      foreign_key_column: id
+  - collection: retour_experience_solution_retour_experience
+    field: id
+    type: integer
+    meta:
+      collection: retour_experience_solution_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: retour_experience_solution_retour_experience
+      data_type: integer
+      default_value: nextval('retour_experience_solution_retour_experience_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience_solution_retour_experience
+    field: retour_experience_id
+    type: integer
+    meta:
+      collection: retour_experience_solution_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: retour_experience_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: retour_experience_id
+      table: retour_experience_solution_retour_experience
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: retour_experience
+      foreign_key_column: id
+  - collection: retour_experience_solution_retour_experience
+    field: solution_retour_experience_id
+    type: integer
+    meta:
+      collection: retour_experience_solution_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: solution_retour_experience_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: solution_retour_experience_id
+      table: retour_experience_solution_retour_experience
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: solution_retour_experience
+      foreign_key_column: id
+  - collection: retour_experience_solution_retour_experience
+    field: sort
+    type: integer
+    meta:
+      collection: retour_experience_solution_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sort
+      table: retour_experience_solution_retour_experience
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience_undefined
+    field: collection
+    type: string
+    meta:
+      collection: retour_experience_undefined
+      conditions: null
+      display: null
+      display_options: null
+      field: collection
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: collection
+      table: retour_experience_undefined
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience_undefined
+    field: id
+    type: integer
+    meta:
+      collection: retour_experience_undefined
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: retour_experience_undefined
+      data_type: integer
+      default_value: nextval('retour_experience_undefined_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience_undefined
+    field: item
+    type: string
+    meta:
+      collection: retour_experience_undefined
+      conditions: null
+      display: null
+      display_options: null
+      field: item
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: item
+      table: retour_experience_undefined
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience_undefined
+    field: retour_experience_id
+    type: integer
+    meta:
+      collection: retour_experience_undefined
+      conditions: null
+      display: null
+      display_options: null
+      field: retour_experience_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: retour_experience_id
+      table: retour_experience_undefined
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: situation_retour_experience
+    field: date_created
+    type: timestamp
+    meta:
+      collection: situation_retour_experience
+      conditions: null
+      display: datetime
+      display_options:
+        relative: true
+      field: date_created
+      group: null
+      hidden: true
+      interface: datetime
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 4
+      special:
+        - date-created
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: date_created
+      table: situation_retour_experience
+      data_type: timestamp with time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: situation_retour_experience
+    field: date_updated
+    type: timestamp
+    meta:
+      collection: situation_retour_experience
+      conditions: null
+      display: datetime
+      display_options:
+        relative: true
+      field: date_updated
+      group: null
+      hidden: true
+      interface: datetime
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 6
+      special:
+        - date-updated
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: date_updated
+      table: situation_retour_experience
+      data_type: timestamp with time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: situation_retour_experience
+    field: description
+    type: text
+    meta:
+      collection: situation_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: description
+      group: null
+      hidden: false
+      interface: input-rich-text-html
+      note: null
+      options:
+        folder: 6de6459d-2db6-4ee7-8b80-089df3530ff8
+      readonly: false
+      required: true
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: description
+      table: situation_retour_experience
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: situation_retour_experience
+    field: id
+    type: integer
+    meta:
+      collection: situation_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: situation_retour_experience
+      data_type: integer
+      default_value: nextval('situation_retour_experience_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: situation_retour_experience
+    field: image
+    type: uuid
+    meta:
+      collection: situation_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: image
+      group: null
+      hidden: false
+      interface: file-image
+      note: null
+      options:
+        crop: false
+        folder: 6de6459d-2db6-4ee7-8b80-089df3530ff8
+      readonly: false
+      required: true
+      sort: 8
+      special:
+        - file
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: image
+      table: situation_retour_experience
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_files
+      foreign_key_column: id
+  - collection: situation_retour_experience
+    field: sort
+    type: integer
+    meta:
+      collection: situation_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sort
+      table: situation_retour_experience
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: situation_retour_experience
+    field: user_created
+    type: uuid
+    meta:
+      collection: situation_retour_experience
+      conditions: null
+      display: user
+      display_options: null
+      field: user_created
+      group: null
+      hidden: true
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
+      readonly: true
+      required: false
+      sort: 3
+      special:
+        - user-created
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: user_created
+      table: situation_retour_experience
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_users
+      foreign_key_column: id
+  - collection: situation_retour_experience
+    field: user_updated
+    type: uuid
+    meta:
+      collection: situation_retour_experience
+      conditions: null
+      display: user
+      display_options: null
+      field: user_updated
+      group: null
+      hidden: true
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
+      readonly: true
+      required: false
+      sort: 5
+      special:
+        - user-updated
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: user_updated
+      table: situation_retour_experience
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_users
+      foreign_key_column: id
+  - collection: solution_retour_experience
+    field: date_created
+    type: timestamp
+    meta:
+      collection: solution_retour_experience
+      conditions: null
+      display: datetime
+      display_options:
+        relative: true
+      field: date_created
+      group: null
+      hidden: true
+      interface: datetime
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 3
+      special:
+        - date-created
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: date_created
+      table: solution_retour_experience
+      data_type: timestamp with time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: solution_retour_experience
+    field: date_updated
+    type: timestamp
+    meta:
+      collection: solution_retour_experience
+      conditions: null
+      display: datetime
+      display_options:
+        relative: true
+      field: date_updated
+      group: null
+      hidden: true
+      interface: datetime
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 5
+      special:
+        - date-updated
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: date_updated
+      table: solution_retour_experience
+      data_type: timestamp with time zone
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: solution_retour_experience
+    field: description
+    type: text
+    meta:
+      collection: solution_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: description
+      group: null
+      hidden: false
+      interface: input-rich-text-html
+      note: null
+      options:
+        folder: 6de6459d-2db6-4ee7-8b80-089df3530ff8
+      readonly: false
+      required: true
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: description
+      table: solution_retour_experience
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: solution_retour_experience
+    field: fiche_technique
+    type: integer
+    meta:
+      collection: solution_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: fiche_technique
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        enableCreate: false
+        template: '{{id}} - {{titre}}'
+      readonly: false
+      required: false
+      sort: 9
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: fiche_technique
+      table: solution_retour_experience
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: fiche_technique
+      foreign_key_column: id
+  - collection: solution_retour_experience
+    field: id
+    type: integer
+    meta:
+      collection: solution_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: solution_retour_experience
+      data_type: integer
+      default_value: nextval('solution_retour_experience_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: solution_retour_experience
+    field: image
+    type: uuid
+    meta:
+      collection: solution_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: image
+      group: null
+      hidden: false
+      interface: file-image
+      note: null
+      options:
+        crop: false
+        folder: 6de6459d-2db6-4ee7-8b80-089df3530ff8
+      readonly: false
+      required: true
+      sort: 8
+      special:
+        - file
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: image
+      table: solution_retour_experience
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_files
+      foreign_key_column: id
+  - collection: solution_retour_experience
+    field: titre
+    type: string
+    meta:
+      collection: solution_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: titre
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: titre
+      table: solution_retour_experience
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: solution_retour_experience
+    field: user_created
+    type: uuid
+    meta:
+      collection: solution_retour_experience
+      conditions: null
+      display: user
+      display_options: null
+      field: user_created
+      group: null
+      hidden: true
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
+      readonly: true
+      required: false
+      sort: 2
+      special:
+        - user-created
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: user_created
+      table: solution_retour_experience
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_users
+      foreign_key_column: id
+  - collection: solution_retour_experience
+    field: user_updated
+    type: uuid
+    meta:
+      collection: solution_retour_experience
+      conditions: null
+      display: user
+      display_options: null
+      field: user_updated
+      group: null
+      hidden: true
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
+      readonly: true
+      required: false
+      sort: 4
+      special:
+        - user-updated
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: user_updated
+      table: solution_retour_experience
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_users
+      foreign_key_column: id
 relations:
   - collection: aide_decision_etape
     field: etape_parente_id
@@ -2021,6 +4645,18 @@ relations:
       constraint_name: aide_decision_etape_fiche_technique_fiche___6f443189_foreign
       on_update: NO ACTION
       on_delete: SET NULL
+  - collection: directus_settings
+    field: public_favicon
+    related_collection: directus_files
+    meta: null
+    schema:
+      table: directus_settings
+      column: public_favicon
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      constraint_name: directus_settings_public_favicon_foreign
+      on_update: NO ACTION
+      on_delete: NO ACTION
   - collection: fiche_technique
     field: image_principale
     related_collection: directus_files
@@ -2168,3 +4804,339 @@ relations:
       constraint_name: fiche_technique_objectif_developpement_dur__1e7d7681_foreign
       on_update: NO ACTION
       on_delete: SET NULL
+  - collection: retour_experience
+    field: image_principale
+    related_collection: directus_files
+    meta:
+      junction_field: null
+      many_collection: retour_experience
+      many_field: image_principale
+      one_allowed_collections: null
+      one_collection: directus_files
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: retour_experience
+      column: image_principale
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      constraint_name: retour_experience_image_principale_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: retour_experience
+    field: situation_apres
+    related_collection: situation_retour_experience
+    meta:
+      junction_field: null
+      many_collection: retour_experience
+      many_field: situation_apres
+      one_allowed_collections: null
+      one_collection: situation_retour_experience
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: retour_experience
+      column: situation_apres
+      foreign_key_table: situation_retour_experience
+      foreign_key_column: id
+      constraint_name: retour_experience_situation_apres_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: retour_experience
+    field: situation_avant
+    related_collection: situation_retour_experience
+    meta:
+      junction_field: retour_experience_id
+      many_collection: retour_experience
+      many_field: situation_avant
+      one_allowed_collections: null
+      one_collection: situation_retour_experience
+      one_collection_field: collection
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: retour_experience
+      column: situation_avant
+      foreign_key_table: situation_retour_experience
+      foreign_key_column: id
+      constraint_name: retour_experience_situation_avant_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: retour_experience
+    field: user_created
+    related_collection: directus_users
+    meta:
+      junction_field: null
+      many_collection: retour_experience
+      many_field: user_created
+      one_allowed_collections: null
+      one_collection: directus_users
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: retour_experience
+      column: user_created
+      foreign_key_table: directus_users
+      foreign_key_column: id
+      constraint_name: retour_experience_user_created_foreign
+      on_update: NO ACTION
+      on_delete: NO ACTION
+  - collection: retour_experience
+    field: user_updated
+    related_collection: directus_users
+    meta:
+      junction_field: null
+      many_collection: retour_experience
+      many_field: user_updated
+      one_allowed_collections: null
+      one_collection: directus_users
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: retour_experience
+      column: user_updated
+      foreign_key_table: directus_users
+      foreign_key_column: id
+      constraint_name: retour_experience_user_updated_foreign
+      on_update: NO ACTION
+      on_delete: NO ACTION
+  - collection: retour_experience_objectif_developpement_durable
+    field: objectif_developpement_durable_id
+    related_collection: objectif_developpement_durable
+    meta:
+      junction_field: retour_experience_id
+      many_collection: retour_experience_objectif_developpement_durable
+      many_field: objectif_developpement_durable_id
+      one_allowed_collections: null
+      one_collection: objectif_developpement_durable
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: retour_experience_objectif_developpement_durable
+      column: objectif_developpement_durable_id
+      foreign_key_table: objectif_developpement_durable
+      foreign_key_column: id
+      constraint_name: retour_experience_objectif_developpement_d__43d5d90f_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: retour_experience_objectif_developpement_durable
+    field: retour_experience_id
+    related_collection: retour_experience
+    meta:
+      junction_field: objectif_developpement_durable_id
+      many_collection: retour_experience_objectif_developpement_durable
+      many_field: retour_experience_id
+      one_allowed_collections: null
+      one_collection: retour_experience
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: odd
+      sort_field: null
+    schema:
+      table: retour_experience_objectif_developpement_durable
+      column: retour_experience_id
+      foreign_key_table: retour_experience
+      foreign_key_column: id
+      constraint_name: retour_experience_objectif_developpement_d__7ad5f0a6_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: retour_experience_solution_retour_experience
+    field: retour_experience_id
+    related_collection: retour_experience
+    meta:
+      junction_field: solution_retour_experience_id
+      many_collection: retour_experience_solution_retour_experience
+      many_field: retour_experience_id
+      one_allowed_collections: null
+      one_collection: retour_experience
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: solutions
+      sort_field: sort
+    schema:
+      table: retour_experience_solution_retour_experience
+      column: retour_experience_id
+      foreign_key_table: retour_experience
+      foreign_key_column: id
+      constraint_name: retour_experience_solution_retour_experienc__15adc57_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: retour_experience_solution_retour_experience
+    field: solution_retour_experience_id
+    related_collection: solution_retour_experience
+    meta:
+      junction_field: retour_experience_id
+      many_collection: retour_experience_solution_retour_experience
+      many_field: solution_retour_experience_id
+      one_allowed_collections: null
+      one_collection: solution_retour_experience
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: retour_experience_solution_retour_experience
+      column: solution_retour_experience_id
+      foreign_key_table: solution_retour_experience
+      foreign_key_column: id
+      constraint_name: retour_experience_solution_retour_experien__2e863e51_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: situation_retour_experience
+    field: image
+    related_collection: directus_files
+    meta:
+      junction_field: null
+      many_collection: situation_retour_experience
+      many_field: image
+      one_allowed_collections: null
+      one_collection: directus_files
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: situation_retour_experience
+      column: image
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      constraint_name: situation_retour_experience_image_foreign
+      on_update: NO ACTION
+      on_delete: NO ACTION
+  - collection: situation_retour_experience
+    field: user_created
+    related_collection: directus_users
+    meta:
+      junction_field: null
+      many_collection: situation_retour_experience
+      many_field: user_created
+      one_allowed_collections: null
+      one_collection: directus_users
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: situation_retour_experience
+      column: user_created
+      foreign_key_table: directus_users
+      foreign_key_column: id
+      constraint_name: situation_retour_experience_user_created_foreign
+      on_update: NO ACTION
+      on_delete: NO ACTION
+  - collection: situation_retour_experience
+    field: user_updated
+    related_collection: directus_users
+    meta:
+      junction_field: null
+      many_collection: situation_retour_experience
+      many_field: user_updated
+      one_allowed_collections: null
+      one_collection: directus_users
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: situation_retour_experience
+      column: user_updated
+      foreign_key_table: directus_users
+      foreign_key_column: id
+      constraint_name: situation_retour_experience_user_updated_foreign
+      on_update: NO ACTION
+      on_delete: NO ACTION
+  - collection: solution_retour_experience
+    field: fiche_technique
+    related_collection: fiche_technique
+    meta:
+      junction_field: null
+      many_collection: solution_retour_experience
+      many_field: fiche_technique
+      one_allowed_collections: null
+      one_collection: fiche_technique
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: solution_retour_experience
+      column: fiche_technique
+      foreign_key_table: fiche_technique
+      foreign_key_column: id
+      constraint_name: solution_retour_experience_fiche_technique_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: solution_retour_experience
+    field: image
+    related_collection: directus_files
+    meta:
+      junction_field: null
+      many_collection: solution_retour_experience
+      many_field: image
+      one_allowed_collections: null
+      one_collection: directus_files
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: solution_retour_experience
+      column: image
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      constraint_name: solution_retour_experience_image_foreign
+      on_update: NO ACTION
+      on_delete: NO ACTION
+  - collection: solution_retour_experience
+    field: user_created
+    related_collection: directus_users
+    meta:
+      junction_field: null
+      many_collection: solution_retour_experience
+      many_field: user_created
+      one_allowed_collections: null
+      one_collection: directus_users
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: solution_retour_experience
+      column: user_created
+      foreign_key_table: directus_users
+      foreign_key_column: id
+      constraint_name: solution_retour_experience_user_created_foreign
+      on_update: NO ACTION
+      on_delete: NO ACTION
+  - collection: solution_retour_experience
+    field: user_updated
+    related_collection: directus_users
+    meta:
+      junction_field: null
+      many_collection: solution_retour_experience
+      many_field: user_updated
+      one_allowed_collections: null
+      one_collection: directus_users
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: solution_retour_experience
+      column: user_updated
+      foreign_key_table: directus_users
+      foreign_key_column: id
+      constraint_name: solution_retour_experience_user_updated_foreign
+      on_update: NO ACTION
+      on_delete: NO ACTION
