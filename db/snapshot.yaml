@@ -218,6 +218,30 @@ collections:
       versioning: false
     schema:
       name: retour_experience_objectif_developpement_durable
+  - collection: retour_experience_retour_experience
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: retour_experience_retour_experience
+      color: null
+      display_template: null
+      group: null
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: retour_experience_retour_experience
   - collection: retour_experience_solution_retour_experience
     meta:
       accountability: all
@@ -242,30 +266,6 @@ collections:
       versioning: false
     schema:
       name: retour_experience_solution_retour_experience
-  - collection: retour_experience_undefined
-    meta:
-      accountability: all
-      archive_app_filter: true
-      archive_field: null
-      archive_value: null
-      collapse: open
-      collection: retour_experience_undefined
-      color: null
-      display_template: null
-      group: null
-      hidden: true
-      icon: import_export
-      item_duplication_fields: null
-      note: null
-      preview_url: null
-      singleton: false
-      sort: null
-      sort_field: null
-      translations: null
-      unarchive_value: null
-      versioning: false
-    schema:
-      name: retour_experience_undefined
   - collection: situation_retour_experience
     meta:
       accountability: all
@@ -301,7 +301,7 @@ collections:
       color: null
       display_template: null
       group: null
-      hidden: true
+      hidden: false
       icon: null
       item_duplication_fields: null
       note: null
@@ -2478,7 +2478,7 @@ fields:
         folder: 6de6459d-2db6-4ee7-8b80-089df3530ff8
       readonly: false
       required: true
-      sort: 3
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -2916,6 +2916,31 @@ fields:
       foreign_key_table: null
       foreign_key_column: null
   - collection: retour_experience
+    field: retours_experience_lies
+    type: alias
+    meta:
+      collection: retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: retours_experience_lies
+      group: null
+      hidden: false
+      interface: list-m2m
+      note: null
+      options:
+        enableCreate: false
+        template: '{{related_retour_experience_id.titre}}'
+      readonly: false
+      required: false
+      sort: 32
+      special:
+        - m2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: retour_experience
     field: situation_apres
     type: integer
     meta:
@@ -3015,7 +3040,7 @@ fields:
       options: null
       readonly: false
       required: true
-      sort: 32
+      sort: 33
       special: null
       translations: null
       validation: null
@@ -3052,6 +3077,7 @@ fields:
       note: null
       options:
         enableLink: true
+        enableSelect: false
         template: '{{solution_retour_experience_id.titre}}'
       readonly: false
       required: false
@@ -3137,7 +3163,7 @@ fields:
             value: archived
       readonly: false
       required: false
-      sort: 4
+      sort: 2
       special: null
       translations: null
       validation: null
@@ -3222,7 +3248,7 @@ fields:
       options: null
       readonly: false
       required: true
-      sort: 2
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -3541,6 +3567,158 @@ fields:
       has_auto_increment: false
       foreign_key_table: retour_experience
       foreign_key_column: id
+  - collection: retour_experience_retour_experience
+    field: id
+    type: integer
+    meta:
+      collection: retour_experience_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: retour_experience_retour_experience
+      data_type: integer
+      default_value: nextval('retour_experience_retour_experience_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: retour_experience_retour_experience
+    field: related_retour_experience_id
+    type: integer
+    meta:
+      collection: retour_experience_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: related_retour_experience_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: related_retour_experience_id
+      table: retour_experience_retour_experience
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: retour_experience
+      foreign_key_column: id
+  - collection: retour_experience_retour_experience
+    field: retour_experience_id
+    type: integer
+    meta:
+      collection: retour_experience_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: retour_experience_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: retour_experience_id
+      table: retour_experience_retour_experience
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: retour_experience
+      foreign_key_column: id
+  - collection: retour_experience_retour_experience
+    field: sort
+    type: integer
+    meta:
+      collection: retour_experience_retour_experience
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sort
+      table: retour_experience_retour_experience
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: retour_experience_solution_retour_experience
     field: id
     type: integer
@@ -3680,158 +3858,6 @@ fields:
     schema:
       name: sort
       table: retour_experience_solution_retour_experience
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: retour_experience_undefined
-    field: collection
-    type: string
-    meta:
-      collection: retour_experience_undefined
-      conditions: null
-      display: null
-      display_options: null
-      field: collection
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 4
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: collection
-      table: retour_experience_undefined
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: retour_experience_undefined
-    field: id
-    type: integer
-    meta:
-      collection: retour_experience_undefined
-      conditions: null
-      display: null
-      display_options: null
-      field: id
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 1
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: id
-      table: retour_experience_undefined
-      data_type: integer
-      default_value: nextval('retour_experience_undefined_id_seq'::regclass)
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: false
-      is_unique: true
-      is_primary_key: true
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: true
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: retour_experience_undefined
-    field: item
-    type: string
-    meta:
-      collection: retour_experience_undefined
-      conditions: null
-      display: null
-      display_options: null
-      field: item
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 3
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: item
-      table: retour_experience_undefined
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: retour_experience_undefined
-    field: retour_experience_id
-    type: integer
-    meta:
-      collection: retour_experience_undefined
-      conditions: null
-      display: null
-      display_options: null
-      field: retour_experience_id
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 2
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: retour_experience_id
-      table: retour_experience_undefined
       data_type: integer
       default_value: null
       max_length: null
@@ -4951,6 +4977,48 @@ relations:
       constraint_name: retour_experience_objectif_developpement_d__7ad5f0a6_foreign
       on_update: NO ACTION
       on_delete: SET NULL
+  - collection: retour_experience_retour_experience
+    field: related_retour_experience_id
+    related_collection: retour_experience
+    meta:
+      junction_field: retour_experience_id
+      many_collection: retour_experience_retour_experience
+      many_field: related_retour_experience_id
+      one_allowed_collections: null
+      one_collection: retour_experience
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: retour_experience_retour_experience
+      column: related_retour_experience_id
+      foreign_key_table: retour_experience
+      foreign_key_column: id
+      constraint_name: retour_experience_retour_experience_relate__48f6d439_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
+  - collection: retour_experience_retour_experience
+    field: retour_experience_id
+    related_collection: retour_experience
+    meta:
+      junction_field: related_retour_experience_id
+      many_collection: retour_experience_retour_experience
+      many_field: retour_experience_id
+      one_allowed_collections: null
+      one_collection: retour_experience
+      one_collection_field: null
+      one_deselect_action: delete
+      one_field: retours_experience_lies
+      sort_field: sort
+    schema:
+      table: retour_experience_retour_experience
+      column: retour_experience_id
+      foreign_key_table: retour_experience
+      foreign_key_column: id
+      constraint_name: retour_experience_retour_experience_retour___15c8a33_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
   - collection: retour_experience_solution_retour_experience
     field: retour_experience_id
     related_collection: retour_experience
