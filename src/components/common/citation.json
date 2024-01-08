@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_common_citations",
+  "info": {
+    "displayName": "citation",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "auteur": {
+      "type": "string",
+      "required": true
+    },
+    "texte": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}

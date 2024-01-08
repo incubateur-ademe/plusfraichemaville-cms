@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cobenefices",
+  "info": {
+    "singularName": "cobenefice",
+    "pluralName": "cobenefices",
+    "displayName": "Cobenefice",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "description": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "icone": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "icone1",
+        "icone2"
+      ]
+    },
+    "fiches_solutions": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::fiche-solution.fiche-solution",
+      "inversedBy": "cobenefices"
+    }
+  }
+}

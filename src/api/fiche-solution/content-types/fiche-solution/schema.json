@@ -1,0 +1,303 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fiche_solutions",
+  "info": {
+    "singularName": "fiche-solution",
+    "pluralName": "fiche-solutions",
+    "displayName": "Fiche Solution",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titre": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "image_principale": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      }
+    },
+    "solution_retour_experiences": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::solution-retour-experience.solution-retour-experience",
+      "mappedBy": "fiche_solution"
+    },
+    "cout_minimum": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "cout_maximum": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "delai_travaux": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "court",
+        "moyen",
+        "long"
+      ],
+      "required": true
+    },
+    "type_solution": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "bleue",
+        "verte",
+        "grise",
+        "douce"
+      ]
+    },
+    "description_courte": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "baisse_temperature": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "decimal",
+      "min": 0,
+      "required": true
+    },
+    "contexte_titre": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string",
+      "default": "Pourquoi choisir cette solution ?",
+      "required": true
+    },
+    "contexte_description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "rafraichissement_attendu_description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "logo_partenaire": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      }
+    },
+    "cout_minimum_entretien": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "integer",
+      "min": 0
+    },
+    "cout_maximum_entretien": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "integer",
+      "min": 0
+    },
+    "etapes_mise_en_oeuvre": {
+      "displayName": "etape_mise_en_oeuvre",
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "component": "fiche-solution.etape-mise-en-oeuvre"
+    },
+    "etapes_entretien": {
+      "displayName": "etape_entretien",
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "component": "fiche-solution.etape-entretien"
+    },
+    "point_vigilance": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "lien_aide_territoire": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string"
+    },
+    "lien_fond_vert": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string"
+    },
+    "types_espace": {
+      "type": "customField",
+      "options": [
+        "Rond-point:rondpoint",
+        "Bâtiment:batiment",
+        "Parking:parking",
+        "Rue:rue",
+        "Place:place",
+        "Cour d'école:ecole",
+        "Parc et jardin:parc"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "etapes_diagnostic": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "component": "fiche-solution.etape-diagnostic"
+    },
+    "aides_regionales": {
+      "displayName": "aide_regionale",
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "component": "fiche-solution.aide-regionale"
+    },
+    "rank": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "integer"
+    },
+    "materiaux": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::materiau.materiau",
+      "inversedBy": "fiches_solution"
+    },
+    "fiches_solutions_complementaires": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::fiche-solution.fiche-solution"
+    },
+    "cobenefices": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::cobenefice.cobenefice",
+      "mappedBy": "fiches_solutions"
+    },
+    "oups": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "component": "fiche-solution.oups"
+    }
+  }
+}

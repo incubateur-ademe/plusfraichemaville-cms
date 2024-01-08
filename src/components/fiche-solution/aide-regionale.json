@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_fiche_solution_aide_regionales",
+  "info": {
+    "displayName": "aide_regionale",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "region": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::region.region"
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor",
+      "required": true
+    },
+    "titre": {
+      "type": "string"
+    }
+  }
+}

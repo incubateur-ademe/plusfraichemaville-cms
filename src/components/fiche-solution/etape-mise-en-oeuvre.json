@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_fiche_solution_etape_mise_en_oeuvres",
+  "info": {
+    "displayName": "etape_mise_en_oeuvre"
+  },
+  "options": {},
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}

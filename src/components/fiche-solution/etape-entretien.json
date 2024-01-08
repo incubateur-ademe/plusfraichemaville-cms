@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_fiche_solution_etape_entretiens",
+  "info": {
+    "displayName": "etape_entretien",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor",
+      "required": true
+    }
+  }
+}

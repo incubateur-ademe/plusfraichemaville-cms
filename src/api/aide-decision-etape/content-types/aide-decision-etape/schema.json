@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "aide_decision_etapes",
+  "info": {
+    "singularName": "aide-decision-etape",
+    "pluralName": "aide-decision-etapes",
+    "displayName": "Aide Décision Etape",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nom": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": false
+    },
+    "question_suivante": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "fiches_solutions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::fiche-solution.fiche-solution"
+    },
+    "etapes_suivantes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::aide-decision-etape.aide-decision-etape",
+      "mappedBy": "etape_precedente"
+    },
+    "etape_precedente": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::aide-decision-etape.aide-decision-etape",
+      "inversedBy": "etapes_suivantes"
+    }
+  }
+}

@@ -31,6 +31,58 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
+
+############################
+# Packages
+############################
+
+*.7z
+*.csv
+*.dat
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.seed
+*.so
+*.swo
+*.swp
+*.swn
+*.swm
+*.out
+*.pid
+
+
+############################
+# Logs and databases
+############################
+
+.tmp
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+
+
+############################
+# Misc.
+############################
+
+*#
+ssl
+.idea
+nbproject
+public/uploads/*
+!public/uploads/.gitkeep
+
 ############################
 # Node.js
 ############################
@@ -44,13 +96,20 @@ node_modules
 .node_history
 
 ############################
-# CUSTOM
+# Tests
 ############################
-/.env
 
+coverage
 
 ############################
-# IDE files
+# Strapi
 ############################
-.idea
-.vscode
+
+.env
+license.txt
+exports
+*.cache
+dist
+build
+.strapi-updater.json
+

@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "solution_retour_experiences",
+  "info": {
+    "singularName": "solution-retour-experience",
+    "pluralName": "solution-retour-experiences",
+    "displayName": "Solution Retour Experience",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "unique": false,
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "fiche_solution": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::fiche-solution.fiche-solution",
+      "inversedBy": "solution_retour_experiences"
+    },
+    "retour_experience": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::retour-experience.retour-experience",
+      "inversedBy": "solution_retour_experiences"
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}

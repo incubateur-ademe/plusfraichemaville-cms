@@ -1,0 +1,109 @@
+{
+  "kind": "collectionType",
+  "collectionName": "materiaux",
+  "info": {
+    "singularName": "materiau",
+    "pluralName": "materiaux",
+    "displayName": "Materiau",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titre": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      }
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "cout_minimum_fourniture": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "integer",
+      "min": 0,
+      "required": true
+    },
+    "cout_maximum_fourniture": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "integer",
+      "min": 0,
+      "required": true
+    },
+    "cout_minimum_entretien": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "integer",
+      "min": 0
+    },
+    "cout_maximum_entretien": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "integer",
+      "min": 0
+    },
+    "cout_unite": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "metreCarre",
+        "lineaire",
+        "metreCube",
+        "unite"
+      ],
+      "required": true
+    },
+    "fiches_solution": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::fiche-solution.fiche-solution",
+      "mappedBy": "materiaux"
+    }
+  }
+}

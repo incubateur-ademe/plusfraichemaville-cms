@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_fiche_solution_oups",
+  "info": {
+    "displayName": "oups",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "titre": {
+      "type": "string",
+      "required": true
+    },
+    "solutions_reparatrices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::fiche-solution.fiche-solution"
+    }
+  }
+}

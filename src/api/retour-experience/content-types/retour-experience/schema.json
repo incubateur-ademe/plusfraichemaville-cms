@@ -1,0 +1,264 @@
+{
+  "kind": "collectionType",
+  "collectionName": "retour_experiences",
+  "info": {
+    "singularName": "retour-experience",
+    "pluralName": "retour-experiences",
+    "displayName": "Retour experience",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titre": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string",
+      "unique": false,
+      "required": true
+    },
+    "image_principale": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      }
+    },
+    "types_solutions": {
+      "type": "customField",
+      "options": [
+        "bleue",
+        "douce",
+        "verte",
+        "grise"
+      ],
+      "required": false,
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "citations": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "component": "common.citation"
+    },
+    "region": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::region.region"
+    },
+    "climat_actuel": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "oceanique",
+        "mediterraneen",
+        "semi-aride",
+        "semi-continental"
+      ]
+    },
+    "climat_futur": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "oceanique",
+        "mediterraneen",
+        "semi-aride",
+        "semi-continental"
+      ]
+    },
+    "echelle": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string"
+    },
+    "temporalite": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "Court terme",
+        "Moyen terme",
+        "Long terme"
+      ]
+    },
+    "cout": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string"
+    },
+    "types_espaces": {
+      "type": "customField",
+      "options": [
+        "Rond-point:rondpoint",
+        "Bâtiment:batiment",
+        "Parking:parking",
+        "Rue:rue",
+        "Place:place",
+        "Cour d'école:ecole",
+        "Parc et jardin:parc"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "retour_experiences": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::retour-experience.retour-experience"
+    },
+    "odds": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::objectif-developpement-durable.objectif-developpement-durable"
+    },
+    "situation_avant": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "component": "retour-experience.situation"
+    },
+    "situation_apres": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "component": "retour-experience.situation"
+    },
+    "calendrier": {
+      "displayName": "Calendrier",
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "component": "retour-experience.calendrier"
+    },
+    "solution_retour_experiences": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::solution-retour-experience.solution-retour-experience",
+      "mappedBy": "retour_experience"
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "porteur": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "contact": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "financement": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "difficultes": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "partenaires": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "ressources": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "credits": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "rank": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "integer"
+    }
+  }
+}
