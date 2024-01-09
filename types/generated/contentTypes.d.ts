@@ -1107,6 +1107,14 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           versioned: true;
         };
       }>;
+    cout_entretien_description: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -119,7 +119,7 @@ export interface FicheSolutionOups extends Schema.Component {
           preset: 'light';
         }
       >;
-    titre: Attribute.String & Attribute.Required;
+    titre: Attribute.Text & Attribute.Required;
     solutions_reparatrices: Attribute.Relation<
       'fiche-solution.oups',
       'oneToMany',

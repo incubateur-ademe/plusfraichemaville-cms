@@ -298,6 +298,14 @@
         }
       },
       "component": "fiche-solution.oups"
+    },
+    "cout_entretien_description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }

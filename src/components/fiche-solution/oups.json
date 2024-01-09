@@ -16,7 +16,7 @@
       "customField": "plugin::ckeditor.CKEditor"
     },
     "titre": {
-      "type": "string",
+      "type": "text",
       "required": true
     },
     "solutions_reparatrices": {
