@@ -52,6 +52,9 @@
       "relation": "manyToOne",
       "target": "api::aide-decision-etape.aide-decision-etape",
       "inversedBy": "etapes_suivantes"
+    },
+    "rank": {
+      "type": "integer"
     }
   }
 }

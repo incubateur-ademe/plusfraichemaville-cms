@@ -801,6 +801,7 @@ export interface ApiAideDecisionEtapeAideDecisionEtape
       'manyToOne',
       'api::aide-decision-etape.aide-decision-etape'
     >;
+    rank: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1356,7 +1357,7 @@ export interface ApiRetourExperienceRetourExperience
       'api::region.region'
     >;
     climat_actuel: Attribute.Enumeration<
-      ['oceanique', 'mediterraneen', 'semi-aride', 'semi-continental']
+      ['oceanique', 'mediterraneen', 'semi_aride', 'semi_continental']
     > &
       Attribute.SetPluginOptions<{
         versions: {
@@ -1364,7 +1365,7 @@ export interface ApiRetourExperienceRetourExperience
         };
       }>;
     climat_futur: Attribute.Enumeration<
-      ['oceanique', 'mediterraneen', 'semi-aride', 'semi-continental']
+      ['oceanique', 'mediterraneen', 'semi_aride', 'semi_continental']
     > &
       Attribute.SetPluginOptions<{
         versions: {
@@ -1378,7 +1379,7 @@ export interface ApiRetourExperienceRetourExperience
         };
       }>;
     temporalite: Attribute.Enumeration<
-      ['Court terme', 'Moyen terme', 'Long terme']
+      ['court_terme', 'moyen_terme', 'long_terme']
     > &
       Attribute.SetPluginOptions<{
         versions: {
