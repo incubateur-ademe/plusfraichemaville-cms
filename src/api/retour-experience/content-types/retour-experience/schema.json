@@ -80,8 +80,8 @@
       "enum": [
         "oceanique",
         "mediterraneen",
-        "semi-aride",
-        "semi-continental"
+        "semi_aride",
+        "semi_continental"
       ]
     },
     "climat_futur": {
@@ -94,8 +94,8 @@
       "enum": [
         "oceanique",
         "mediterraneen",
-        "semi-aride",
-        "semi-continental"
+        "semi_aride",
+        "semi_continental"
       ]
     },
     "echelle": {
@@ -114,9 +114,9 @@
       },
       "type": "enumeration",
       "enum": [
-        "Court terme",
-        "Moyen terme",
-        "Long terme"
+        "court_terme",
+        "moyen_terme",
+        "long_terme"
       ]
     },
     "cout": {
