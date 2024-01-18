@@ -81,7 +81,8 @@
         "oceanique",
         "mediterraneen",
         "semi_aride",
-        "semi_continental"
+        "semi_continental",
+        "equatorial"
       ]
     },
     "climat_futur": {
@@ -95,7 +96,8 @@
         "oceanique",
         "mediterraneen",
         "semi_aride",
-        "semi_continental"
+        "semi_continental",
+        "equatorial"
       ]
     },
     "echelle": {

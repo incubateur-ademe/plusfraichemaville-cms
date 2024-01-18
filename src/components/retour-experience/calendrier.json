@@ -20,7 +20,7 @@
         "output": "HTML",
         "preset": "light"
       },
-      "required": true,
+      "required": false,
       "customField": "plugin::ckeditor.CKEditor"
     }
   }
