@@ -311,6 +311,15 @@
         "surface",
         "interieur"
       ]
+    },
+    "cout_entretien_unite": {
+      "type": "enumeration",
+      "enum": [
+        "metreCarre",
+        "lineaire",
+        "metreCube",
+        "unite"
+      ]
     }
   }
 }
