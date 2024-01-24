@@ -320,6 +320,14 @@
         "metreCube",
         "unite"
       ]
+    },
+    "en_savoir_plus": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }
