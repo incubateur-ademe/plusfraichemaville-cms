@@ -1124,6 +1124,14 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
     cout_entretien_unite: Attribute.Enumeration<
       ['metreCarre', 'lineaire', 'metreCube', 'unite']
     >;
+    en_savoir_plus: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
