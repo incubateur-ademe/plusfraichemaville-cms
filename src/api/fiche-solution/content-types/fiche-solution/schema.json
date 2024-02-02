@@ -57,7 +57,7 @@
         }
       },
       "type": "integer",
-      "required": true,
+      "required": false,
       "min": 0
     },
     "cout_maximum": {
@@ -67,7 +67,7 @@
         }
       },
       "type": "integer",
-      "required": true,
+      "required": false,
       "min": 0
     },
     "type_solution": {
@@ -296,13 +296,13 @@
     "delai_travaux_minimum": {
       "type": "integer",
       "min": 0,
-      "required": true
+      "required": false
     },
     "delai_travaux_maximum": {
       "type": "integer",
       "unique": false,
       "min": 0,
-      "required": true
+      "required": false
     },
     "portee_baisse_temperature": {
       "type": "enumeration",
@@ -328,6 +328,9 @@
         "preset": "light"
       },
       "customField": "plugin::ckeditor.CKEditor"
+    },
+    "libelle_avantage_solution": {
+      "type": "string"
     }
   }
 }
