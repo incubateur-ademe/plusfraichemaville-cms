@@ -922,6 +922,80 @@ export interface ApiFicheDiagnosticFicheDiagnostic
     rank: Attribute.Integer;
     image_principale: Attribute.Media;
     echelle: Attribute.Enumeration<['territoire', 'espace']>;
+    methode: Attribute.Enumeration<
+      [
+        'observation',
+        'enquete',
+        'simulation_numerique',
+        'analyse_spatiale',
+        'modelisation_spatiale'
+      ]
+    >;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    besoin: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    indicateurs: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    delai_min: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    delai_max: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    cout_min: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    cout_max: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    explication_source: Attribute.String;
+    avantage_description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    vigilance_description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    en_savoir_plus_description: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    fiches_diagnostics_associees: Attribute.Relation<
+      'api::fiche-diagnostic.fiche-diagnostic',
+      'oneToMany',
+      'api::fiche-diagnostic.fiche-diagnostic'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1330,6 +1404,7 @@ export interface ApiMaterielFicheDiagnosticMaterielFicheDiagnostic
     singularName: 'materiel-fiche-diagnostic';
     pluralName: 'materiel-fiche-diagnostics';
     displayName: 'Materiel Fiche Diagnostic';
+    description: '';
   };
   options: {
     draftAndPublish: true;

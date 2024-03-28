@@ -57,6 +57,87 @@
         "territoire",
         "espace"
       ]
+    },
+    "methode": {
+      "type": "enumeration",
+      "enum": [
+        "observation",
+        "enquete",
+        "simulation_numerique",
+        "analyse_spatiale",
+        "modelisation_spatiale"
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "besoin": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "indicateurs": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "delai_min": {
+      "type": "integer",
+      "min": 0
+    },
+    "delai_max": {
+      "type": "integer",
+      "min": 0
+    },
+    "cout_min": {
+      "type": "integer",
+      "min": 0
+    },
+    "cout_max": {
+      "type": "integer",
+      "min": 0
+    },
+    "explication_source": {
+      "type": "string"
+    },
+    "avantage_description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "vigilance_description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "en_savoir_plus_description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "fiches_diagnostics_associees": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::fiche-diagnostic.fiche-diagnostic"
     }
   }
 }

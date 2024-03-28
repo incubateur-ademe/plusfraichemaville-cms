@@ -4,7 +4,8 @@
   "info": {
     "singularName": "materiel-fiche-diagnostic",
     "pluralName": "materiel-fiche-diagnostics",
-    "displayName": "Materiel Fiche Diagnostic"
+    "displayName": "Materiel Fiche Diagnostic",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
