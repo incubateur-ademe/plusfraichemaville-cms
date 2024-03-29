@@ -914,11 +914,6 @@ export interface ApiFicheDiagnosticFicheDiagnostic
       'fiche-diagnostic.etape-mise-en-oeuvre',
       true
     >;
-    materiel_fiche_diagnostics: Attribute.Relation<
-      'api::fiche-diagnostic.fiche-diagnostic',
-      'manyToMany',
-      'api::materiel-fiche-diagnostic.materiel-fiche-diagnostic'
-    >;
     rank: Attribute.Integer;
     image_principale: Attribute.Media;
     echelle: Attribute.Enumeration<['territoire', 'espace']>;
@@ -996,6 +991,14 @@ export interface ApiFicheDiagnosticFicheDiagnostic
       'oneToMany',
       'api::fiche-diagnostic.fiche-diagnostic'
     >;
+    materiel: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1397,52 +1400,6 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
   };
 }
 
-export interface ApiMaterielFicheDiagnosticMaterielFicheDiagnostic
-  extends Schema.CollectionType {
-  collectionName: 'materiel_fiche_diagnostics';
-  info: {
-    singularName: 'materiel-fiche-diagnostic';
-    pluralName: 'materiel-fiche-diagnostics';
-    displayName: 'Materiel Fiche Diagnostic';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    titre: Attribute.String;
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    fiche_diagnostics: Attribute.Relation<
-      'api::materiel-fiche-diagnostic.materiel-fiche-diagnostic',
-      'manyToMany',
-      'api::fiche-diagnostic.fiche-diagnostic'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::materiel-fiche-diagnostic.materiel-fiche-diagnostic',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::materiel-fiche-diagnostic.materiel-fiche-diagnostic',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiObjectifDeveloppementDurableObjectifDeveloppementDurable
   extends Schema.CollectionType {
   collectionName: 'objectif_developpement_durables';
@@ -1815,7 +1772,6 @@ declare module '@strapi/types' {
       'api::fiche-diagnostic.fiche-diagnostic': ApiFicheDiagnosticFicheDiagnostic;
       'api::fiche-solution.fiche-solution': ApiFicheSolutionFicheSolution;
       'api::materiau.materiau': ApiMateriauMateriau;
-      'api::materiel-fiche-diagnostic.materiel-fiche-diagnostic': ApiMaterielFicheDiagnosticMaterielFicheDiagnostic;
       'api::objectif-developpement-durable.objectif-developpement-durable': ApiObjectifDeveloppementDurableObjectifDeveloppementDurable;
       'api::region.region': ApiRegionRegion;
       'api::retour-experience.retour-experience': ApiRetourExperienceRetourExperience;

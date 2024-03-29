@@ -34,12 +34,6 @@
       "repeatable": true,
       "component": "fiche-diagnostic.etape-mise-en-oeuvre"
     },
-    "materiel_fiche_diagnostics": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::materiel-fiche-diagnostic.materiel-fiche-diagnostic",
-      "inversedBy": "fiche_diagnostics"
-    },
     "rank": {
       "type": "integer"
     },
@@ -138,6 +132,14 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::fiche-diagnostic.fiche-diagnostic"
+    },
+    "materiel": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }
