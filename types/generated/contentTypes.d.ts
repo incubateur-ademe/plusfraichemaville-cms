@@ -999,6 +999,14 @@ export interface ApiFicheDiagnosticFicheDiagnostic
           preset: 'light';
         }
       >;
+    partenaire: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
