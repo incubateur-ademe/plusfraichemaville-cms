@@ -1,0 +1,153 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fiche_diagnostics",
+  "info": {
+    "singularName": "fiche-diagnostic",
+    "pluralName": "fiche-diagnostics",
+    "displayName": "Fiche Diagnostic",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "required": true
+    },
+    "description_courte": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "etapes_mise_en_oeuvre": {
+      "type": "component",
+      "repeatable": true,
+      "component": "fiche-diagnostic.etape-mise-en-oeuvre"
+    },
+    "rank": {
+      "type": "integer"
+    },
+    "image_principale": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "echelle": {
+      "type": "enumeration",
+      "enum": [
+        "territoire",
+        "espace"
+      ]
+    },
+    "methode": {
+      "type": "enumeration",
+      "enum": [
+        "observation",
+        "enquete",
+        "simulation_numerique",
+        "analyse_spatiale",
+        "modelisation_spatiale"
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "besoin": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "indicateurs": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "delai_min": {
+      "type": "integer",
+      "min": 0
+    },
+    "delai_max": {
+      "type": "integer",
+      "min": 0
+    },
+    "cout_min": {
+      "type": "integer",
+      "min": 0
+    },
+    "cout_max": {
+      "type": "integer",
+      "min": 0
+    },
+    "explication_source": {
+      "type": "string"
+    },
+    "avantage_description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "vigilance_description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "en_savoir_plus_description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "fiches_diagnostics_associees": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::fiche-diagnostic.fiche-diagnostic"
+    },
+    "materiel": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "partenaire": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}
