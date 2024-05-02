@@ -331,6 +331,14 @@
     },
     "libelle_avantage_solution": {
       "type": "string"
+    },
+    "credits": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }
