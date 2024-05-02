@@ -37,11 +37,4 @@ module.exports = ({ env }) => ({
       defaultLimit: 100,
     },
   },
-  sentry: {
-    enabled: true,
-    config: {
-      dsn: env("SENTRY_DSN"),
-      sendMetadata: true,
-    },
-  },
 });
