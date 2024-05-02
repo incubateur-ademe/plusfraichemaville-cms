@@ -1,5 +1,8 @@
 import * as Sentry from "@sentry/node";
-import {extractTraceparentData, stripUrlQueryAndFragment,} from "@sentry/tracing";
+import {
+  extractTraceparentData,
+  stripUrlQueryAndFragment,
+} from "@sentry/tracing";
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
@@ -8,7 +11,7 @@ Sentry.init({
     // enable HTTP calls tracing
     new Sentry.Integrations.Http({ tracing: true }),
   ],
-  tracesSampleRate: 1.0
+  tracesSampleRate: 1.0,
 });
 
 const tracingMiddleWare = async (ctx, next) => {
