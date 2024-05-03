@@ -54,7 +54,7 @@
       },
       "type": "integer",
       "min": 0,
-      "required": true
+      "required": false
     },
     "cout_maximum_fourniture": {
       "pluginOptions": {
@@ -64,7 +64,7 @@
       },
       "type": "integer",
       "min": 0,
-      "required": true
+      "required": false
     },
     "cout_minimum_entretien": {
       "pluginOptions": {
