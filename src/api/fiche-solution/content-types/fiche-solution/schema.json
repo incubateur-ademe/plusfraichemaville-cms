@@ -339,6 +339,14 @@
         "preset": "light"
       },
       "customField": "plugin::ckeditor.CKEditor"
+    },
+    "cout_unite": {
+      "type": "enumeration",
+      "enum": [
+        "metreCarre",
+        "megaWattHeure"
+      ],
+      "default": "metreCarre"
     }
   }
 }

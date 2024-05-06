@@ -1295,6 +1295,8 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           preset: 'light';
         }
       >;
+    cout_unite: Attribute.Enumeration<['metreCarre', 'megaWattHeure']> &
+      Attribute.DefaultTo<'metreCarre'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1386,7 +1388,7 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
         min: 0;
       }>;
     cout_unite: Attribute.Enumeration<
-      ['metreCarre', 'lineaire', 'metreCube', 'unite']
+      ['metreCarre', 'lineaire', 'metreCube', 'unite', 'megaWattHeure']
     > &
       Attribute.Required &
       Attribute.SetPluginOptions<{
