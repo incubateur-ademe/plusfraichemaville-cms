@@ -1,15 +1,15 @@
-module.exports = ({env}) => ({
+module.exports = ({ env }) => ({
   upload: {
     config: {
-      provider: 'aws-s3',
+      provider: "aws-s3",
       providerOptions: {
         s3Options: {
-          accessKeyId: env('SCALEWAY_ACCESS_KEY_ID'),
-          secretAccessKey: env('SCALEWAY_ACCESS_SECRET'),
-          endpoint: env('SCALEWAY_ENDPOINT'),
-          region: env('SCALEWAY_REGION'),
+          accessKeyId: env("SCALEWAY_ACCESS_KEY_ID"),
+          secretAccessKey: env("SCALEWAY_ACCESS_SECRET"),
+          endpoint: env("SCALEWAY_ENDPOINT"),
+          region: env("SCALEWAY_REGION"),
           params: {
-            Bucket: env('SCALEWAY_BUCKET'),
+            Bucket: env("SCALEWAY_BUCKET"),
           },
         },
       },
@@ -25,16 +25,16 @@ module.exports = ({env}) => ({
       },
     },
   },
-  'drag-drop-content-types': {
-    enabled: true
+  "drag-drop-content-types": {
+    enabled: true,
   },
   ckeditor: {
     enabled: true,
-    resolve: "./src/plugins/strapi-plugin-ckeditor"
+    resolve: "./src/plugins/strapi-plugin-ckeditor",
   },
   graphql: {
     config: {
       defaultLimit: 100,
-    }
-  }
+    },
+  },
 });
