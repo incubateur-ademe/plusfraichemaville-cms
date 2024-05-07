@@ -318,7 +318,8 @@
         "metreCarre",
         "lineaire",
         "metreCube",
-        "unite"
+        "unite",
+        "megaWattHeure"
       ]
     },
     "en_savoir_plus": {
