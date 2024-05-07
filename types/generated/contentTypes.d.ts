@@ -1359,7 +1359,6 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
         }
       >;
     cout_minimum_fourniture: Attribute.Integer &
-      Attribute.Required &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -1369,7 +1368,6 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
         min: 0;
       }>;
     cout_maximum_fourniture: Attribute.Integer &
-      Attribute.Required &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
