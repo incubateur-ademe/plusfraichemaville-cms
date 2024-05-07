@@ -1297,6 +1297,15 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
       >;
     cout_unite: Attribute.Enumeration<['metreCarre', 'megaWattHeure']> &
       Attribute.DefaultTo<'metreCarre'>;
+    description_estimation: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    cout_global: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

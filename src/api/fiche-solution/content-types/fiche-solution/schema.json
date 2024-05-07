@@ -347,6 +347,17 @@
         "megaWattHeure"
       ],
       "default": "metreCarre"
+    },
+    "description_estimation": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "cout_global": {
+      "type": "integer"
     }
   }
 }
