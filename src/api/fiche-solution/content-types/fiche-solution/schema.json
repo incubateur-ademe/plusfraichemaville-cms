@@ -355,9 +355,6 @@
         "preset": "light"
       },
       "customField": "plugin::ckeditor.CKEditor"
-    },
-    "cout_global": {
-      "type": "integer"
     }
   }
 }

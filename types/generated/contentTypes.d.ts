@@ -1305,7 +1305,6 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           preset: 'light';
         }
       >;
-    cout_global: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
