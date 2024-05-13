@@ -96,7 +96,8 @@
         "lineaire",
         "metreCube",
         "unite",
-        "megaWattHeure"
+        "megaWattHeure",
+        "kiloWatt"
       ],
       "required": true
     },

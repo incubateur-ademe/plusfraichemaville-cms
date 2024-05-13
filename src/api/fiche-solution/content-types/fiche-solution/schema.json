@@ -319,7 +319,8 @@
         "lineaire",
         "metreCube",
         "unite",
-        "megaWattHeure"
+        "megaWattHeure",
+        "kiloWatt"
       ]
     },
     "en_savoir_plus": {
@@ -348,6 +349,14 @@
         "megaWattHeure"
       ],
       "default": "metreCarre"
+    },
+    "description_estimation": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }

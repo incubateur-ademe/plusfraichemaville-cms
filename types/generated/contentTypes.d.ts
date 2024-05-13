@@ -1276,7 +1276,14 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
       ['air', 'surface', 'interieur']
     >;
     cout_entretien_unite: Attribute.Enumeration<
-      ['metreCarre', 'lineaire', 'metreCube', 'unite', 'megaWattHeure']
+      [
+        'metreCarre',
+        'lineaire',
+        'metreCube',
+        'unite',
+        'megaWattHeure',
+        'kiloWatt'
+      ]
     >;
     en_savoir_plus: Attribute.RichText &
       Attribute.CustomField<
@@ -1297,6 +1304,14 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
       >;
     cout_unite: Attribute.Enumeration<['metreCarre', 'megaWattHeure']> &
       Attribute.DefaultTo<'metreCarre'>;
+    description_estimation: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1386,7 +1401,14 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
         min: 0;
       }>;
     cout_unite: Attribute.Enumeration<
-      ['metreCarre', 'lineaire', 'metreCube', 'unite', 'megaWattHeure']
+      [
+        'metreCarre',
+        'lineaire',
+        'metreCube',
+        'unite',
+        'megaWattHeure',
+        'kiloWatt'
+      ]
     > &
       Attribute.Required &
       Attribute.SetPluginOptions<{
