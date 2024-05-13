@@ -1276,7 +1276,14 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
       ['air', 'surface', 'interieur']
     >;
     cout_entretien_unite: Attribute.Enumeration<
-      ['metreCarre', 'lineaire', 'metreCube', 'unite', 'megaWattHeure']
+      [
+        'metreCarre',
+        'lineaire',
+        'metreCube',
+        'unite',
+        'megaWattHeure',
+        'kiloWatt'
+      ]
     >;
     en_savoir_plus: Attribute.RichText &
       Attribute.CustomField<
@@ -1394,7 +1401,14 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
         min: 0;
       }>;
     cout_unite: Attribute.Enumeration<
-      ['metreCarre', 'lineaire', 'metreCube', 'unite', 'megaWattHeure']
+      [
+        'metreCarre',
+        'lineaire',
+        'metreCube',
+        'unite',
+        'megaWattHeure',
+        'kiloWatt'
+      ]
     > &
       Attribute.Required &
       Attribute.SetPluginOptions<{

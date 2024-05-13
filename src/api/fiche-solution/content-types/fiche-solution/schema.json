@@ -319,7 +319,8 @@
         "lineaire",
         "metreCube",
         "unite",
-        "megaWattHeure"
+        "megaWattHeure",
+        "kiloWatt"
       ]
     },
     "en_savoir_plus": {
