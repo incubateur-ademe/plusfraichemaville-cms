@@ -1276,7 +1276,7 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
       ['air', 'surface', 'interieur']
     >;
     cout_entretien_unite: Attribute.Enumeration<
-      ['metreCarre', 'lineaire', 'metreCube', 'unite']
+      ['metreCarre', 'lineaire', 'metreCube', 'unite', 'megaWattHeure']
     >;
     en_savoir_plus: Attribute.RichText &
       Attribute.CustomField<
