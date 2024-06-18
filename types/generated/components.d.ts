@@ -174,7 +174,7 @@ export interface RetourExperienceSituation extends Schema.Component {
     description: '';
   };
   attributes: {
-    image: Attribute.Media;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
