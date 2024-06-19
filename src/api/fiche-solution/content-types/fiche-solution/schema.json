@@ -357,6 +357,9 @@
         "preset": "light"
       },
       "customField": "plugin::ckeditor.CKEditor"
+    },
+    "aides_territoires_mots_cles": {
+      "type": "text"
     }
   }
 }
