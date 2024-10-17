@@ -1864,6 +1864,7 @@ export interface ApiWebinaireWebinaire extends Schema.CollectionType {
     singularName: 'webinaire';
     pluralName: 'webinaires';
     displayName: 'Webinaire';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1879,8 +1880,10 @@ export interface ApiWebinaireWebinaire extends Schema.CollectionType {
         }
       >;
     lien_inscription: Attribute.String;
-    date_evenement: Attribute.DateTime;
     lien_replay: Attribute.String;
+    jour_evenement: Attribute.Date;
+    heure_debut: Attribute.Time;
+    heure_fin: Attribute.Time;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

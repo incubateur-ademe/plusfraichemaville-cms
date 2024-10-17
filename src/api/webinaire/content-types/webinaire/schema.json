@@ -4,7 +4,8 @@
   "info": {
     "singularName": "webinaire",
     "pluralName": "webinaires",
-    "displayName": "Webinaire"
+    "displayName": "Webinaire",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -26,11 +27,17 @@
       "type": "string",
       "required": false
     },
-    "date_evenement": {
-      "type": "datetime"
-    },
     "lien_replay": {
       "type": "string"
+    },
+    "jour_evenement": {
+      "type": "date"
+    },
+    "heure_debut": {
+      "type": "time"
+    },
+    "heure_fin": {
+      "type": "time"
     }
   }
 }
