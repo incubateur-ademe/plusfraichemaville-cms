@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "webinaires",
+  "info": {
+    "singularName": "webinaire",
+    "pluralName": "webinaires",
+    "displayName": "Webinaire"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titre": {
+      "type": "string"
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "lien_inscription": {
+      "type": "string",
+      "required": false
+    },
+    "date_evenement": {
+      "type": "datetime"
+    },
+    "lien_replay": {
+      "type": "string"
+    }
+  }
+}
