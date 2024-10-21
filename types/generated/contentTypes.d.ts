@@ -1858,6 +1858,50 @@ export interface ApiSolutionRetourExperienceSolutionRetourExperience
   };
 }
 
+export interface ApiWebinaireWebinaire extends Schema.CollectionType {
+  collectionName: 'webinaires';
+  info: {
+    singularName: 'webinaire';
+    pluralName: 'webinaires';
+    displayName: 'Webinaire';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    titre: Attribute.String;
+    description: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    lien_inscription: Attribute.String;
+    lien_replay: Attribute.String;
+    jour_evenement: Attribute.Date;
+    heure_debut: Attribute.Time;
+    heure_fin: Attribute.Time;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::webinaire.webinaire',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::webinaire.webinaire',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1885,6 +1929,7 @@ declare module '@strapi/types' {
       'api::region.region': ApiRegionRegion;
       'api::retour-experience.retour-experience': ApiRetourExperienceRetourExperience;
       'api::solution-retour-experience.solution-retour-experience': ApiSolutionRetourExperienceSolutionRetourExperience;
+      'api::webinaire.webinaire': ApiWebinaireWebinaire;
     }
   }
 }
