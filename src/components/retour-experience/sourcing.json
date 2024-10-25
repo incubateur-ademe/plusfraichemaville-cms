@@ -1,0 +1,55 @@
+{
+  "collectionName": "components_retour_experience_sourcings",
+  "info": {
+    "displayName": "Sourcing",
+    "icon": "phone",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "telephone": {
+      "type": "string"
+    },
+    "type_de_contact": {
+      "type": "enumeration",
+      "enum": [
+        "Public et parapublic",
+        "Entreprises et agences",
+        "Conseil",
+        "Recherche et enseignement"
+      ]
+    },
+    "sous_type_de_contact": {
+      "type": "enumeration",
+      "enum": [
+        "Bureau d’étude",
+        "Assistance à maitrise d’ouvrage",
+        "Association",
+        "Pôle universitaire",
+        "Laboratoire de recherche",
+        "Agence d’architecture",
+        "Entreprise privée",
+        "Agence paysagiste",
+        "Syndicat mixte",
+        "Collectif",
+        "Aménageur",
+        "Agence de l’eau",
+        "CAUE",
+        "Conseil en ingénierie",
+        "Agence de conception lumière",
+        "Agence de communication",
+        "Syndic de copropriété",
+        "Société d’arboriculture",
+        "Acteur public et parapublic",
+        "Bailleur social",
+        "Institut"
+      ]
+    },
+    "email": {
+      "type": "email"
+    }
+  }
+}

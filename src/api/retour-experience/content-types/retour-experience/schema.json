@@ -263,6 +263,11 @@
         }
       },
       "type": "integer"
+    },
+    "sourcing": {
+      "type": "component",
+      "repeatable": true,
+      "component": "retour-experience.sourcing"
     }
   }
 }
