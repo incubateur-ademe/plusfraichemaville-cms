@@ -22,6 +22,7 @@ export default [
             "market-assets.strapi.io",
             "plusfraichemaville.s3.fr-par.scw.cloud",
           ],
+          "script-src": ["'self'", "'unsafe-inline'", "maps.googleapis.com"],
           upgradeInsecureRequests: null,
         },
       },

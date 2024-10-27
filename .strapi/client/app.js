@@ -8,6 +8,7 @@ import strapiCloud from "@strapi/plugin-cloud/strapi-admin";
 import graphql from "@strapi/plugin-graphql/strapi-admin";
 import i18N from "@strapi/plugin-i18n/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
+import locationField from "strapi-location-field-plugin/strapi-admin";
 import multiSelect from "strapi-plugin-multi-select/strapi-admin";
 import ckeditor from "../../src/plugins/strapi-plugin-ckeditor/strapi-admin";
 import { renderAdmin } from "@strapi/strapi/admin";
@@ -20,6 +21,7 @@ renderAdmin(document.getElementById("strapi"), {
     graphql: graphql,
     i18n: i18N,
     "users-permissions": usersPermissions,
+    "location-field": locationField,
     "multi-select": multiSelect,
     ckeditor: ckeditor,
   },

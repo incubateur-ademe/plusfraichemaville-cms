@@ -1,4 +1,15 @@
 module.exports = ({ env }) => ({
+  "location-field": {
+    enabled: true,
+    config: {
+      fields: ["photo", "rating"],
+      googleMapsApiKey: env("GOOGLE_MAPS_PLACES_API_TOKEN"),
+      autocompletionRequestOptions: {
+        language: "fr",
+        locationBias: "IP_BIAS",
+      },
+    },
+  },
   upload: {
     config: {
       provider: "aws-s3",
