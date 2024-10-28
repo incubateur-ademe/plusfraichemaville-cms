@@ -53,9 +53,6 @@ importers:
       react-router-dom:
         specifier: 5.3.4
         version: 5.3.4(react@18.2.0)
-      strapi-location-field-plugin:
-        specifier: ^1.2.3
-        version: 1.2.3(@strapi/strapi@4.25.0(@babel/runtime@7.24.4)(@codemirror/autocomplete@6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)(@lezer/common@1.2.1))(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.26.3)(@swc/helpers@0.5.10)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.12.7)(@types/react@18.2.79)(codemirror@6.0.1(@lezer/common@1.2.1))(pg@8.12.0)(react-dom@18.2.0(react@18.2.0))(react-router-dom@5.3.4(react@18.2.0))(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3(@babel/core@7.24.4)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0))(terser@5.30.3)(type-fest@2.19.0))
       strapi-plugin-multi-select:
         specifier: ^1.2.3
         version: 1.2.3(@strapi/strapi@4.25.0(@babel/runtime@7.24.4)(@codemirror/autocomplete@6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)(@lezer/common@1.2.1))(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.26.3)(@swc/helpers@0.5.10)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.12.7)(@types/react@18.2.79)(codemirror@6.0.1(@lezer/common@1.2.1))(pg@8.12.0)(react-dom@18.2.0(react@18.2.0))(react-router-dom@5.3.4(react@18.2.0))(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3(@babel/core@7.24.4)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0))(terser@5.30.3)(type-fest@2.19.0))
@@ -843,9 +840,6 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
-
-  '@googlemaps/js-api-loader@1.16.8':
-    resolution: {integrity: sha512-CROqqwfKotdO6EBjZO/gQGVTbeDps5V7Mt9+8+5Q+jTg5CRMi3Ii/L9PmV3USROrt2uWxtGzJHORmByxyo9pSQ==}
 
   '@graphql-tools/merge@8.3.1':
     resolution: {integrity: sha512-BMm99mqdNZbEYeTPK3it9r9S6rsZsQKtlqJsSBknAclXq2pGEfOxjcIZi+kBSkHZKPKCRrYDd5vY0+rUmIHVLg==}
@@ -6014,12 +6008,6 @@ packages:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
     engines: {node: '>= 0.8'}
 
-  strapi-location-field-plugin@1.2.3:
-    resolution: {integrity: sha512-Eq5Llf2ZGUa+jETRr10Pvg+865uORe4kyw4tCyVf/8AACZD3NkqJ0Sgm5ue58fbCsNOXGXYhI07gYkawYdDNsw==}
-    engines: {node: '>=14.19.1 <=20.x.x', npm: '>=6.0.0'}
-    peerDependencies:
-      '@strapi/strapi': ^4.0.0
-
   strapi-plugin-multi-select@1.2.3:
     resolution: {integrity: sha512-l5y5N3Hi1RcfRAtmQcAIn5u81amAQ+azWKgLcdzI1i3Hm5AZRCcZbtNDXb4ETsZUw7jvktRrD7F5QYOwzc8fiw==}
     peerDependencies:
@@ -7800,8 +7788,6 @@ snapshots:
       tslib: 2.6.2
     optionalDependencies:
       typescript: 5.2.2
-
-  '@googlemaps/js-api-loader@1.16.8': {}
 
   '@graphql-tools/merge@8.3.1(graphql@15.8.0)':
     dependencies:
@@ -14378,11 +14364,6 @@ snapshots:
   statuses@1.5.0: {}
 
   statuses@2.0.1: {}
-
-  strapi-location-field-plugin@1.2.3(@strapi/strapi@4.25.0(@babel/runtime@7.24.4)(@codemirror/autocomplete@6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)(@lezer/common@1.2.1))(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.26.3)(@swc/helpers@0.5.10)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.12.7)(@types/react@18.2.79)(codemirror@6.0.1(@lezer/common@1.2.1))(pg@8.12.0)(react-dom@18.2.0(react@18.2.0))(react-router-dom@5.3.4(react@18.2.0))(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3(@babel/core@7.24.4)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0))(terser@5.30.3)(type-fest@2.19.0)):
-    dependencies:
-      '@googlemaps/js-api-loader': 1.16.8
-      '@strapi/strapi': 4.25.0(@babel/runtime@7.24.4)(@codemirror/autocomplete@6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)(@lezer/common@1.2.1))(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.26.3)(@swc/helpers@0.5.10)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.12.7)(@types/react@18.2.79)(codemirror@6.0.1(@lezer/common@1.2.1))(pg@8.12.0)(react-dom@18.2.0(react@18.2.0))(react-router-dom@5.3.4(react@18.2.0))(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3(@babel/core@7.24.4)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0))(terser@5.30.3)(type-fest@2.19.0)
 
   strapi-plugin-multi-select@1.2.3(@strapi/strapi@4.25.0(@babel/runtime@7.24.4)(@codemirror/autocomplete@6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)(@lezer/common@1.2.1))(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.26.3)(@swc/helpers@0.5.10)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.12.7)(@types/react@18.2.79)(codemirror@6.0.1(@lezer/common@1.2.1))(pg@8.12.0)(react-dom@18.2.0(react@18.2.0))(react-router-dom@5.3.4(react@18.2.0))(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3(@babel/core@7.24.4)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0))(terser@5.30.3)(type-fest@2.19.0)):
     dependencies:

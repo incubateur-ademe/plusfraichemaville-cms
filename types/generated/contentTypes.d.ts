@@ -1791,8 +1791,7 @@ export interface ApiRetourExperienceRetourExperience
         };
       }>;
     sourcing: Attribute.Component<'retour-experience.sourcing', true>;
-    location: Attribute.JSON &
-      Attribute.CustomField<'plugin::location-field.location'>;
+    location: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

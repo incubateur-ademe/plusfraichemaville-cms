@@ -16,36 +16,37 @@
     "type_de_contact": {
       "type": "enumeration",
       "enum": [
-        "Public et parapublic",
-        "Entreprises et agences",
         "Conseil",
-        "Recherche et enseignement"
+        "Structure publique",
+        "Conception & réalisation",
+        "Concertation citoyenne",
+        "Recherche & innovation",
+        "Groupements"
       ]
     },
     "sous_type_de_contact": {
       "type": "enumeration",
       "enum": [
-        "Bureau d’étude",
+        "Bureau d’étude en ingénierie",
+        "Bureau d’étude technique",
         "Assistance à maitrise d’ouvrage",
-        "Association",
+        "Agence de l’eau",
+        "Bailleur social",
+        "CAUE",
+        "Agence d’architecture",
+        "Agence paysagiste",
+        "Aménageur",
+        "Société d’arboriculture",
+        "Agence de conception lumière",
+        "Syndic de copropriété",
+        "Agence de communication",
+        "Collectif",
         "Pôle universitaire",
         "Laboratoire de recherche",
-        "Agence d’architecture",
-        "Entreprise privée",
-        "Agence paysagiste",
+        "Institut",
         "Syndicat mixte",
-        "Collectif",
-        "Aménageur",
-        "Agence de l’eau",
-        "CAUE",
-        "Conseil en ingénierie",
-        "Agence de conception lumière",
-        "Agence de communication",
-        "Syndic de copropriété",
-        "Société d’arboriculture",
-        "Acteur public et parapublic",
-        "Bailleur social",
-        "Institut"
+        "Association",
+        "Fédération"
       ]
     },
     "email": {
