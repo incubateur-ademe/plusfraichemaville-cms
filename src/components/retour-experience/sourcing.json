@@ -13,44 +13,44 @@
     "telephone": {
       "type": "string"
     },
+    "email": {
+      "type": "email"
+    },
     "type_de_contact": {
       "type": "enumeration",
       "enum": [
-        "Conseil",
-        "Structure publique",
-        "Conception & réalisation",
-        "Concertation citoyenne",
-        "Recherche & innovation",
-        "Groupements"
+        "conseil",
+        "structure_publique",
+        "conception_et_realisation",
+        "concertation_citoyenne",
+        "recherche_et_innovation",
+        "groupements"
       ]
     },
     "sous_type_de_contact": {
       "type": "enumeration",
       "enum": [
-        "Bureau d’étude en ingénierie",
-        "Bureau d’étude technique",
-        "Assistance à maitrise d’ouvrage",
-        "Agence de l’eau",
-        "Bailleur social",
-        "CAUE",
-        "Agence d’architecture",
-        "Agence paysagiste",
-        "Aménageur",
-        "Société d’arboriculture",
-        "Agence de conception lumière",
-        "Syndic de copropriété",
-        "Agence de communication",
-        "Collectif",
-        "Pôle universitaire",
-        "Laboratoire de recherche",
-        "Institut",
-        "Syndicat mixte",
-        "Association",
-        "Fédération"
+        "bureau_etude_ingenierie",
+        "bureau_etude_technique",
+        "assistance_maitrise_ouvrage",
+        "agence_eau",
+        "bailleur_social",
+        "caue",
+        "agence_architecture",
+        "agence_paysagiste",
+        "amenageur",
+        "societe_arboriculture",
+        "agence_conception_lumiere",
+        "syndic_copropriete",
+        "agence_communication",
+        "collectif",
+        "pole_universitaire",
+        "laboratoire_recherche",
+        "institut",
+        "syndicat_mixte",
+        "association",
+        "federation"
       ]
-    },
-    "email": {
-      "type": "email"
     }
   }
 }
