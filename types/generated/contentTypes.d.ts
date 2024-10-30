@@ -1790,8 +1790,8 @@ export interface ApiRetourExperienceRetourExperience
           versioned: true;
         };
       }>;
-    sourcing: Attribute.Component<'retour-experience.sourcing', true>;
     location: Attribute.JSON;
+    contacts: Attribute.Component<'retour-experience.contact', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

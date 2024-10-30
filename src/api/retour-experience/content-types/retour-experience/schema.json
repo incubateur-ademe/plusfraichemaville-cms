@@ -264,13 +264,13 @@
       },
       "type": "integer"
     },
-    "sourcing": {
-      "type": "component",
-      "repeatable": true,
-      "component": "retour-experience.sourcing"
-    },
     "location": {
       "type": "json"
+    },
+    "contacts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "retour-experience.contact"
     }
   }
 }
