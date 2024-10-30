@@ -2,7 +2,8 @@
   "collectionName": "components_retour_experience_contacts",
   "info": {
     "displayName": "Contact",
-    "icon": "phone"
+    "icon": "phone",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -23,7 +24,8 @@
         "conception_et_realisation",
         "concertation_citoyenne",
         "recherche_et_innovation",
-        "groupements"
+        "groupements",
+        "collectivite"
       ]
     },
     "sous_type_de_contact": {
@@ -48,7 +50,8 @@
         "institut",
         "syndicat_mixte",
         "association",
-        "federation"
+        "federation",
+        "collectivite"
       ]
     }
   }
