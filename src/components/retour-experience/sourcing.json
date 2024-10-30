@@ -24,7 +24,8 @@
         "conception_et_realisation",
         "concertation_citoyenne",
         "recherche_et_innovation",
-        "groupements"
+        "groupements",
+        "collectivite"
       ]
     },
     "sous_type_de_contact": {
@@ -49,7 +50,8 @@
         "institut",
         "syndicat_mixte",
         "association",
-        "federation"
+        "federation",
+        "collectivite"
       ]
     }
   }

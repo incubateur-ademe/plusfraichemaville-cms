@@ -252,7 +252,8 @@ export interface RetourExperienceSourcing extends Schema.Component {
         'conception_et_realisation',
         'concertation_citoyenne',
         'recherche_et_innovation',
-        'groupements'
+        'groupements',
+        'collectivite'
       ]
     >;
     sous_type_de_contact: Attribute.Enumeration<
@@ -276,7 +277,8 @@ export interface RetourExperienceSourcing extends Schema.Component {
         'institut',
         'syndicat_mixte',
         'association',
-        'federation'
+        'federation',
+        'collectivite'
       ]
     >;
   };
