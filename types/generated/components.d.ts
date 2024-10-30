@@ -167,6 +167,56 @@ export interface RetourExperienceCalendrier extends Schema.Component {
   };
 }
 
+export interface RetourExperienceContact extends Schema.Component {
+  collectionName: 'components_retour_experience_contacts';
+  info: {
+    displayName: 'Contact';
+    icon: 'phone';
+    description: '';
+  };
+  attributes: {
+    label: Attribute.String;
+    telephone: Attribute.String;
+    email: Attribute.Email;
+    type_de_contact: Attribute.Enumeration<
+      [
+        'conseil',
+        'structure_publique',
+        'conception_et_realisation',
+        'concertation_citoyenne',
+        'recherche_et_innovation',
+        'groupements',
+        'collectivite'
+      ]
+    >;
+    sous_type_de_contact: Attribute.Enumeration<
+      [
+        'bureau_etude_ingenierie',
+        'bureau_etude_technique',
+        'assistance_maitrise_ouvrage',
+        'agence_eau',
+        'bailleur_social',
+        'caue',
+        'agence_architecture',
+        'agence_paysagiste',
+        'amenageur',
+        'societe_arboriculture',
+        'agence_conception_lumiere',
+        'syndic_copropriete',
+        'agence_communication',
+        'collectif',
+        'pole_universitaire',
+        'laboratoire_recherche',
+        'institut',
+        'syndicat_mixte',
+        'association',
+        'federation',
+        'collectivite'
+      ]
+    >;
+  };
+}
+
 export interface RetourExperienceSituation extends Schema.Component {
   collectionName: 'components_retour_experience_situations';
   info: {
@@ -198,6 +248,7 @@ declare module '@strapi/types' {
       'fiche-solution.etape-mise-en-oeuvre': FicheSolutionEtapeMiseEnOeuvre;
       'fiche-solution.oups': FicheSolutionOups;
       'retour-experience.calendrier': RetourExperienceCalendrier;
+      'retour-experience.contact': RetourExperienceContact;
       'retour-experience.situation': RetourExperienceSituation;
     }
   }

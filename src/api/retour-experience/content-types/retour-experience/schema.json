@@ -263,6 +263,14 @@
         }
       },
       "type": "integer"
+    },
+    "location": {
+      "type": "json"
+    },
+    "contacts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "retour-experience.contact"
     }
   }
 }
