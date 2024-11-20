@@ -271,6 +271,9 @@
       "type": "component",
       "repeatable": true,
       "component": "retour-experience.contact"
+    },
+    "cout_euro": {
+      "type": "integer"
     }
   }
 }
