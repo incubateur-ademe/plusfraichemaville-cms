@@ -7,7 +7,8 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "generate-types": "npx strapi-plugin-schemas-to-ts generateInterfaces --strapi-root-path . --destinationFolder types "
   },
   "dependencies": {
     "@notum-cz/strapi-plugin-content-versioning": "^1.2.7",
