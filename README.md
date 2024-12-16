@@ -34,7 +34,9 @@ npm run develop
 
 ## Classe typescript
 
-Les classes peuvent donc être récupérées dans ce repository dans les fichiers [contentTypes.d.ts](./types/generated/contentTypes.d.ts)  et [components.d.ts](./types/generated/components.d.ts).
-Ils sont automatiquement mis à jours lors de la modification de schéma dans l'interface "content builder" de l'admin de Strapi.
+Les classes typescript peuvent être générées grâce au plugin schemas-to-ts, en lançant la commande suivante:
+```shell
+schemas-to-ts generateInterfaces  --strapi-root-path .
+```
 
-Ces fichiers sont récupérés et utilisés tels quels dans [le repo NextJS](https://github.com/incubateur-ademe/plusfraichemaville-site) du site https://plusfraichemaville.fr .
+Les fichiers générés dans le répertoires /types sont à copier tels quels dans le répertoire /lib/strapi/types du [repo NextJS](https://github.com/incubateur-ademe/plusfraichemaville-site) du site https://plusfraichemaville.fr  
