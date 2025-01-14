@@ -1793,6 +1793,7 @@ export interface ApiRetourExperienceRetourExperience
     location: Attribute.JSON;
     contacts: Attribute.Component<'retour-experience.contact', true>;
     cout_euro: Attribute.Integer;
+    export_aquagir: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

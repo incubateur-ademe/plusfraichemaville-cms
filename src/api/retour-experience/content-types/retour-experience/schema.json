@@ -274,6 +274,10 @@
     },
     "cout_euro": {
       "type": "integer"
+    },
+    "export_aquagir": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
