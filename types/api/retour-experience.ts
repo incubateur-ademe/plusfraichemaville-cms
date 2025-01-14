@@ -74,6 +74,7 @@ export interface RetourExperience {
     location?: any;
     contacts: Contact[];
     cout_euro?: number;
+    export_aquagir?: boolean;
   };
 }
 export interface RetourExperience_Plain {
@@ -108,6 +109,7 @@ export interface RetourExperience_Plain {
   location?: any;
   contacts: Contact_Plain[];
   cout_euro?: number;
+  export_aquagir?: boolean;
 }
 
 export interface RetourExperience_NoRelations {
@@ -142,6 +144,7 @@ export interface RetourExperience_NoRelations {
   location?: any;
   contacts: Contact_NoRelations[];
   cout_euro?: number;
+  export_aquagir?: boolean;
 }
 
 export interface RetourExperience_AdminPanelLifeCycle {
@@ -176,4 +179,5 @@ export interface RetourExperience_AdminPanelLifeCycle {
   location?: any;
   contacts: Contact_Plain[];
   cout_euro?: number;
+  export_aquagir?: boolean;
 }
