@@ -35,9 +35,7 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images"
-      ],
+      "allowedTypes": ["images"],
       "pluginOptions": {
         "versions": {
           "versioned": true
@@ -77,12 +75,7 @@
         }
       },
       "type": "enumeration",
-      "enum": [
-        "bleue",
-        "verte",
-        "grise",
-        "douce"
-      ]
+      "enum": ["bleue", "verte", "grise", "douce"]
     },
     "description_courte": {
       "pluginOptions": {
@@ -97,10 +90,10 @@
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
       "required": true,
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "baisse_temperature": {
       "pluginOptions": {
@@ -126,26 +119,24 @@
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
       "required": true,
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "rafraichissement_attendu_description": {
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "logo_partenaire": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images"
-      ],
+      "allowedTypes": ["images"],
       "pluginOptions": {
         "versions": {
           "versioned": true
@@ -196,9 +187,9 @@
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "lien_aide_territoire": {
       "pluginOptions": {
@@ -289,9 +280,9 @@
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "delai_travaux_minimum": {
       "type": "integer",
@@ -306,11 +297,7 @@
     },
     "portee_baisse_temperature": {
       "type": "enumeration",
-      "enum": [
-        "air",
-        "surface",
-        "interieur"
-      ]
+      "enum": ["air", "surface", "interieur"]
     },
     "cout_entretien_unite": {
       "type": "enumeration",
@@ -327,9 +314,9 @@
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "libelle_avantage_solution": {
       "type": "string"
@@ -338,25 +325,22 @@
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "cout_unite": {
       "type": "enumeration",
-      "enum": [
-        "metreCarre",
-        "megaWattHeure"
-      ],
+      "enum": ["metreCarre", "megaWattHeure"],
       "default": "metreCarre"
     },
     "description_estimation": {
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "aides_territoires_mots_cles": {
       "type": "text"

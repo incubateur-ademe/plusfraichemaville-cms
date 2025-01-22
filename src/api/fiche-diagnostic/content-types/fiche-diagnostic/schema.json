@@ -24,10 +24,10 @@
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
       "required": true,
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "etapes_mise_en_oeuvre": {
       "type": "component",
@@ -71,17 +71,17 @@
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "indicateurs": {
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "delai_min": {
       "type": "integer",
@@ -106,27 +106,27 @@
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
       "required": true,
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "vigilance_description": {
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
       "required": true,
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "en_savoir_plus_description": {
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "fiches_diagnostics_associees": {
       "type": "relation",
@@ -137,17 +137,17 @@
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "partenaire": {
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "light"
+        "preset": "default"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     }
   }
 }

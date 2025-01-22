@@ -1,4 +1,4 @@
-module.exports = ({env}) => ({
+module.exports = ({ env }) => ({
   upload: {
     config: {
       provider: "aws-s3",
@@ -28,16 +28,10 @@ module.exports = ({env}) => ({
   "drag-drop-content-types": {
     enabled: true,
   },
-  ckeditor: {
-    enabled: true,
-    resolve: "./src/plugins/strapi-plugin-ckeditor",
-  },
   graphql: {
     config: {
       defaultLimit: 100,
+      v4CompatibilityMode: true,
     },
-  },
-  "schemas-to-ts": {
-    enabled: true,
   },
 });

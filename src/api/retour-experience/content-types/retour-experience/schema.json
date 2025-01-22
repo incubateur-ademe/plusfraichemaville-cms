@@ -35,9 +35,7 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images"
-      ],
+      "allowedTypes": ["images"],
       "pluginOptions": {
         "versions": {
           "versioned": true
@@ -46,12 +44,7 @@
     },
     "types_solutions": {
       "type": "customField",
-      "options": [
-        "bleue",
-        "douce",
-        "verte",
-        "grise"
-      ],
+      "options": ["bleue", "douce", "verte", "grise"],
       "required": false,
       "customField": "plugin::multi-select.multi-select"
     },
@@ -117,11 +110,7 @@
         }
       },
       "type": "enumeration",
-      "enum": [
-        "court_terme",
-        "moyen_terme",
-        "long_terme"
-      ]
+      "enum": ["court_terme", "moyen_terme", "long_terme"]
     },
     "cout": {
       "pluginOptions": {
@@ -198,7 +187,7 @@
         "preset": "light"
       },
       "required": true,
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "porteur": {
       "type": "customField",
@@ -206,7 +195,7 @@
         "output": "HTML",
         "preset": "light"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "contact": {
       "type": "customField",
@@ -214,7 +203,7 @@
         "output": "HTML",
         "preset": "light"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "financement": {
       "type": "customField",
@@ -222,7 +211,7 @@
         "output": "HTML",
         "preset": "light"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "difficultes": {
       "type": "customField",
@@ -230,7 +219,7 @@
         "output": "HTML",
         "preset": "light"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "partenaires": {
       "type": "customField",
@@ -238,7 +227,7 @@
         "output": "HTML",
         "preset": "light"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "ressources": {
       "type": "customField",
@@ -246,7 +235,7 @@
         "output": "HTML",
         "preset": "light"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "credits": {
       "type": "customField",
@@ -254,7 +243,7 @@
         "output": "HTML",
         "preset": "light"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "rank": {
       "pluginOptions": {

@@ -1,195 +1,180 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
-export interface CommonCitation extends Schema.Component {
+export interface CommonCitation extends Struct.ComponentSchema {
   collectionName: 'components_common_citations';
   info: {
-    displayName: 'citation';
     description: '';
+    displayName: 'citation';
   };
   attributes: {
-    auteur: Attribute.String & Attribute.Required;
-    texte: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    auteur: Schema.Attribute.String & Schema.Attribute.Required;
+    texte: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
           output: 'HTML';
-          preset: 'light';
+          preset: 'default';
         }
       >;
   };
 }
 
-export interface FicheDiagnosticEtapeMiseEnOeuvre extends Schema.Component {
+export interface FicheDiagnosticEtapeMiseEnOeuvre
+  extends Struct.ComponentSchema {
   collectionName: 'components_fiche_diagnostic_etape_mise_en_oeuvres';
   info: {
     displayName: 'Etape_mise_en_oeuvre';
   };
   attributes: {
-    titre: Attribute.String & Attribute.Required;
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
           output: 'HTML';
-          preset: 'light';
+          preset: 'default';
         }
       >;
+    titre: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface FicheSolutionAideRegionale extends Schema.Component {
+export interface FicheSolutionAideRegionale extends Struct.ComponentSchema {
   collectionName: 'components_fiche_solution_aide_regionales';
   info: {
-    displayName: 'aide_regionale';
     description: '';
+    displayName: 'aide_regionale';
   };
   attributes: {
-    region: Attribute.Relation<
-      'fiche-solution.aide-regionale',
-      'oneToOne',
-      'api::region.region'
-    >;
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
           output: 'HTML';
-          preset: 'light';
+          preset: 'default';
         }
       >;
-    titre: Attribute.String;
+    region: Schema.Attribute.Relation<'oneToOne', 'api::region.region'>;
+    titre: Schema.Attribute.String;
   };
 }
 
-export interface FicheSolutionEtapeDiagnostic extends Schema.Component {
+export interface FicheSolutionEtapeDiagnostic extends Struct.ComponentSchema {
   collectionName: 'components_fiche_solution_etape_diagnostics';
   info: {
     displayName: 'etape_diagnostic';
   };
   attributes: {
-    titre: Attribute.String & Attribute.Required;
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
           output: 'HTML';
-          preset: 'light';
+          preset: 'default';
         }
       >;
+    titre: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface FicheSolutionEtapeEntretien extends Schema.Component {
+export interface FicheSolutionEtapeEntretien extends Struct.ComponentSchema {
   collectionName: 'components_fiche_solution_etape_entretiens';
   info: {
-    displayName: 'etape_entretien';
     description: '';
+    displayName: 'etape_entretien';
   };
   attributes: {
-    titre: Attribute.String & Attribute.Required;
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
           output: 'HTML';
-          preset: 'light';
+          preset: 'default';
         }
       >;
+    titre: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface FicheSolutionEtapeMiseEnOeuvre extends Schema.Component {
+export interface FicheSolutionEtapeMiseEnOeuvre extends Struct.ComponentSchema {
   collectionName: 'components_fiche_solution_etape_mise_en_oeuvres';
   info: {
     displayName: 'etape_mise_en_oeuvre';
   };
   attributes: {
-    titre: Attribute.String & Attribute.Required;
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
           output: 'HTML';
-          preset: 'light';
+          preset: 'default';
         }
       >;
+    titre: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface FicheSolutionOups extends Schema.Component {
+export interface FicheSolutionOups extends Struct.ComponentSchema {
   collectionName: 'components_fiche_solution_oups';
   info: {
-    displayName: 'oups';
     description: '';
+    displayName: 'oups';
   };
   attributes: {
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
           output: 'HTML';
-          preset: 'light';
+          preset: 'default';
         }
       >;
-    titre: Attribute.Text & Attribute.Required;
-    solutions_reparatrices: Attribute.Relation<
-      'fiche-solution.oups',
+    solutions_reparatrices: Schema.Attribute.Relation<
       'oneToMany',
       'api::fiche-solution.fiche-solution'
     >;
+    titre: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
 
-export interface RetourExperienceCalendrier extends Schema.Component {
+export interface RetourExperienceCalendrier extends Struct.ComponentSchema {
   collectionName: 'components_retour_experience_calendriers';
   info: {
-    displayName: 'Calendrier';
     description: '';
+    displayName: 'Calendrier';
   };
   attributes: {
-    date: Attribute.String & Attribute.Required;
-    titre: Attribute.String & Attribute.Required;
-    description: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    date: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
           output: 'HTML';
-          preset: 'light';
+          preset: 'default';
         }
       >;
+    titre: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface RetourExperienceContact extends Schema.Component {
+export interface RetourExperienceContact extends Struct.ComponentSchema {
   collectionName: 'components_retour_experience_contacts';
   info: {
+    description: '';
     displayName: 'Contact';
     icon: 'phone';
-    description: '';
   };
   attributes: {
-    label: Attribute.String;
-    telephone: Attribute.String;
-    email: Attribute.Email;
-    type_de_contact: Attribute.Enumeration<
-      [
-        'conseil',
-        'structure_publique',
-        'conception_et_realisation',
-        'concertation_citoyenne',
-        'recherche_et_innovation',
-        'groupements',
-        'collectivite'
-      ]
-    >;
-    sous_type_de_contact: Attribute.Enumeration<
+    email: Schema.Attribute.Email;
+    label: Schema.Attribute.String;
+    site_internet: Schema.Attribute.String;
+    sous_type_de_contact: Schema.Attribute.Enumeration<
       [
         'agence_architecture',
         'agence_communication',
@@ -215,36 +200,47 @@ export interface RetourExperienceContact extends Schema.Component {
         'pole_universitaire',
         'societe_arboriculture',
         'syndic_copropriete',
-        'syndicat_mixte'
+        'syndicat_mixte',
       ]
     >;
-    site_internet: Attribute.String;
+    telephone: Schema.Attribute.String;
+    type_de_contact: Schema.Attribute.Enumeration<
+      [
+        'conseil',
+        'structure_publique',
+        'conception_et_realisation',
+        'concertation_citoyenne',
+        'recherche_et_innovation',
+        'groupements',
+        'collectivite',
+      ]
+    >;
   };
 }
 
-export interface RetourExperienceSituation extends Schema.Component {
+export interface RetourExperienceSituation extends Struct.ComponentSchema {
   collectionName: 'components_retour_experience_situations';
   info: {
-    displayName: 'Situation';
     description: '';
+    displayName: 'Situation';
   };
   attributes: {
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
           output: 'HTML';
-          preset: 'light';
+          preset: 'default';
         }
       >;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
   };
 }
 
-declare module '@strapi/types' {
-  export module Shared {
-    export interface Components {
+declare module '@strapi/strapi' {
+  export module Public {
+    export interface ComponentSchemas {
       'common.citation': CommonCitation;
       'fiche-diagnostic.etape-mise-en-oeuvre': FicheDiagnosticEtapeMiseEnOeuvre;
       'fiche-solution.aide-regionale': FicheSolutionAideRegionale;
