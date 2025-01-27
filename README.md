@@ -36,7 +36,7 @@ npm run develop
 
 Les classes typescript peuvent être générées grâce au plugin schemas-to-ts, en lançant la commande suivante:
 ```shell
-schemas-to-ts generateInterfaces  --strapi-root-path .
+npm run generate-types
 ```
 
 Les fichiers générés dans le répertoires /types sont à copier tels quels dans le répertoire /lib/strapi/types du [repo NextJS](https://github.com/incubateur-ademe/plusfraichemaville-site) du site https://plusfraichemaville.fr  
