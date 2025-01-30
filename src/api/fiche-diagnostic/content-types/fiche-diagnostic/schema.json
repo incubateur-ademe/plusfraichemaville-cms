@@ -170,6 +170,14 @@
         "amelioration_confort_thermique"
       ],
       "customField": "plugin::multi-select.multi-select"
+    },
+    "echelle_spatiale": {
+      "type": "customField",
+      "options": [
+        "quartier",
+        "espace_public"
+      ],
+      "customField": "plugin::multi-select.multi-select"
     }
   }
 }

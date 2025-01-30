@@ -1051,6 +1051,11 @@ export interface ApiFicheDiagnosticFicheDiagnostic
         'plugin::multi-select.multi-select',
         ['diminution_effet_icu', 'amelioration_confort_thermique']
       >;
+    echelle_spatiale: Attribute.JSON &
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        ['quartier', 'espace_public']
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

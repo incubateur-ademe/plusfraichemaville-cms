@@ -50,6 +50,7 @@ export interface FicheDiagnostic {
     nom_scientifique?: string;
     type_livrables?: string;
     effets_attendus?: any;
+    echelle_spatiale?: any;
   };
 }
 export interface FicheDiagnostic_Plain {
@@ -81,6 +82,7 @@ export interface FicheDiagnostic_Plain {
   nom_scientifique?: string;
   type_livrables?: string;
   effets_attendus?: any;
+  echelle_spatiale?: any;
 }
 
 export interface FicheDiagnostic_NoRelations {
@@ -112,6 +114,7 @@ export interface FicheDiagnostic_NoRelations {
   nom_scientifique?: string;
   type_livrables?: string;
   effets_attendus?: any;
+  echelle_spatiale?: any;
 }
 
 export interface FicheDiagnostic_AdminPanelLifeCycle {
@@ -143,4 +146,5 @@ export interface FicheDiagnostic_AdminPanelLifeCycle {
   nom_scientifique?: string;
   type_livrables?: string;
   effets_attendus?: any;
+  echelle_spatiale?: any;
 }
