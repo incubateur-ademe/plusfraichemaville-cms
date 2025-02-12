@@ -39,6 +39,16 @@ export interface FicheDiagnosticEtapeMiseEnOeuvre extends Schema.Component {
   };
 }
 
+export interface FicheDiagnosticUtiliteMethode extends Schema.Component {
+  collectionName: 'components_fiche_diagnostic_utilite_methodes';
+  info: {
+    displayName: 'utilite_methode';
+  };
+  attributes: {
+    description: Attribute.String & Attribute.Required;
+  };
+}
+
 export interface FicheSolutionAideRegionale extends Schema.Component {
   collectionName: 'components_fiche_solution_aide_regionales';
   info: {
@@ -247,6 +257,7 @@ declare module '@strapi/types' {
     export interface Components {
       'common.citation': CommonCitation;
       'fiche-diagnostic.etape-mise-en-oeuvre': FicheDiagnosticEtapeMiseEnOeuvre;
+      'fiche-diagnostic.utilite-methode': FicheDiagnosticUtiliteMethode;
       'fiche-solution.aide-regionale': FicheSolutionAideRegionale;
       'fiche-solution.etape-diagnostic': FicheSolutionEtapeDiagnostic;
       'fiche-solution.etape-entretien': FicheSolutionEtapeEntretien;

@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lien_rex_diagnostics",
+  "info": {
+    "singularName": "lien-rex-diagnostic",
+    "pluralName": "lien-rex-diagnostics",
+    "displayName": "Lien REX-Diagnostic"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fiche_diagnostic": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::fiche-diagnostic.fiche-diagnostic",
+      "inversedBy": "lien_rex_diagnostics"
+    },
+    "retour_experience_diagnostic": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::retour-experience-diagnostic.retour-experience-diagnostic",
+      "inversedBy": "lien_rex_diagnostics"
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}
