@@ -1056,6 +1056,11 @@ export interface ApiFicheDiagnosticFicheDiagnostic
         'plugin::multi-select.multi-select',
         ['quartier', 'espace_public']
       >;
+    lien_rex_diagnostics: Attribute.Relation<
+      'api::fiche-diagnostic.fiche-diagnostic',
+      'oneToMany',
+      'api::lien-rex-diagnostic.lien-rex-diagnostic'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1394,6 +1399,54 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::fiche-solution.fiche-solution',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLienRexDiagnosticLienRexDiagnostic
+  extends Schema.CollectionType {
+  collectionName: 'lien_rex_diagnostics';
+  info: {
+    singularName: 'lien-rex-diagnostic';
+    pluralName: 'lien-rex-diagnostics';
+    displayName: 'Lien REX-Diagnostic';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    fiche_diagnostic: Attribute.Relation<
+      'api::lien-rex-diagnostic.lien-rex-diagnostic',
+      'manyToOne',
+      'api::fiche-diagnostic.fiche-diagnostic'
+    >;
+    retour_experience_diagnostic: Attribute.Relation<
+      'api::lien-rex-diagnostic.lien-rex-diagnostic',
+      'manyToOne',
+      'api::retour-experience-diagnostic.retour-experience-diagnostic'
+    >;
+    description: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::lien-rex-diagnostic.lien-rex-diagnostic',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::lien-rex-diagnostic.lien-rex-diagnostic',
       'oneToOne',
       'admin::user'
     > &
@@ -1829,6 +1882,123 @@ export interface ApiRetourExperienceRetourExperience
   };
 }
 
+export interface ApiRetourExperienceDiagnosticRetourExperienceDiagnostic
+  extends Schema.CollectionType {
+  collectionName: 'retour_experience_diagnostics';
+  info: {
+    singularName: 'retour-experience-diagnostic';
+    pluralName: 'retour-experience-diagnostics';
+    displayName: 'Retour Experience Diagnostic';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    image_principale: Attribute.Media<'images'>;
+    titre: Attribute.String & Attribute.Required;
+    lieu: Attribute.String & Attribute.Required;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    citations: Attribute.Component<'common.citation', true>;
+    collectivite_info: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    climat_actuel: Attribute.String;
+    climat_futur: Attribute.String;
+    annee_realisation: Attribute.String;
+    cout_description: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    financements: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    besoin: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    resultats: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'standard';
+        }
+      >;
+    points_vigilance: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    apres: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    partenaires: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    lien_rex_diagnostics: Attribute.Relation<
+      'api::retour-experience-diagnostic.retour-experience-diagnostic',
+      'oneToMany',
+      'api::lien-rex-diagnostic.lien-rex-diagnostic'
+    >;
+    slug: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::retour-experience-diagnostic.retour-experience-diagnostic',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::retour-experience-diagnostic.retour-experience-diagnostic',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiSolutionRetourExperienceSolutionRetourExperience
   extends Schema.CollectionType {
   collectionName: 'solution_retour_experiences';
@@ -1945,10 +2115,12 @@ declare module '@strapi/types' {
       'api::cobenefice.cobenefice': ApiCobeneficeCobenefice;
       'api::fiche-diagnostic.fiche-diagnostic': ApiFicheDiagnosticFicheDiagnostic;
       'api::fiche-solution.fiche-solution': ApiFicheSolutionFicheSolution;
+      'api::lien-rex-diagnostic.lien-rex-diagnostic': ApiLienRexDiagnosticLienRexDiagnostic;
       'api::materiau.materiau': ApiMateriauMateriau;
       'api::objectif-developpement-durable.objectif-developpement-durable': ApiObjectifDeveloppementDurableObjectifDeveloppementDurable;
       'api::region.region': ApiRegionRegion;
       'api::retour-experience.retour-experience': ApiRetourExperienceRetourExperience;
+      'api::retour-experience-diagnostic.retour-experience-diagnostic': ApiRetourExperienceDiagnosticRetourExperienceDiagnostic;
       'api::solution-retour-experience.solution-retour-experience': ApiSolutionRetourExperienceSolutionRetourExperience;
       'api::webinaire.webinaire': ApiWebinaireWebinaire;
     }
