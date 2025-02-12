@@ -148,6 +148,42 @@
         "preset": "light"
       },
       "customField": "plugin::ckeditor.CKEditor"
+    },
+    "utilite_methode": {
+      "type": "component",
+      "repeatable": true,
+      "component": "fiche-diagnostic.utilite-methode"
+    },
+    "explication_cout": {
+      "type": "string"
+    },
+    "nom_scientifique": {
+      "type": "string"
+    },
+    "type_livrables": {
+      "type": "string"
+    },
+    "effets_attendus": {
+      "type": "customField",
+      "options": [
+        "diminution_effet_icu",
+        "amelioration_confort_thermique"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "echelle_spatiale": {
+      "type": "customField",
+      "options": [
+        "quartier",
+        "espace_public"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "lien_rex_diagnostics": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::lien-rex-diagnostic.lien-rex-diagnostic",
+      "mappedBy": "fiche_diagnostic"
     }
   }
 }

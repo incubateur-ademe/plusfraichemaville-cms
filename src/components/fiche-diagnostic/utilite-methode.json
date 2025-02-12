@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_fiche_diagnostic_utilite_methodes",
+  "info": {
+    "displayName": "utilite_methode"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "kind": "collectionType",
+  "collectionName": "retour_experience_diagnostics",
+  "info": {
+    "singularName": "retour-experience-diagnostic",
+    "pluralName": "retour-experience-diagnostics",
+    "displayName": "Retour Experience Diagnostic",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "image_principale": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "titre": {
+      "type": "string",
+      "required": true
+    },
+    "lieu": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "citations": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.citation"
+    },
+    "collectivite_info": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "climat_actuel": {
+      "type": "string"
+    },
+    "climat_futur": {
+      "type": "string"
+    },
+    "annee_realisation": {
+      "type": "string"
+    },
+    "cout_description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "financements": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "besoin": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "resultats": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "points_vigilance": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "apres": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "partenaires": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "lien_rex_diagnostics": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::lien-rex-diagnostic.lien-rex-diagnostic",
+      "mappedBy": "retour_experience_diagnostic"
+    },
+    "slug": {
+      "type": "string"
+    }
+  }
+}
