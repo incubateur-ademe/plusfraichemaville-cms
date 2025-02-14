@@ -20,6 +20,18 @@ export interface CommonCitation extends Schema.Component {
   };
 }
 
+export interface CommonImageWithCaption extends Schema.Component {
+  collectionName: 'components_common_image_with_captions';
+  info: {
+    displayName: 'image_with_caption';
+  };
+  attributes: {
+    caption: Attribute.String;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Attribute.Required;
+  };
+}
+
 export interface FicheDiagnosticEtapeMiseEnOeuvre extends Schema.Component {
   collectionName: 'components_fiche_diagnostic_etape_mise_en_oeuvres';
   info: {
@@ -257,6 +269,7 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'common.citation': CommonCitation;
+      'common.image-with-caption': CommonImageWithCaption;
       'fiche-diagnostic.etape-mise-en-oeuvre': FicheDiagnosticEtapeMiseEnOeuvre;
       'fiche-diagnostic.utilite-methode': FicheDiagnosticUtiliteMethode;
       'fiche-solution.aide-regionale': FicheSolutionAideRegionale;
