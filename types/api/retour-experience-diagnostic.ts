@@ -3,10 +3,13 @@
 import { Media } from '../common/Media';
 import { Citation } from '../components/common/Citation';
 import { LienRexDiagnostic } from './lien-rex-diagnostic';
+import { Contact } from '../components/retour-experience/Contact';
 import { Media_Plain } from '../common/Media';
 import { Citation_Plain } from '../components/common/Citation';
 import { LienRexDiagnostic_Plain } from './lien-rex-diagnostic';
+import { Contact_Plain } from '../components/retour-experience/Contact';
 import { Citation_NoRelations } from '../components/common/Citation';
+import { Contact_NoRelations } from '../components/retour-experience/Contact';
 import { AdminPanelRelationPropertyModification } from '../common/AdminPanelRelationPropertyModification';
 
 export interface RetourExperienceDiagnostic {
@@ -30,6 +33,9 @@ export interface RetourExperienceDiagnostic {
     partenaires?: any;
     lien_rex_diagnostics: { data: LienRexDiagnostic[] };
     slug?: string;
+    contacts: Contact[];
+    credits?: any;
+    guide_pdf?: { data: Media };
   };
 }
 export interface RetourExperienceDiagnostic_Plain {
@@ -52,6 +58,9 @@ export interface RetourExperienceDiagnostic_Plain {
   partenaires?: any;
   lien_rex_diagnostics: LienRexDiagnostic_Plain[];
   slug?: string;
+  contacts: Contact_Plain[];
+  credits?: any;
+  guide_pdf?: Media_Plain;
 }
 
 export interface RetourExperienceDiagnostic_NoRelations {
@@ -74,6 +83,9 @@ export interface RetourExperienceDiagnostic_NoRelations {
   partenaires?: any;
   lien_rex_diagnostics: number[];
   slug?: string;
+  contacts: Contact_NoRelations[];
+  credits?: any;
+  guide_pdf?: number;
 }
 
 export interface RetourExperienceDiagnostic_AdminPanelLifeCycle {
@@ -96,4 +108,7 @@ export interface RetourExperienceDiagnostic_AdminPanelLifeCycle {
   partenaires?: any;
   lien_rex_diagnostics: AdminPanelRelationPropertyModification<LienRexDiagnostic_Plain>;
   slug?: string;
+  contacts: Contact_Plain[];
+  credits?: any;
+  guide_pdf?: AdminPanelRelationPropertyModification<Media_Plain>;
 }

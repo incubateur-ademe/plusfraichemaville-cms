@@ -190,13 +190,13 @@ export interface RetourExperienceContact extends Schema.Component {
     email: Attribute.Email;
     type_de_contact: Attribute.Enumeration<
       [
-        'conseil',
-        'structure_publique',
+        'collectivite',
         'conception_et_realisation',
         'concertation_citoyenne',
-        'recherche_et_innovation',
+        'conseil',
         'groupements',
-        'collectivite'
+        'recherche_et_innovation',
+        'structure_publique'
       ]
     >;
     sous_type_de_contact: Attribute.Enumeration<
@@ -229,6 +229,7 @@ export interface RetourExperienceContact extends Schema.Component {
       ]
     >;
     site_internet: Attribute.String;
+    nom: Attribute.String;
   };
 }
 

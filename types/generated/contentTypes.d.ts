@@ -1981,6 +1981,16 @@ export interface ApiRetourExperienceDiagnosticRetourExperienceDiagnostic
       'api::lien-rex-diagnostic.lien-rex-diagnostic'
     >;
     slug: Attribute.String;
+    contacts: Attribute.Component<'retour-experience.contact', true>;
+    credits: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    guide_pdf: Attribute.Media<'files'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
