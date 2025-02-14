@@ -122,7 +122,9 @@
       "mappedBy": "retour_experience_diagnostic"
     },
     "slug": {
-      "type": "string"
+      "type": "string",
+      "unique": true,
+      "required": true
     },
     "contacts": {
       "type": "component",
@@ -138,11 +140,12 @@
       "customField": "plugin::ckeditor.CKEditor"
     },
     "guide_pdf": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "files"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }

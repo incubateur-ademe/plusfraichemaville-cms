@@ -32,7 +32,7 @@ export interface RetourExperienceDiagnostic {
     apres?: any;
     partenaires?: any;
     lien_rex_diagnostics: { data: LienRexDiagnostic[] };
-    slug?: string;
+    slug: string;
     contacts: Contact[];
     credits?: any;
     guide_pdf?: { data: Media };
@@ -57,7 +57,7 @@ export interface RetourExperienceDiagnostic_Plain {
   apres?: any;
   partenaires?: any;
   lien_rex_diagnostics: LienRexDiagnostic_Plain[];
-  slug?: string;
+  slug: string;
   contacts: Contact_Plain[];
   credits?: any;
   guide_pdf?: Media_Plain;
@@ -82,7 +82,7 @@ export interface RetourExperienceDiagnostic_NoRelations {
   apres?: any;
   partenaires?: any;
   lien_rex_diagnostics: number[];
-  slug?: string;
+  slug: string;
   contacts: Contact_NoRelations[];
   credits?: any;
   guide_pdf?: number;
@@ -107,7 +107,7 @@ export interface RetourExperienceDiagnostic_AdminPanelLifeCycle {
   apres?: any;
   partenaires?: any;
   lien_rex_diagnostics: AdminPanelRelationPropertyModification<LienRexDiagnostic_Plain>;
-  slug?: string;
+  slug: string;
   contacts: Contact_Plain[];
   credits?: any;
   guide_pdf?: AdminPanelRelationPropertyModification<Media_Plain>;
