@@ -184,6 +184,26 @@
       "relation": "oneToMany",
       "target": "api::lien-rex-diagnostic.lien-rex-diagnostic",
       "mappedBy": "fiche_diagnostic"
+    },
+    "image_confort_thermique": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "image_diag_icu": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

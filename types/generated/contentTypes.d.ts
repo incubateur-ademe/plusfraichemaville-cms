@@ -1061,6 +1061,10 @@ export interface ApiFicheDiagnosticFicheDiagnostic
       'oneToMany',
       'api::lien-rex-diagnostic.lien-rex-diagnostic'
     >;
+    image_confort_thermique: Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    image_diag_icu: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1980,7 +1984,17 @@ export interface ApiRetourExperienceDiagnosticRetourExperienceDiagnostic
       'oneToMany',
       'api::lien-rex-diagnostic.lien-rex-diagnostic'
     >;
-    slug: Attribute.String;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    contacts: Attribute.Component<'retour-experience.contact', true>;
+    credits: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    guide_pdf: Attribute.Media<'files'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
