@@ -146,6 +146,11 @@
       "allowedTypes": [
         "files"
       ]
+    },
+    "resultats_images": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.image-with-caption"
     }
   }
 }

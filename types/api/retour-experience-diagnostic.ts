@@ -4,12 +4,15 @@ import { Media } from '../common/Media';
 import { Citation } from '../components/common/Citation';
 import { LienRexDiagnostic } from './lien-rex-diagnostic';
 import { Contact } from '../components/retour-experience/Contact';
+import { ImageWithCaption } from '../components/common/ImageWithCaption';
 import { Media_Plain } from '../common/Media';
 import { Citation_Plain } from '../components/common/Citation';
 import { LienRexDiagnostic_Plain } from './lien-rex-diagnostic';
 import { Contact_Plain } from '../components/retour-experience/Contact';
+import { ImageWithCaption_Plain } from '../components/common/ImageWithCaption';
 import { Citation_NoRelations } from '../components/common/Citation';
 import { Contact_NoRelations } from '../components/retour-experience/Contact';
+import { ImageWithCaption_NoRelations } from '../components/common/ImageWithCaption';
 import { AdminPanelRelationPropertyModification } from '../common/AdminPanelRelationPropertyModification';
 
 export interface RetourExperienceDiagnostic {
@@ -36,6 +39,7 @@ export interface RetourExperienceDiagnostic {
     contacts: Contact[];
     credits?: any;
     guide_pdf?: { data: Media };
+    resultats_images: ImageWithCaption[];
   };
 }
 export interface RetourExperienceDiagnostic_Plain {
@@ -61,6 +65,7 @@ export interface RetourExperienceDiagnostic_Plain {
   contacts: Contact_Plain[];
   credits?: any;
   guide_pdf?: Media_Plain;
+  resultats_images: ImageWithCaption_Plain[];
 }
 
 export interface RetourExperienceDiagnostic_NoRelations {
@@ -86,6 +91,7 @@ export interface RetourExperienceDiagnostic_NoRelations {
   contacts: Contact_NoRelations[];
   credits?: any;
   guide_pdf?: number;
+  resultats_images: ImageWithCaption_NoRelations[];
 }
 
 export interface RetourExperienceDiagnostic_AdminPanelLifeCycle {
@@ -111,4 +117,5 @@ export interface RetourExperienceDiagnostic_AdminPanelLifeCycle {
   contacts: Contact_Plain[];
   credits?: any;
   guide_pdf?: AdminPanelRelationPropertyModification<Media_Plain>;
+  resultats_images: ImageWithCaption_Plain[];
 }
