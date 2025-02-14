@@ -20,6 +20,18 @@ export interface CommonCitation extends Schema.Component {
   };
 }
 
+export interface CommonImageWithCaption extends Schema.Component {
+  collectionName: 'components_common_image_with_captions';
+  info: {
+    displayName: 'image_with_caption';
+  };
+  attributes: {
+    caption: Attribute.String;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Attribute.Required;
+  };
+}
+
 export interface FicheDiagnosticEtapeMiseEnOeuvre extends Schema.Component {
   collectionName: 'components_fiche_diagnostic_etape_mise_en_oeuvres';
   info: {
@@ -190,13 +202,13 @@ export interface RetourExperienceContact extends Schema.Component {
     email: Attribute.Email;
     type_de_contact: Attribute.Enumeration<
       [
-        'conseil',
-        'structure_publique',
+        'collectivite',
         'conception_et_realisation',
         'concertation_citoyenne',
-        'recherche_et_innovation',
+        'conseil',
         'groupements',
-        'collectivite'
+        'recherche_et_innovation',
+        'structure_publique'
       ]
     >;
     sous_type_de_contact: Attribute.Enumeration<
@@ -229,6 +241,7 @@ export interface RetourExperienceContact extends Schema.Component {
       ]
     >;
     site_internet: Attribute.String;
+    nom: Attribute.String;
   };
 }
 
@@ -256,6 +269,7 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'common.citation': CommonCitation;
+      'common.image-with-caption': CommonImageWithCaption;
       'fiche-diagnostic.etape-mise-en-oeuvre': FicheDiagnosticEtapeMiseEnOeuvre;
       'fiche-diagnostic.utilite-methode': FicheDiagnosticUtiliteMethode;
       'fiche-solution.aide-regionale': FicheSolutionAideRegionale;

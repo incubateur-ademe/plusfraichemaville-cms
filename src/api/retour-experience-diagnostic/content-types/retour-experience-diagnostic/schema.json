@@ -122,7 +122,35 @@
       "mappedBy": "retour_experience_diagnostic"
     },
     "slug": {
-      "type": "string"
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "contacts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "retour-experience.contact"
+    },
+    "credits": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "guide_pdf": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "files"
+      ]
+    },
+    "resultats_images": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.image-with-caption"
     }
   }
 }

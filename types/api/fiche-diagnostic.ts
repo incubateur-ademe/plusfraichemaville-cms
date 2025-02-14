@@ -54,6 +54,8 @@ export interface FicheDiagnostic {
     effets_attendus?: any;
     echelle_spatiale?: any;
     lien_rex_diagnostics: { data: LienRexDiagnostic[] };
+    image_confort_thermique?: { data: Media };
+    image_diag_icu?: { data: Media };
   };
 }
 export interface FicheDiagnostic_Plain {
@@ -87,6 +89,8 @@ export interface FicheDiagnostic_Plain {
   effets_attendus?: any;
   echelle_spatiale?: any;
   lien_rex_diagnostics: LienRexDiagnostic_Plain[];
+  image_confort_thermique?: Media_Plain;
+  image_diag_icu?: Media_Plain;
 }
 
 export interface FicheDiagnostic_NoRelations {
@@ -120,6 +124,8 @@ export interface FicheDiagnostic_NoRelations {
   effets_attendus?: any;
   echelle_spatiale?: any;
   lien_rex_diagnostics: number[];
+  image_confort_thermique?: number;
+  image_diag_icu?: number;
 }
 
 export interface FicheDiagnostic_AdminPanelLifeCycle {
@@ -153,4 +159,6 @@ export interface FicheDiagnostic_AdminPanelLifeCycle {
   effets_attendus?: any;
   echelle_spatiale?: any;
   lien_rex_diagnostics: AdminPanelRelationPropertyModification<LienRexDiagnostic_Plain>;
+  image_confort_thermique?: AdminPanelRelationPropertyModification<Media_Plain>;
+  image_diag_icu?: AdminPanelRelationPropertyModification<Media_Plain>;
 }
