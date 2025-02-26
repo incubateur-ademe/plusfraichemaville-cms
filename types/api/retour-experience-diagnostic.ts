@@ -33,7 +33,6 @@ export interface RetourExperienceDiagnostic {
     resultats?: any;
     points_vigilance?: any;
     apres?: any;
-    partenaires?: any;
     lien_rex_diagnostics: { data: LienRexDiagnostic[] };
     slug: string;
     contacts: Contact[];
@@ -59,7 +58,6 @@ export interface RetourExperienceDiagnostic_Plain {
   resultats?: any;
   points_vigilance?: any;
   apres?: any;
-  partenaires?: any;
   lien_rex_diagnostics: LienRexDiagnostic_Plain[];
   slug: string;
   contacts: Contact_Plain[];
@@ -85,7 +83,6 @@ export interface RetourExperienceDiagnostic_NoRelations {
   resultats?: any;
   points_vigilance?: any;
   apres?: any;
-  partenaires?: any;
   lien_rex_diagnostics: number[];
   slug: string;
   contacts: Contact_NoRelations[];
@@ -111,7 +108,6 @@ export interface RetourExperienceDiagnostic_AdminPanelLifeCycle {
   resultats?: any;
   points_vigilance?: any;
   apres?: any;
-  partenaires?: any;
   lien_rex_diagnostics: AdminPanelRelationPropertyModification<LienRexDiagnostic_Plain>;
   slug: string;
   contacts: Contact_Plain[];

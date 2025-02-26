@@ -1417,9 +1417,10 @@ export interface ApiLienRexDiagnosticLienRexDiagnostic
     singularName: 'lien-rex-diagnostic';
     pluralName: 'lien-rex-diagnostics';
     displayName: 'Lien REX-Diagnostic';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     fiche_diagnostic: Attribute.Relation<
@@ -1442,7 +1443,6 @@ export interface ApiLienRexDiagnosticLienRexDiagnostic
       >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::lien-rex-diagnostic.lien-rex-diagnostic',
       'oneToOne',
@@ -1964,14 +1964,6 @@ export interface ApiRetourExperienceDiagnosticRetourExperienceDiagnostic
         }
       >;
     apres: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    partenaires: Attribute.RichText &
       Attribute.CustomField<
         'plugin::ckeditor.CKEditor',
         {

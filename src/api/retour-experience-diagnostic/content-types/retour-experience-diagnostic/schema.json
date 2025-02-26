@@ -107,14 +107,6 @@
       },
       "customField": "plugin::ckeditor.CKEditor"
     },
-    "partenaires": {
-      "type": "customField",
-      "options": {
-        "output": "HTML",
-        "preset": "light"
-      },
-      "customField": "plugin::ckeditor.CKEditor"
-    },
     "lien_rex_diagnostics": {
       "type": "relation",
       "relation": "oneToMany",
