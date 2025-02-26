@@ -4,10 +4,11 @@
   "info": {
     "singularName": "lien-rex-diagnostic",
     "pluralName": "lien-rex-diagnostics",
-    "displayName": "Lien REX-Diagnostic"
+    "displayName": "Lien REX-Diagnostic",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
