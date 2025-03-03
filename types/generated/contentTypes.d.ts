@@ -963,14 +963,14 @@ export interface ApiFicheDiagnosticFicheDiagnostic
           preset: 'light';
         }
       >;
-    delai_min: Attribute.Integer &
+    delai_min: Attribute.Float &
       Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    delai_max: Attribute.Integer &
+    delai_max: Attribute.Float &
       Attribute.SetMinMax<
         {
           min: 0;
@@ -1061,10 +1061,7 @@ export interface ApiFicheDiagnosticFicheDiagnostic
       'oneToMany',
       'api::lien-rex-diagnostic.lien-rex-diagnostic'
     >;
-    image_confort_thermique: Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    image_diag_icu: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image_icone: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
