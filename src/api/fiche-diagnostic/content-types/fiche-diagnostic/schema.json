@@ -84,11 +84,11 @@
       "customField": "plugin::ckeditor.CKEditor"
     },
     "delai_min": {
-      "type": "integer",
+      "type": "float",
       "min": 0
     },
     "delai_max": {
-      "type": "integer",
+      "type": "float",
       "min": 0
     },
     "cout_min": {
@@ -185,25 +185,16 @@
       "target": "api::lien-rex-diagnostic.lien-rex-diagnostic",
       "mappedBy": "fiche_diagnostic"
     },
-    "image_confort_thermique": {
+    "image_icone": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
-    },
-    "image_diag_icu": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }
