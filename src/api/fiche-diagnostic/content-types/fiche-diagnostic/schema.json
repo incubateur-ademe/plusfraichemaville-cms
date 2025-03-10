@@ -149,7 +149,7 @@
       },
       "customField": "plugin::ckeditor.CKEditor"
     },
-    "utilite_methode": {
+    "objectifs": {
       "type": "component",
       "repeatable": true,
       "component": "fiche-diagnostic.utilite-methode"
@@ -163,18 +163,18 @@
     "type_livrables": {
       "type": "string"
     },
-    "effets_attendus": {
+    "echelle_thermique": {
       "type": "customField",
       "options": [
-        "diminution_effet_icu",
-        "amelioration_confort_thermique"
+        "ilot_chaleur_urbain",
+        "confort_thermique"
       ],
       "customField": "plugin::multi-select.multi-select"
     },
     "echelle_spatiale": {
       "type": "customField",
       "options": [
-        "quartier",
+        "commune",
         "espace_public"
       ],
       "customField": "plugin::multi-select.multi-select"

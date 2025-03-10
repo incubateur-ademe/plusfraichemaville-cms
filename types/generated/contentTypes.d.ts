@@ -1039,22 +1039,19 @@ export interface ApiFicheDiagnosticFicheDiagnostic
           preset: 'light';
         }
       >;
-    utilite_methode: Attribute.Component<
-      'fiche-diagnostic.utilite-methode',
-      true
-    >;
+    objectifs: Attribute.Component<'fiche-diagnostic.utilite-methode', true>;
     explication_cout: Attribute.String;
     nom_scientifique: Attribute.String;
     type_livrables: Attribute.String;
-    effets_attendus: Attribute.JSON &
+    echelle_thermique: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
-        ['diminution_effet_icu', 'amelioration_confort_thermique']
+        ['ilot_chaleur_urbain', 'confort_thermique']
       >;
     echelle_spatiale: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
-        ['quartier', 'espace_public']
+        ['commune', 'espace_public']
       >;
     lien_rex_diagnostics: Attribute.Relation<
       'api::fiche-diagnostic.fiche-diagnostic',
