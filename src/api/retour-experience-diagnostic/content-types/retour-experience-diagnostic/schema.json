@@ -143,6 +143,9 @@
       "type": "component",
       "repeatable": true,
       "component": "common.image-with-caption"
+    },
+    "rank": {
+      "type": "integer"
     }
   }
 }

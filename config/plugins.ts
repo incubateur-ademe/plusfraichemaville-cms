@@ -11,6 +11,7 @@ module.exports = ({env}) => ({
           params: {
             Bucket: env("SCALEWAY_BUCKET"),
           },
+          baseUrl: "https://f64fbe9d-cb33-4b6a-a46b-ddac7a1770c3.svc.edge.scw.cloud"
         },
       },
       actionOptions: {
