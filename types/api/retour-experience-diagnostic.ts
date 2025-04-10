@@ -39,6 +39,7 @@ export interface RetourExperienceDiagnostic {
     credits?: any;
     guide_pdf?: { data: Media };
     resultats_images: ImageWithCaption[];
+    rank?: number;
   };
 }
 export interface RetourExperienceDiagnostic_Plain {
@@ -64,6 +65,7 @@ export interface RetourExperienceDiagnostic_Plain {
   credits?: any;
   guide_pdf?: Media_Plain;
   resultats_images: ImageWithCaption_Plain[];
+  rank?: number;
 }
 
 export interface RetourExperienceDiagnostic_NoRelations {
@@ -89,6 +91,7 @@ export interface RetourExperienceDiagnostic_NoRelations {
   credits?: any;
   guide_pdf?: number;
   resultats_images: ImageWithCaption_NoRelations[];
+  rank?: number;
 }
 
 export interface RetourExperienceDiagnostic_AdminPanelLifeCycle {
@@ -114,4 +117,5 @@ export interface RetourExperienceDiagnostic_AdminPanelLifeCycle {
   credits?: any;
   guide_pdf?: AdminPanelRelationPropertyModification<Media_Plain>;
   resultats_images: ImageWithCaption_Plain[];
+  rank?: number;
 }
