@@ -14,8 +14,6 @@ export default [
             "blob:",
             "market-assets.strapi.io",
             "plusfraichemaville.s3.fr-par.scw.cloud",
-            "f64fbe9d-cb33-4b6a-a46b-ddac7a1770c3.svc.edge.scw.cloud",
-            "cdn.plusfraichemaville.fr",
           ],
           "media-src": [
             "'self'",
@@ -23,8 +21,6 @@ export default [
             "blob:",
             "market-assets.strapi.io",
             "plusfraichemaville.s3.fr-par.scw.cloud",
-            "f64fbe9d-cb33-4b6a-a46b-ddac7a1770c3.svc.edge.scw.cloud",
-            "cdn.plusfraichemaville.fr",
           ],
           upgradeInsecureRequests: null,
         },
