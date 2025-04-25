@@ -44,5 +44,5 @@ jobs:
       - uses: kolok/deploy-to-scalingo@v1
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known-host: ssh.osc-fr1.scalingo.com
+          known-host: ssh.osc-secnum-fr1.scalingo.com
           app-name:  ${{ vars.SCALINGO_APP_NAME }}
