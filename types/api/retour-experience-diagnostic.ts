@@ -40,6 +40,7 @@ export interface RetourExperienceDiagnostic {
     guide_pdf?: { data: Media };
     resultats_images: ImageWithCaption[];
     rank?: number;
+    cout_euro?: number;
   };
 }
 export interface RetourExperienceDiagnostic_Plain {
@@ -66,6 +67,7 @@ export interface RetourExperienceDiagnostic_Plain {
   guide_pdf?: Media_Plain;
   resultats_images: ImageWithCaption_Plain[];
   rank?: number;
+  cout_euro?: number;
 }
 
 export interface RetourExperienceDiagnostic_NoRelations {
@@ -92,6 +94,7 @@ export interface RetourExperienceDiagnostic_NoRelations {
   guide_pdf?: number;
   resultats_images: ImageWithCaption_NoRelations[];
   rank?: number;
+  cout_euro?: number;
 }
 
 export interface RetourExperienceDiagnostic_AdminPanelLifeCycle {
@@ -118,4 +121,5 @@ export interface RetourExperienceDiagnostic_AdminPanelLifeCycle {
   guide_pdf?: AdminPanelRelationPropertyModification<Media_Plain>;
   resultats_images: ImageWithCaption_Plain[];
   rank?: number;
+  cout_euro?: number;
 }

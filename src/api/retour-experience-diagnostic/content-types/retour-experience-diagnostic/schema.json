@@ -146,6 +146,9 @@
     },
     "rank": {
       "type": "integer"
+    },
+    "cout_euro": {
+      "type": "integer"
     }
   }
 }

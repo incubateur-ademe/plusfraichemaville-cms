@@ -1983,6 +1983,7 @@ export interface ApiRetourExperienceDiagnosticRetourExperienceDiagnostic
     guide_pdf: Attribute.Media<'files'>;
     resultats_images: Attribute.Component<'common.image-with-caption', true>;
     rank: Attribute.Integer;
+    cout_euro: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
