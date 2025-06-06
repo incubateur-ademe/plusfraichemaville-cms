@@ -906,6 +906,49 @@ export interface ApiCobeneficeCobenefice extends Schema.CollectionType {
   };
 }
 
+export interface ApiEvenementEvenement extends Schema.CollectionType {
+  collectionName: 'evenements';
+  info: {
+    singularName: 'evenement';
+    pluralName: 'evenements';
+    displayName: 'Ev\u00E9nement';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    description: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    type: Attribute.String & Attribute.Required;
+    image_principale: Attribute.Media<'images'> & Attribute.Required;
+    bouton_texte: Attribute.String;
+    bouton_lien: Attribute.String;
+    rank: Attribute.Integer;
+    date_fin: Attribute.DateTime & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::evenement.evenement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::evenement.evenement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiFicheDiagnosticFicheDiagnostic
   extends Schema.CollectionType {
   collectionName: 'fiche_diagnostics';
@@ -2116,6 +2159,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::aide-decision-etape.aide-decision-etape': ApiAideDecisionEtapeAideDecisionEtape;
       'api::cobenefice.cobenefice': ApiCobeneficeCobenefice;
+      'api::evenement.evenement': ApiEvenementEvenement;
       'api::fiche-diagnostic.fiche-diagnostic': ApiFicheDiagnosticFicheDiagnostic;
       'api::fiche-solution.fiche-solution': ApiFicheSolutionFicheSolution;
       'api::lien-rex-diagnostic.lien-rex-diagnostic': ApiLienRexDiagnosticLienRexDiagnostic;
