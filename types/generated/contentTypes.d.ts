@@ -1741,7 +1741,8 @@ export interface ApiRetourExperienceRetourExperience
         'semi_aride',
         'semi_continental',
         'equatorial',
-        'tempere'
+        'tempere',
+        'tropical'
       ]
     > &
       Attribute.SetPluginOptions<{
@@ -1756,7 +1757,8 @@ export interface ApiRetourExperienceRetourExperience
         'semi_aride',
         'semi_continental',
         'equatorial',
-        'tempere'
+        'tempere',
+        'tropical'
       ]
     > &
       Attribute.SetPluginOptions<{

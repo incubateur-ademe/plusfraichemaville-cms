@@ -83,7 +83,8 @@
         "semi_aride",
         "semi_continental",
         "equatorial",
-        "tempere"
+        "tempere",
+        "tropical"
       ]
     },
     "climat_futur": {
@@ -99,7 +100,8 @@
         "semi_aride",
         "semi_continental",
         "equatorial",
-        "tempere"
+        "tempere",
+        "tropical"
       ]
     },
     "echelle": {
