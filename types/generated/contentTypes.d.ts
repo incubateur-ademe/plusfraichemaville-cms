@@ -1,13 +1,120 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Attribute, Schema } from '@strapi/strapi';
+
+export interface AdminApiToken extends Schema.CollectionType {
+  collectionName: 'strapi_api_tokens';
+  info: {
+    description: '';
+    displayName: 'Api Token';
+    name: 'Api Token';
+    pluralName: 'api-tokens';
+    singularName: 'api-token';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    accessKey: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'admin::api-token',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    description: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }> &
+      Attribute.DefaultTo<''>;
+    expiresAt: Attribute.DateTime;
+    lastUsedAt: Attribute.DateTime;
+    lifespan: Attribute.BigInteger;
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    permissions: Attribute.Relation<
+      'admin::api-token',
+      'oneToMany',
+      'admin::api-token-permission'
+    >;
+    type: Attribute.Enumeration<['read-only', 'full-access', 'custom']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'read-only'>;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'admin::api-token',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface AdminApiTokenPermission extends Schema.CollectionType {
+  collectionName: 'strapi_api_token_permissions';
+  info: {
+    description: '';
+    displayName: 'API Token Permission';
+    name: 'API Token Permission';
+    pluralName: 'api-token-permissions';
+    singularName: 'api-token-permission';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    action: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'admin::api-token-permission',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    token: Attribute.Relation<
+      'admin::api-token-permission',
+      'manyToOne',
+      'admin::api-token'
+    >;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'admin::api-token-permission',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
 
 export interface AdminPermission extends Schema.CollectionType {
   collectionName: 'admin_permissions';
   info: {
-    name: 'Permission';
     description: '';
-    singularName: 'permission';
-    pluralName: 'permissions';
     displayName: 'Permission';
+    name: 'Permission';
+    pluralName: 'permissions';
+    singularName: 'permission';
   };
   pluginOptions: {
     'content-manager': {
@@ -24,83 +131,26 @@ export interface AdminPermission extends Schema.CollectionType {
         minLength: 1;
       }>;
     actionParameters: Attribute.JSON & Attribute.DefaultTo<{}>;
-    subject: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-      }>;
-    properties: Attribute.JSON & Attribute.DefaultTo<{}>;
     conditions: Attribute.JSON & Attribute.DefaultTo<[]>;
-    role: Attribute.Relation<'admin::permission', 'manyToOne', 'admin::role'>;
     createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'admin::permission',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
+    properties: Attribute.JSON & Attribute.DefaultTo<{}>;
+    role: Attribute.Relation<'admin::permission', 'manyToOne', 'admin::role'>;
+    subject: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'admin::permission',
       'oneToOne',
       'admin::user'
     > &
-      Attribute.Private;
-  };
-}
-
-export interface AdminUser extends Schema.CollectionType {
-  collectionName: 'admin_users';
-  info: {
-    name: 'User';
-    description: '';
-    singularName: 'user';
-    pluralName: 'users';
-    displayName: 'User';
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    firstname: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-      }>;
-    lastname: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-      }>;
-    username: Attribute.String;
-    email: Attribute.Email &
-      Attribute.Required &
-      Attribute.Private &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        minLength: 6;
-      }>;
-    password: Attribute.Password &
-      Attribute.Private &
-      Attribute.SetMinMaxLength<{
-        minLength: 6;
-      }>;
-    resetPasswordToken: Attribute.String & Attribute.Private;
-    registrationToken: Attribute.String & Attribute.Private;
-    isActive: Attribute.Boolean &
-      Attribute.Private &
-      Attribute.DefaultTo<false>;
-    roles: Attribute.Relation<'admin::user', 'manyToMany', 'admin::role'> &
-      Attribute.Private;
-    blocked: Attribute.Boolean & Attribute.Private & Attribute.DefaultTo<false>;
-    preferedLanguage: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'admin::user', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'admin::user', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -108,11 +158,11 @@ export interface AdminUser extends Schema.CollectionType {
 export interface AdminRole extends Schema.CollectionType {
   collectionName: 'admin_roles';
   info: {
-    name: 'Role';
     description: '';
-    singularName: 'role';
-    pluralName: 'roles';
     displayName: 'Role';
+    name: 'Role';
+    pluralName: 'roles';
+    singularName: 'role';
   };
   pluginOptions: {
     'content-manager': {
@@ -123,149 +173,42 @@ export interface AdminRole extends Schema.CollectionType {
     };
   };
   attributes: {
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-      }>;
     code: Attribute.String &
       Attribute.Required &
       Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    description: Attribute.String;
-    users: Attribute.Relation<'admin::role', 'manyToMany', 'admin::user'>;
-    permissions: Attribute.Relation<
-      'admin::role',
-      'oneToMany',
-      'admin::permission'
-    >;
     createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'admin::role', 'oneToOne', 'admin::user'> &
       Attribute.Private;
-    updatedBy: Attribute.Relation<'admin::role', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface AdminApiToken extends Schema.CollectionType {
-  collectionName: 'strapi_api_tokens';
-  info: {
-    name: 'Api Token';
-    singularName: 'api-token';
-    pluralName: 'api-tokens';
-    displayName: 'Api Token';
-    description: '';
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
+    description: Attribute.String;
     name: Attribute.String &
       Attribute.Required &
       Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    description: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-      }> &
-      Attribute.DefaultTo<''>;
-    type: Attribute.Enumeration<['read-only', 'full-access', 'custom']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'read-only'>;
-    accessKey: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-      }>;
-    lastUsedAt: Attribute.DateTime;
     permissions: Attribute.Relation<
-      'admin::api-token',
+      'admin::role',
       'oneToMany',
-      'admin::api-token-permission'
+      'admin::permission'
     >;
-    expiresAt: Attribute.DateTime;
-    lifespan: Attribute.BigInteger;
-    createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'admin::api-token',
-      'oneToOne',
-      'admin::user'
-    > &
+    updatedBy: Attribute.Relation<'admin::role', 'oneToOne', 'admin::user'> &
       Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'admin::api-token',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface AdminApiTokenPermission extends Schema.CollectionType {
-  collectionName: 'strapi_api_token_permissions';
-  info: {
-    name: 'API Token Permission';
-    description: '';
-    singularName: 'api-token-permission';
-    pluralName: 'api-token-permissions';
-    displayName: 'API Token Permission';
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    action: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-      }>;
-    token: Attribute.Relation<
-      'admin::api-token-permission',
-      'manyToOne',
-      'admin::api-token'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'admin::api-token-permission',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'admin::api-token-permission',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    users: Attribute.Relation<'admin::role', 'manyToMany', 'admin::user'>;
   };
 }
 
 export interface AdminTransferToken extends Schema.CollectionType {
   collectionName: 'strapi_transfer_tokens';
   info: {
-    name: 'Transfer Token';
-    singularName: 'transfer-token';
-    pluralName: 'transfer-tokens';
-    displayName: 'Transfer Token';
     description: '';
+    displayName: 'Transfer Token';
+    name: 'Transfer Token';
+    pluralName: 'transfer-tokens';
+    singularName: 'transfer-token';
   };
   pluginOptions: {
     'content-manager': {
@@ -276,38 +219,38 @@ export interface AdminTransferToken extends Schema.CollectionType {
     };
   };
   attributes: {
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-      }>;
-    description: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        minLength: 1;
-      }> &
-      Attribute.DefaultTo<''>;
     accessKey: Attribute.String &
       Attribute.Required &
       Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    lastUsedAt: Attribute.DateTime;
-    permissions: Attribute.Relation<
-      'admin::transfer-token',
-      'oneToMany',
-      'admin::transfer-token-permission'
-    >;
-    expiresAt: Attribute.DateTime;
-    lifespan: Attribute.BigInteger;
     createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'admin::transfer-token',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
+    description: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }> &
+      Attribute.DefaultTo<''>;
+    expiresAt: Attribute.DateTime;
+    lastUsedAt: Attribute.DateTime;
+    lifespan: Attribute.BigInteger;
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    permissions: Attribute.Relation<
+      'admin::transfer-token',
+      'oneToMany',
+      'admin::transfer-token-permission'
+    >;
+    updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'admin::transfer-token',
       'oneToOne',
@@ -320,11 +263,11 @@ export interface AdminTransferToken extends Schema.CollectionType {
 export interface AdminTransferTokenPermission extends Schema.CollectionType {
   collectionName: 'strapi_transfer_token_permissions';
   info: {
-    name: 'Transfer Token Permission';
     description: '';
-    singularName: 'transfer-token-permission';
-    pluralName: 'transfer-token-permissions';
     displayName: 'Transfer Token Permission';
+    name: 'Transfer Token Permission';
+    pluralName: 'transfer-token-permissions';
+    singularName: 'transfer-token-permission';
   };
   pluginOptions: {
     'content-manager': {
@@ -340,19 +283,19 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
       Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'admin::transfer-token-permission',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
     token: Attribute.Relation<
       'admin::transfer-token-permission',
       'manyToOne',
       'admin::transfer-token'
     >;
-    createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'admin::transfer-token-permission',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
     updatedBy: Attribute.Relation<
       'admin::transfer-token-permission',
       'oneToOne',
@@ -362,429 +305,60 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface PluginUploadFile extends Schema.CollectionType {
-  collectionName: 'files';
+export interface AdminUser extends Schema.CollectionType {
+  collectionName: 'admin_users';
   info: {
-    singularName: 'file';
-    pluralName: 'files';
-    displayName: 'File';
     description: '';
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    alternativeText: Attribute.String;
-    caption: Attribute.String;
-    width: Attribute.Integer;
-    height: Attribute.Integer;
-    formats: Attribute.JSON;
-    hash: Attribute.String & Attribute.Required;
-    ext: Attribute.String;
-    mime: Attribute.String & Attribute.Required;
-    size: Attribute.Decimal & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-    previewUrl: Attribute.String;
-    provider: Attribute.String & Attribute.Required;
-    provider_metadata: Attribute.JSON;
-    related: Attribute.Relation<'plugin::upload.file', 'morphToMany'>;
-    folder: Attribute.Relation<
-      'plugin::upload.file',
-      'manyToOne',
-      'plugin::upload.folder'
-    > &
-      Attribute.Private;
-    folderPath: Attribute.String &
-      Attribute.Required &
-      Attribute.Private &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::upload.file',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::upload.file',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginUploadFolder extends Schema.CollectionType {
-  collectionName: 'upload_folders';
-  info: {
-    singularName: 'folder';
-    pluralName: 'folders';
-    displayName: 'Folder';
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
-    pathId: Attribute.Integer & Attribute.Required & Attribute.Unique;
-    parent: Attribute.Relation<
-      'plugin::upload.folder',
-      'manyToOne',
-      'plugin::upload.folder'
-    >;
-    children: Attribute.Relation<
-      'plugin::upload.folder',
-      'oneToMany',
-      'plugin::upload.folder'
-    >;
-    files: Attribute.Relation<
-      'plugin::upload.folder',
-      'oneToMany',
-      'plugin::upload.file'
-    >;
-    path: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::upload.folder',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::upload.folder',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginContentReleasesRelease extends Schema.CollectionType {
-  collectionName: 'strapi_releases';
-  info: {
-    singularName: 'release';
-    pluralName: 'releases';
-    displayName: 'Release';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    releasedAt: Attribute.DateTime;
-    scheduledAt: Attribute.DateTime;
-    timezone: Attribute.String;
-    status: Attribute.Enumeration<
-      ['ready', 'blocked', 'failed', 'done', 'empty']
-    > &
-      Attribute.Required;
-    actions: Attribute.Relation<
-      'plugin::content-releases.release',
-      'oneToMany',
-      'plugin::content-releases.release-action'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::content-releases.release',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::content-releases.release',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginContentReleasesReleaseAction
-  extends Schema.CollectionType {
-  collectionName: 'strapi_release_actions';
-  info: {
-    singularName: 'release-action';
-    pluralName: 'release-actions';
-    displayName: 'Release Action';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    type: Attribute.Enumeration<['publish', 'unpublish']> & Attribute.Required;
-    entry: Attribute.Relation<
-      'plugin::content-releases.release-action',
-      'morphToOne'
-    >;
-    contentType: Attribute.String & Attribute.Required;
-    locale: Attribute.String;
-    release: Attribute.Relation<
-      'plugin::content-releases.release-action',
-      'manyToOne',
-      'plugin::content-releases.release'
-    >;
-    isEntryValid: Attribute.Boolean;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::content-releases.release-action',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::content-releases.release-action',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginI18NLocale extends Schema.CollectionType {
-  collectionName: 'i18n_locale';
-  info: {
-    singularName: 'locale';
-    pluralName: 'locales';
-    collectionName: 'locales';
-    displayName: 'Locale';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 50;
-        },
-        number
-      >;
-    code: Attribute.String & Attribute.Unique;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::i18n.locale',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::i18n.locale',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginUsersPermissionsPermission
-  extends Schema.CollectionType {
-  collectionName: 'up_permissions';
-  info: {
-    name: 'permission';
-    description: '';
-    singularName: 'permission';
-    pluralName: 'permissions';
-    displayName: 'Permission';
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    action: Attribute.String & Attribute.Required;
-    role: Attribute.Relation<
-      'plugin::users-permissions.permission',
-      'manyToOne',
-      'plugin::users-permissions.role'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::users-permissions.permission',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::users-permissions.permission',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginUsersPermissionsRole extends Schema.CollectionType {
-  collectionName: 'up_roles';
-  info: {
-    name: 'role';
-    description: '';
-    singularName: 'role';
-    pluralName: 'roles';
-    displayName: 'Role';
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 3;
-      }>;
-    description: Attribute.String;
-    type: Attribute.String & Attribute.Unique;
-    permissions: Attribute.Relation<
-      'plugin::users-permissions.role',
-      'oneToMany',
-      'plugin::users-permissions.permission'
-    >;
-    users: Attribute.Relation<
-      'plugin::users-permissions.role',
-      'oneToMany',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::users-permissions.role',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::users-permissions.role',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginUsersPermissionsUser extends Schema.CollectionType {
-  collectionName: 'up_users';
-  info: {
-    name: 'user';
-    description: '';
-    singularName: 'user';
-    pluralName: 'users';
     displayName: 'User';
+    name: 'User';
+    pluralName: 'users';
+    singularName: 'user';
   };
-  options: {
-    draftAndPublish: false;
-    timestamps: true;
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
   };
   attributes: {
-    username: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
-        minLength: 3;
-      }>;
+    blocked: Attribute.Boolean & Attribute.Private & Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'admin::user', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
     email: Attribute.Email &
       Attribute.Required &
+      Attribute.Private &
+      Attribute.Unique &
       Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
-    provider: Attribute.String;
+    firstname: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    isActive: Attribute.Boolean &
+      Attribute.Private &
+      Attribute.DefaultTo<false>;
+    lastname: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
     password: Attribute.Password &
       Attribute.Private &
       Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    preferedLanguage: Attribute.String;
+    registrationToken: Attribute.String & Attribute.Private;
     resetPasswordToken: Attribute.String & Attribute.Private;
-    confirmationToken: Attribute.String & Attribute.Private;
-    confirmed: Attribute.Boolean & Attribute.DefaultTo<false>;
-    blocked: Attribute.Boolean & Attribute.DefaultTo<false>;
-    role: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'manyToOne',
-      'plugin::users-permissions.role'
-    >;
-    createdAt: Attribute.DateTime;
+    roles: Attribute.Relation<'admin::user', 'manyToMany', 'admin::role'> &
+      Attribute.Private;
     updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToOne',
-      'admin::user'
-    > &
+    updatedBy: Attribute.Relation<'admin::user', 'oneToOne', 'admin::user'> &
       Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    username: Attribute.String;
   };
 }
 
@@ -792,45 +366,45 @@ export interface ApiAideDecisionEtapeAideDecisionEtape
   extends Schema.CollectionType {
   collectionName: 'aide_decision_etapes';
   info: {
-    singularName: 'aide-decision-etape';
-    pluralName: 'aide-decision-etapes';
-    displayName: 'Aide D\u00E9cision Etape';
     description: '';
+    displayName: 'Aide D\u00E9cision Etape';
+    pluralName: 'aide-decision-etapes';
+    singularName: 'aide-decision-etape';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    nom: Attribute.String & Attribute.Required;
-    description: Attribute.String;
-    question_suivante: Attribute.String;
-    image: Attribute.Media<'images'>;
-    slug: Attribute.String & Attribute.Required & Attribute.Unique;
-    fiches_solutions: Attribute.Relation<
-      'api::aide-decision-etape.aide-decision-etape',
-      'oneToMany',
-      'api::fiche-solution.fiche-solution'
-    >;
-    etapes_suivantes: Attribute.Relation<
-      'api::aide-decision-etape.aide-decision-etape',
-      'oneToMany',
-      'api::aide-decision-etape.aide-decision-etape'
-    >;
-    etape_precedente: Attribute.Relation<
-      'api::aide-decision-etape.aide-decision-etape',
-      'manyToOne',
-      'api::aide-decision-etape.aide-decision-etape'
-    >;
-    rank: Attribute.Integer;
     createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::aide-decision-etape.aide-decision-etape',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
+    description: Attribute.String;
+    etape_precedente: Attribute.Relation<
+      'api::aide-decision-etape.aide-decision-etape',
+      'manyToOne',
+      'api::aide-decision-etape.aide-decision-etape'
+    >;
+    etapes_suivantes: Attribute.Relation<
+      'api::aide-decision-etape.aide-decision-etape',
+      'oneToMany',
+      'api::aide-decision-etape.aide-decision-etape'
+    >;
+    fiches_solutions: Attribute.Relation<
+      'api::aide-decision-etape.aide-decision-etape',
+      'oneToMany',
+      'api::fiche-solution.fiche-solution'
+    >;
+    image: Attribute.Media<'images'>;
+    nom: Attribute.String & Attribute.Required;
+    publishedAt: Attribute.DateTime;
+    question_suivante: Attribute.String;
+    rank: Attribute.Integer;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::aide-decision-etape.aide-decision-etape',
       'oneToOne',
@@ -843,15 +417,22 @@ export interface ApiAideDecisionEtapeAideDecisionEtape
 export interface ApiCobeneficeCobenefice extends Schema.CollectionType {
   collectionName: 'cobenefices';
   info: {
-    singularName: 'cobenefice';
-    pluralName: 'cobenefices';
-    displayName: 'Cobenefice';
     description: '';
+    displayName: 'Cobenefice';
+    pluralName: 'cobenefices';
+    singularName: 'cobenefice';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::cobenefice.cobenefice',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
     description: Attribute.String &
       Attribute.Required &
       Attribute.SetPluginOptions<{
@@ -859,6 +440,11 @@ export interface ApiCobeneficeCobenefice extends Schema.CollectionType {
           versioned: true;
         };
       }>;
+    fiches_solutions: Attribute.Relation<
+      'api::cobenefice.cobenefice',
+      'manyToMany',
+      'api::fiche-solution.fiche-solution'
+    >;
     icone: Attribute.Enumeration<
       [
         'abriter_biodiversite',
@@ -884,19 +470,7 @@ export interface ApiCobeneficeCobenefice extends Schema.CollectionType {
           versioned: true;
         };
       }>;
-    fiches_solutions: Attribute.Relation<
-      'api::cobenefice.cobenefice',
-      'manyToMany',
-      'api::fiche-solution.fiche-solution'
-    >;
-    createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::cobenefice.cobenefice',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::cobenefice.cobenefice',
       'oneToOne',
@@ -909,14 +483,24 @@ export interface ApiCobeneficeCobenefice extends Schema.CollectionType {
 export interface ApiEvenementEvenement extends Schema.CollectionType {
   collectionName: 'evenements';
   info: {
-    singularName: 'evenement';
-    pluralName: 'evenements';
     displayName: 'Ev\u00E9nement';
+    pluralName: 'evenements';
+    singularName: 'evenement';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    bouton_lien: Attribute.String;
+    bouton_texte: Attribute.String;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::evenement.evenement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    date_fin: Attribute.DateTime & Attribute.Required;
     description: Attribute.RichText &
       Attribute.CustomField<
         'plugin::ckeditor.CKEditor',
@@ -925,21 +509,11 @@ export interface ApiEvenementEvenement extends Schema.CollectionType {
           preset: 'light';
         }
       >;
-    type: Attribute.String & Attribute.Required;
     image_principale: Attribute.Media<'images'> & Attribute.Required;
-    bouton_texte: Attribute.String;
-    bouton_lien: Attribute.String;
-    rank: Attribute.Integer;
-    date_fin: Attribute.DateTime & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::evenement.evenement',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    rank: Attribute.Integer;
+    type: Attribute.String & Attribute.Required;
+    updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::evenement.evenement',
       'oneToOne',
@@ -953,18 +527,16 @@ export interface ApiFicheDiagnosticFicheDiagnostic
   extends Schema.CollectionType {
   collectionName: 'fiche_diagnostics';
   info: {
-    singularName: 'fiche-diagnostic';
-    pluralName: 'fiche-diagnostics';
-    displayName: 'Fiche Diagnostic';
     description: '';
+    displayName: 'Fiche Diagnostic';
+    pluralName: 'fiche-diagnostics';
+    singularName: 'fiche-diagnostic';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    titre: Attribute.String & Attribute.Required;
-    description_courte: Attribute.String & Attribute.Required;
-    description: Attribute.RichText &
+    avantage_description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
         'plugin::ckeditor.CKEditor',
@@ -973,23 +545,6 @@ export interface ApiFicheDiagnosticFicheDiagnostic
           preset: 'light';
         }
       >;
-    etapes_mise_en_oeuvre: Attribute.Component<
-      'fiche-diagnostic.etape-mise-en-oeuvre',
-      true
-    >;
-    rank: Attribute.Integer;
-    image_principale: Attribute.Media<'images'>;
-    echelle: Attribute.Enumeration<['territoire', 'espace']>;
-    methode: Attribute.Enumeration<
-      [
-        'observation',
-        'enquete',
-        'simulation_numerique',
-        'analyse_spatiale',
-        'modelisation_spatiale'
-      ]
-    >;
-    slug: Attribute.String & Attribute.Required & Attribute.Unique;
     besoin: Attribute.RichText &
       Attribute.CustomField<
         'plugin::ckeditor.CKEditor',
@@ -998,22 +553,7 @@ export interface ApiFicheDiagnosticFicheDiagnostic
           preset: 'light';
         }
       >;
-    indicateurs: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    delai_min: Attribute.Float &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
-    delai_max: Attribute.Float &
+    cout_max: Attribute.Integer &
       Attribute.SetMinMax<
         {
           min: 0;
@@ -1027,173 +567,27 @@ export interface ApiFicheDiagnosticFicheDiagnostic
         },
         number
       >;
-    cout_max: Attribute.Integer &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
-    explication_source: Attribute.String;
-    avantage_description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    vigilance_description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    en_savoir_plus_description: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    fiches_diagnostics_associees: Attribute.Relation<
-      'api::fiche-diagnostic.fiche-diagnostic',
-      'oneToMany',
-      'api::fiche-diagnostic.fiche-diagnostic'
-    >;
-    materiel: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    partenaire: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    objectifs: Attribute.Component<'fiche-diagnostic.utilite-methode', true>;
-    explication_cout: Attribute.String;
-    nom_scientifique: Attribute.String;
-    type_livrables: Attribute.String;
-    echelle_thermique: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        ['ilot_chaleur_urbain', 'confort_thermique']
-      >;
-    echelle_spatiale: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        ['commune', 'espace_public']
-      >;
-    lien_rex_diagnostics: Attribute.Relation<
-      'api::fiche-diagnostic.fiche-diagnostic',
-      'oneToMany',
-      'api::lien-rex-diagnostic.lien-rex-diagnostic'
-    >;
-    image_icone: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::fiche-diagnostic.fiche-diagnostic',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::fiche-diagnostic.fiche-diagnostic',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
-  collectionName: 'fiche_solutions';
-  info: {
-    singularName: 'fiche-solution';
-    pluralName: 'fiche-solutions';
-    displayName: 'Fiche Solution';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    titre: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    slug: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    image_principale: Attribute.Media<'images'> &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    solution_retour_experiences: Attribute.Relation<
-      'api::fiche-solution.fiche-solution',
-      'oneToMany',
-      'api::solution-retour-experience.solution-retour-experience'
-    >;
-    cout_minimum: Attribute.Integer &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }> &
+    delai_max: Attribute.Float &
       Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    cout_maximum: Attribute.Integer &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }> &
+    delai_min: Attribute.Float &
       Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    type_solution: Attribute.Enumeration<['bleue', 'verte', 'grise', 'douce']> &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    description_courte: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
@@ -1203,6 +597,125 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           preset: 'light';
         }
       >;
+    description_courte: Attribute.String & Attribute.Required;
+    echelle: Attribute.Enumeration<['territoire', 'espace']>;
+    echelle_spatiale: Attribute.JSON &
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        ['commune', 'espace_public']
+      >;
+    echelle_thermique: Attribute.JSON &
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        ['ilot_chaleur_urbain', 'confort_thermique']
+      >;
+    en_savoir_plus_description: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    etapes_mise_en_oeuvre: Attribute.Component<
+      'fiche-diagnostic.etape-mise-en-oeuvre',
+      true
+    >;
+    explication_cout: Attribute.String;
+    explication_source: Attribute.String;
+    fiches_diagnostics_associees: Attribute.Relation<
+      'api::fiche-diagnostic.fiche-diagnostic',
+      'oneToMany',
+      'api::fiche-diagnostic.fiche-diagnostic'
+    >;
+    image_icone: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image_principale: Attribute.Media<'images'>;
+    indicateurs: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    lien_rex_diagnostics: Attribute.Relation<
+      'api::fiche-diagnostic.fiche-diagnostic',
+      'oneToMany',
+      'api::lien-rex-diagnostic.lien-rex-diagnostic'
+    >;
+    materiel: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    methode: Attribute.Enumeration<
+      [
+        'observation',
+        'enquete',
+        'simulation_numerique',
+        'analyse_spatiale',
+        'modelisation_spatiale'
+      ]
+    >;
+    nom_scientifique: Attribute.String;
+    objectifs: Attribute.Component<'fiche-diagnostic.utilite-methode', true>;
+    partenaire: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    publishedAt: Attribute.DateTime;
+    rank: Attribute.Integer;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    titre: Attribute.String & Attribute.Required;
+    type_livrables: Attribute.String;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'api::fiche-diagnostic.fiche-diagnostic',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    vigilance_description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+  };
+}
+
+export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
+  collectionName: 'fiche_solutions';
+  info: {
+    description: '';
+    displayName: 'Fiche Solution';
+    pluralName: 'fiche-solutions';
+    singularName: 'fiche-solution';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    aides_regionales: Attribute.Component<
+      'fiche-solution.aide-regionale',
+      true
+    > &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    aides_territoires_mots_cles: Attribute.Text;
     baisse_temperature: Attribute.Decimal &
       Attribute.SetPluginOptions<{
         versions: {
@@ -1215,14 +728,11 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         },
         number
       >;
-    contexte_titre: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }> &
-      Attribute.DefaultTo<'Pourquoi choisir cette solution ?'>;
+    cobenefices: Attribute.Relation<
+      'api::fiche-solution.fiche-solution',
+      'manyToMany',
+      'api::cobenefice.cobenefice'
+    >;
     contexte_description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
@@ -1232,7 +742,15 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           preset: 'light';
         }
       >;
-    rafraichissement_attendu_description: Attribute.RichText &
+    contexte_titre: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }> &
+      Attribute.DefaultTo<'Pourquoi choisir cette solution ?'>;
+    cout_entretien_description: Attribute.RichText &
       Attribute.CustomField<
         'plugin::ckeditor.CKEditor',
         {
@@ -1240,13 +758,17 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           preset: 'light';
         }
       >;
-    logo_partenaire: Attribute.Media<'images'> &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    cout_minimum_entretien: Attribute.Integer &
+    cout_entretien_unite: Attribute.Enumeration<
+      [
+        'metreCarre',
+        'lineaire',
+        'metreCube',
+        'unite',
+        'megaWattHeure',
+        'kiloWatt'
+      ]
+    >;
+    cout_maximum: Attribute.Integer &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -1270,8 +792,95 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         },
         number
       >;
-    etapes_mise_en_oeuvre: Attribute.Component<
-      'fiche-solution.etape-mise-en-oeuvre',
+    cout_minimum: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }> &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    cout_minimum_entretien: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }> &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    cout_unite: Attribute.Enumeration<['metreCarre', 'megaWattHeure']> &
+      Attribute.DefaultTo<'metreCarre'>;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::fiche-solution.fiche-solution',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    credits: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    delai_travaux_maximum: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    delai_travaux_minimum: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    description_courte: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    description_estimation: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    en_savoir_plus: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    etapes_diagnostic: Attribute.Component<
+      'fiche-solution.etape-diagnostic',
       true
     > &
       Attribute.SetPluginOptions<{
@@ -1288,6 +897,56 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           versioned: true;
         };
       }>;
+    etapes_mise_en_oeuvre: Attribute.Component<
+      'fiche-solution.etape-mise-en-oeuvre',
+      true
+    > &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    fiches_solutions_complementaires: Attribute.Relation<
+      'api::fiche-solution.fiche-solution',
+      'oneToMany',
+      'api::fiche-solution.fiche-solution'
+    >;
+    image_principale: Attribute.Media<'images'> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    libelle_avantage_solution: Attribute.String;
+    lien_aide_territoire: Attribute.String &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    lien_fond_vert: Attribute.String &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    logo_partenaire: Attribute.Media<'images'> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    materiaux: Attribute.Relation<
+      'api::fiche-solution.fiche-solution',
+      'manyToMany',
+      'api::materiau.materiau'
+    >;
+    oups: Attribute.Component<'fiche-solution.oups', true> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
     point_vigilance: Attribute.RichText &
       Attribute.CustomField<
         'plugin::ckeditor.CKEditor',
@@ -1296,13 +955,44 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           preset: 'light';
         }
       >;
-    lien_aide_territoire: Attribute.String &
+    portee_baisse_temperature: Attribute.Enumeration<
+      ['air', 'surface', 'interieur']
+    >;
+    publishedAt: Attribute.DateTime;
+    rafraichissement_attendu_description: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    rank: Attribute.Integer &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    lien_fond_vert: Attribute.String &
+    slug: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    solution_retour_experiences: Attribute.Relation<
+      'api::fiche-solution.fiche-solution',
+      'oneToMany',
+      'api::solution-retour-experience.solution-retour-experience'
+    >;
+    titre: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    type_solution: Attribute.Enumeration<['bleue', 'verte', 'grise', 'douce']> &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -1321,123 +1011,7 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           'Parc et jardin:parc'
         ]
       >;
-    etapes_diagnostic: Attribute.Component<
-      'fiche-solution.etape-diagnostic',
-      true
-    > &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    aides_regionales: Attribute.Component<
-      'fiche-solution.aide-regionale',
-      true
-    > &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    rank: Attribute.Integer &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    materiaux: Attribute.Relation<
-      'api::fiche-solution.fiche-solution',
-      'manyToMany',
-      'api::materiau.materiau'
-    >;
-    fiches_solutions_complementaires: Attribute.Relation<
-      'api::fiche-solution.fiche-solution',
-      'oneToMany',
-      'api::fiche-solution.fiche-solution'
-    >;
-    cobenefices: Attribute.Relation<
-      'api::fiche-solution.fiche-solution',
-      'manyToMany',
-      'api::cobenefice.cobenefice'
-    >;
-    oups: Attribute.Component<'fiche-solution.oups', true> &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    cout_entretien_description: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    delai_travaux_minimum: Attribute.Integer &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
-    delai_travaux_maximum: Attribute.Integer &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
-    portee_baisse_temperature: Attribute.Enumeration<
-      ['air', 'surface', 'interieur']
-    >;
-    cout_entretien_unite: Attribute.Enumeration<
-      [
-        'metreCarre',
-        'lineaire',
-        'metreCube',
-        'unite',
-        'megaWattHeure',
-        'kiloWatt'
-      ]
-    >;
-    en_savoir_plus: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    libelle_avantage_solution: Attribute.String;
-    credits: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    cout_unite: Attribute.Enumeration<['metreCarre', 'megaWattHeure']> &
-      Attribute.DefaultTo<'metreCarre'>;
-    description_estimation: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    aides_territoires_mots_cles: Attribute.Text;
-    createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::fiche-solution.fiche-solution',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::fiche-solution.fiche-solution',
       'oneToOne',
@@ -1451,15 +1025,30 @@ export interface ApiLienRexDiagnosticLienRexDiagnostic
   extends Schema.CollectionType {
   collectionName: 'lien_rex_diagnostics';
   info: {
-    singularName: 'lien-rex-diagnostic';
-    pluralName: 'lien-rex-diagnostics';
-    displayName: 'Lien REX-Diagnostic';
     description: '';
+    displayName: 'Lien REX-Diagnostic';
+    pluralName: 'lien-rex-diagnostics';
+    singularName: 'lien-rex-diagnostic';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::lien-rex-diagnostic.lien-rex-diagnostic',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    description: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
     fiche_diagnostic: Attribute.Relation<
       'api::lien-rex-diagnostic.lien-rex-diagnostic',
       'manyToOne',
@@ -1470,22 +1059,7 @@ export interface ApiLienRexDiagnosticLienRexDiagnostic
       'manyToOne',
       'api::retour-experience-diagnostic.retour-experience-diagnostic'
     >;
-    description: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::lien-rex-diagnostic.lien-rex-diagnostic',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::lien-rex-diagnostic.lien-rex-diagnostic',
       'oneToOne',
@@ -1498,38 +1072,16 @@ export interface ApiLienRexDiagnosticLienRexDiagnostic
 export interface ApiMateriauMateriau extends Schema.CollectionType {
   collectionName: 'materiaux';
   info: {
-    singularName: 'materiau';
-    pluralName: 'materiaux';
-    displayName: 'Materiau';
     description: '';
+    displayName: 'Materiau';
+    pluralName: 'materiaux';
+    singularName: 'materiau';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    titre: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    cout_minimum_fourniture: Attribute.Integer &
+    cout_maximum_entretien: Attribute.Integer &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -1565,7 +1117,7 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
         },
         number
       >;
-    cout_maximum_entretien: Attribute.Integer &
+    cout_minimum_fourniture: Attribute.Integer &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -1593,19 +1145,41 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
           versioned: true;
         };
       }>;
-    fiches_solution: Attribute.Relation<
-      'api::materiau.materiau',
-      'manyToMany',
-      'api::fiche-solution.fiche-solution'
-    >;
     createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::materiau.materiau',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    fiches_solution: Attribute.Relation<
+      'api::materiau.materiau',
+      'manyToMany',
+      'api::fiche-solution.fiche-solution'
+    >;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    titre: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::materiau.materiau',
       'oneToOne',
@@ -1619,33 +1193,33 @@ export interface ApiObjectifDeveloppementDurableObjectifDeveloppementDurable
   extends Schema.CollectionType {
   collectionName: 'objectif_developpement_durables';
   info: {
-    singularName: 'objectif-developpement-durable';
-    pluralName: 'objectif-developpement-durables';
     displayName: 'Objectif Developpement Durable';
+    pluralName: 'objectif-developpement-durables';
+    singularName: 'objectif-developpement-durable';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    numero: Attribute.Integer &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 17;
-        },
-        number
-      >;
-    description: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::objectif-developpement-durable.objectif-developpement-durable',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
+    description: Attribute.String & Attribute.Required;
+    numero: Attribute.Integer &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMax<
+        {
+          max: 17;
+          min: 1;
+        },
+        number
+      >;
+    updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::objectif-developpement-durable.objectif-developpement-durable',
       'oneToOne',
@@ -1658,26 +1232,148 @@ export interface ApiObjectifDeveloppementDurableObjectifDeveloppementDurable
 export interface ApiRegionRegion extends Schema.CollectionType {
   collectionName: 'regions';
   info: {
-    singularName: 'region';
-    pluralName: 'regions';
     displayName: 'region';
+    pluralName: 'regions';
+    singularName: 'region';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
     code: Attribute.String & Attribute.Required & Attribute.Unique;
-    nom: Attribute.String;
     createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::region.region',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
+    nom: Attribute.String;
+    updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::region.region',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRetourExperienceDiagnosticRetourExperienceDiagnostic
+  extends Schema.CollectionType {
+  collectionName: 'retour_experience_diagnostics';
+  info: {
+    description: '';
+    displayName: 'Retour Experience Diagnostic';
+    pluralName: 'retour-experience-diagnostics';
+    singularName: 'retour-experience-diagnostic';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    annee_realisation: Attribute.String;
+    apres: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    besoin: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    citations: Attribute.Component<'common.citation', true>;
+    climat_actuel: Attribute.String;
+    climat_futur: Attribute.String;
+    collectivite_info: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    contacts: Attribute.Component<'retour-experience.contact', true>;
+    cout_description: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    cout_euro: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::retour-experience-diagnostic.retour-experience-diagnostic',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    credits: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    financements: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    guide_pdf: Attribute.Media<'files'>;
+    image_principale: Attribute.Media<'images'>;
+    lien_rex_diagnostics: Attribute.Relation<
+      'api::retour-experience-diagnostic.retour-experience-diagnostic',
+      'oneToMany',
+      'api::lien-rex-diagnostic.lien-rex-diagnostic'
+    >;
+    lieu: Attribute.String & Attribute.Required;
+    points_vigilance: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    publishedAt: Attribute.DateTime;
+    rank: Attribute.Integer;
+    resultats: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'standard';
+        }
+      >;
+    resultats_images: Attribute.Component<'common.image-with-caption', true>;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    titre: Attribute.String & Attribute.Required;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'api::retour-experience-diagnostic.retour-experience-diagnostic',
       'oneToOne',
       'admin::user'
     > &
@@ -1689,51 +1385,27 @@ export interface ApiRetourExperienceRetourExperience
   extends Schema.CollectionType {
   collectionName: 'retour_experiences';
   info: {
-    singularName: 'retour-experience';
-    pluralName: 'retour-experiences';
-    displayName: 'Retour experience';
     description: '';
+    displayName: 'Retour experience';
+    pluralName: 'retour-experiences';
+    singularName: 'retour-experience';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    titre: Attribute.String &
-      Attribute.Required &
+    calendrier: Attribute.Component<'retour-experience.calendrier', true> &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    slug: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    image_principale: Attribute.Media<'images'> &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    types_solutions: Attribute.JSON &
-      Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        ['bleue', 'douce', 'verte', 'grise']
-      >;
     citations: Attribute.Component<'common.citation', true> &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    region: Attribute.Relation<
-      'api::retour-experience.retour-experience',
-      'oneToOne',
-      'api::region.region'
-    >;
     climat_actuel: Attribute.Enumeration<
       [
         'oceanique',
@@ -1766,12 +1438,146 @@ export interface ApiRetourExperienceRetourExperience
           versioned: true;
         };
       }>;
+    contact: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    contacts: Attribute.Component<'retour-experience.contact', true>;
+    cout: Attribute.String &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    cout_euro: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::retour-experience.retour-experience',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    credits: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    difficultes: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
     echelle: Attribute.String &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
+    export_aquagir: Attribute.Boolean & Attribute.DefaultTo<false>;
+    financement: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    image_principale: Attribute.Media<'images'> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    location: Attribute.JSON;
+    odds: Attribute.Relation<
+      'api::retour-experience.retour-experience',
+      'oneToMany',
+      'api::objectif-developpement-durable.objectif-developpement-durable'
+    >;
+    partenaires: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    porteur: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    publishedAt: Attribute.DateTime;
+    rank: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    region: Attribute.Relation<
+      'api::retour-experience.retour-experience',
+      'oneToOne',
+      'api::region.region'
+    >;
+    ressources: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'light';
+        }
+      >;
+    retour_experiences: Attribute.Relation<
+      'api::retour-experience.retour-experience',
+      'oneToMany',
+      'api::retour-experience.retour-experience'
+    >;
+    situation_apres: Attribute.Component<'retour-experience.situation'> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    situation_avant: Attribute.Component<'retour-experience.situation'> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    slug: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    solution_retour_experiences: Attribute.Relation<
+      'api::retour-experience.retour-experience',
+      'oneToMany',
+      'api::solution-retour-experience.solution-retour-experience'
+    >;
     temporalite: Attribute.Enumeration<
       ['court_terme', 'moyen_terme', 'long_terme']
     > &
@@ -1780,7 +1586,8 @@ export interface ApiRetourExperienceRetourExperience
           versioned: true;
         };
       }>;
-    cout: Attribute.String &
+    titre: Attribute.String &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -1799,247 +1606,14 @@ export interface ApiRetourExperienceRetourExperience
           'Parc et jardin:parc'
         ]
       >;
-    retour_experiences: Attribute.Relation<
-      'api::retour-experience.retour-experience',
-      'oneToMany',
-      'api::retour-experience.retour-experience'
-    >;
-    odds: Attribute.Relation<
-      'api::retour-experience.retour-experience',
-      'oneToMany',
-      'api::objectif-developpement-durable.objectif-developpement-durable'
-    >;
-    situation_avant: Attribute.Component<'retour-experience.situation'> &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    situation_apres: Attribute.Component<'retour-experience.situation'> &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    calendrier: Attribute.Component<'retour-experience.calendrier', true> &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    solution_retour_experiences: Attribute.Relation<
-      'api::retour-experience.retour-experience',
-      'oneToMany',
-      'api::solution-retour-experience.solution-retour-experience'
-    >;
-    description: Attribute.RichText &
-      Attribute.Required &
+    types_solutions: Attribute.JSON &
       Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
+        'plugin::multi-select.multi-select',
+        ['bleue', 'douce', 'verte', 'grise']
       >;
-    porteur: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    contact: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    financement: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    difficultes: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    partenaires: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    ressources: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    credits: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    rank: Attribute.Integer &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    location: Attribute.JSON;
-    contacts: Attribute.Component<'retour-experience.contact', true>;
-    cout_euro: Attribute.Integer;
-    export_aquagir: Attribute.Boolean & Attribute.DefaultTo<false>;
-    createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::retour-experience.retour-experience',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::retour-experience.retour-experience',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiRetourExperienceDiagnosticRetourExperienceDiagnostic
-  extends Schema.CollectionType {
-  collectionName: 'retour_experience_diagnostics';
-  info: {
-    singularName: 'retour-experience-diagnostic';
-    pluralName: 'retour-experience-diagnostics';
-    displayName: 'Retour Experience Diagnostic';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    image_principale: Attribute.Media<'images'>;
-    titre: Attribute.String & Attribute.Required;
-    lieu: Attribute.String & Attribute.Required;
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    citations: Attribute.Component<'common.citation', true>;
-    collectivite_info: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    climat_actuel: Attribute.String;
-    climat_futur: Attribute.String;
-    annee_realisation: Attribute.String;
-    cout_description: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    financements: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    besoin: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    resultats: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'standard';
-        }
-      >;
-    points_vigilance: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    apres: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    lien_rex_diagnostics: Attribute.Relation<
-      'api::retour-experience-diagnostic.retour-experience-diagnostic',
-      'oneToMany',
-      'api::lien-rex-diagnostic.lien-rex-diagnostic'
-    >;
-    slug: Attribute.String & Attribute.Required & Attribute.Unique;
-    contacts: Attribute.Component<'retour-experience.contact', true>;
-    credits: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    guide_pdf: Attribute.Media<'files'>;
-    resultats_images: Attribute.Component<'common.image-with-caption', true>;
-    rank: Attribute.Integer;
-    cout_euro: Attribute.Integer;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::retour-experience-diagnostic.retour-experience-diagnostic',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::retour-experience-diagnostic.retour-experience-diagnostic',
       'oneToOne',
       'admin::user'
     > &
@@ -2051,27 +1625,22 @@ export interface ApiSolutionRetourExperienceSolutionRetourExperience
   extends Schema.CollectionType {
   collectionName: 'solution_retour_experiences';
   info: {
-    singularName: 'solution-retour-experience';
-    pluralName: 'solution-retour-experiences';
-    displayName: 'Solution Retour Experience';
     description: '';
+    displayName: 'Solution Retour Experience';
+    pluralName: 'solution-retour-experiences';
+    singularName: 'solution-retour-experience';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    titre: Attribute.String & Attribute.Required;
-    image: Attribute.Media<'images'>;
-    fiche_solution: Attribute.Relation<
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
       'api::solution-retour-experience.solution-retour-experience',
-      'manyToOne',
-      'api::fiche-solution.fiche-solution'
-    >;
-    retour_experience: Attribute.Relation<
-      'api::solution-retour-experience.solution-retour-experience',
-      'manyToOne',
-      'api::retour-experience.retour-experience'
-    >;
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
     description: Attribute.RichText &
       Attribute.CustomField<
         'plugin::ckeditor.CKEditor',
@@ -2080,14 +1649,19 @@ export interface ApiSolutionRetourExperienceSolutionRetourExperience
           preset: 'light';
         }
       >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
+    fiche_solution: Attribute.Relation<
       'api::solution-retour-experience.solution-retour-experience',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+      'manyToOne',
+      'api::fiche-solution.fiche-solution'
+    >;
+    image: Attribute.Media<'images'>;
+    retour_experience: Attribute.Relation<
+      'api::solution-retour-experience.solution-retour-experience',
+      'manyToOne',
+      'api::retour-experience.retour-experience'
+    >;
+    titre: Attribute.String & Attribute.Required;
+    updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::solution-retour-experience.solution-retour-experience',
       'oneToOne',
@@ -2100,16 +1674,22 @@ export interface ApiSolutionRetourExperienceSolutionRetourExperience
 export interface ApiWebinaireWebinaire extends Schema.CollectionType {
   collectionName: 'webinaires';
   info: {
-    singularName: 'webinaire';
-    pluralName: 'webinaires';
-    displayName: 'Webinaire';
     description: '';
+    displayName: 'Webinaire';
+    pluralName: 'webinaires';
+    singularName: 'webinaire';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    titre: Attribute.String;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::webinaire.webinaire',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
     description: Attribute.RichText &
       Attribute.CustomField<
         'plugin::ckeditor.CKEditor',
@@ -2118,22 +1698,16 @@ export interface ApiWebinaireWebinaire extends Schema.CollectionType {
           preset: 'light';
         }
       >;
-    lien_inscription: Attribute.String;
-    lien_replay: Attribute.String;
-    jour_evenement: Attribute.Date;
     heure_debut: Attribute.Time;
     heure_fin: Attribute.Time;
-    lien_btn_secondaire: Attribute.String;
+    jour_evenement: Attribute.Date;
     label_btn_secondaire: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
+    lien_btn_secondaire: Attribute.String;
+    lien_inscription: Attribute.String;
+    lien_replay: Attribute.String;
     publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::webinaire.webinaire',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    titre: Attribute.String;
+    updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::webinaire.webinaire',
       'oneToOne',
@@ -2143,24 +1717,442 @@ export interface ApiWebinaireWebinaire extends Schema.CollectionType {
   };
 }
 
+export interface PluginContentReleasesRelease extends Schema.CollectionType {
+  collectionName: 'strapi_releases';
+  info: {
+    displayName: 'Release';
+    pluralName: 'releases';
+    singularName: 'release';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    actions: Attribute.Relation<
+      'plugin::content-releases.release',
+      'oneToMany',
+      'plugin::content-releases.release-action'
+    >;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::content-releases.release',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    name: Attribute.String & Attribute.Required;
+    releasedAt: Attribute.DateTime;
+    scheduledAt: Attribute.DateTime;
+    status: Attribute.Enumeration<
+      ['ready', 'blocked', 'failed', 'done', 'empty']
+    > &
+      Attribute.Required;
+    timezone: Attribute.String;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'plugin::content-releases.release',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginContentReleasesReleaseAction
+  extends Schema.CollectionType {
+  collectionName: 'strapi_release_actions';
+  info: {
+    displayName: 'Release Action';
+    pluralName: 'release-actions';
+    singularName: 'release-action';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    contentType: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::content-releases.release-action',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    entry: Attribute.Relation<
+      'plugin::content-releases.release-action',
+      'morphToOne'
+    >;
+    isEntryValid: Attribute.Boolean;
+    locale: Attribute.String;
+    release: Attribute.Relation<
+      'plugin::content-releases.release-action',
+      'manyToOne',
+      'plugin::content-releases.release'
+    >;
+    type: Attribute.Enumeration<['publish', 'unpublish']> & Attribute.Required;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'plugin::content-releases.release-action',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginI18NLocale extends Schema.CollectionType {
+  collectionName: 'i18n_locale';
+  info: {
+    collectionName: 'locales';
+    description: '';
+    displayName: 'Locale';
+    pluralName: 'locales';
+    singularName: 'locale';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    code: Attribute.String & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    name: Attribute.String &
+      Attribute.SetMinMax<
+        {
+          max: 50;
+          min: 1;
+        },
+        number
+      >;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginUploadFile extends Schema.CollectionType {
+  collectionName: 'files';
+  info: {
+    description: '';
+    displayName: 'File';
+    pluralName: 'files';
+    singularName: 'file';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    alternativeText: Attribute.String;
+    caption: Attribute.String;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::upload.file',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    ext: Attribute.String;
+    folder: Attribute.Relation<
+      'plugin::upload.file',
+      'manyToOne',
+      'plugin::upload.folder'
+    > &
+      Attribute.Private;
+    folderPath: Attribute.String &
+      Attribute.Required &
+      Attribute.Private &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    formats: Attribute.JSON;
+    hash: Attribute.String & Attribute.Required;
+    height: Attribute.Integer;
+    mime: Attribute.String & Attribute.Required;
+    name: Attribute.String & Attribute.Required;
+    previewUrl: Attribute.String;
+    provider: Attribute.String & Attribute.Required;
+    provider_metadata: Attribute.JSON;
+    related: Attribute.Relation<'plugin::upload.file', 'morphToMany'>;
+    size: Attribute.Decimal & Attribute.Required;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'plugin::upload.file',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    url: Attribute.String & Attribute.Required;
+    width: Attribute.Integer;
+  };
+}
+
+export interface PluginUploadFolder extends Schema.CollectionType {
+  collectionName: 'upload_folders';
+  info: {
+    displayName: 'Folder';
+    pluralName: 'folders';
+    singularName: 'folder';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    children: Attribute.Relation<
+      'plugin::upload.folder',
+      'oneToMany',
+      'plugin::upload.folder'
+    >;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::upload.folder',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    files: Attribute.Relation<
+      'plugin::upload.folder',
+      'oneToMany',
+      'plugin::upload.file'
+    >;
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    parent: Attribute.Relation<
+      'plugin::upload.folder',
+      'manyToOne',
+      'plugin::upload.folder'
+    >;
+    path: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    pathId: Attribute.Integer & Attribute.Required & Attribute.Unique;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'plugin::upload.folder',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginUsersPermissionsPermission
+  extends Schema.CollectionType {
+  collectionName: 'up_permissions';
+  info: {
+    description: '';
+    displayName: 'Permission';
+    name: 'permission';
+    pluralName: 'permissions';
+    singularName: 'permission';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    action: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::users-permissions.permission',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    role: Attribute.Relation<
+      'plugin::users-permissions.permission',
+      'manyToOne',
+      'plugin::users-permissions.role'
+    >;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'plugin::users-permissions.permission',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginUsersPermissionsRole extends Schema.CollectionType {
+  collectionName: 'up_roles';
+  info: {
+    description: '';
+    displayName: 'Role';
+    name: 'role';
+    pluralName: 'roles';
+    singularName: 'role';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::users-permissions.role',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    description: Attribute.String;
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 3;
+      }>;
+    permissions: Attribute.Relation<
+      'plugin::users-permissions.role',
+      'oneToMany',
+      'plugin::users-permissions.permission'
+    >;
+    type: Attribute.String & Attribute.Unique;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'plugin::users-permissions.role',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    users: Attribute.Relation<
+      'plugin::users-permissions.role',
+      'oneToMany',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
+export interface PluginUsersPermissionsUser extends Schema.CollectionType {
+  collectionName: 'up_users';
+  info: {
+    description: '';
+    displayName: 'User';
+    name: 'user';
+    pluralName: 'users';
+    singularName: 'user';
+  };
+  options: {
+    draftAndPublish: false;
+    timestamps: true;
+  };
+  attributes: {
+    blocked: Attribute.Boolean & Attribute.DefaultTo<false>;
+    confirmationToken: Attribute.String & Attribute.Private;
+    confirmed: Attribute.Boolean & Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    email: Attribute.Email &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 6;
+      }>;
+    password: Attribute.Password &
+      Attribute.Private &
+      Attribute.SetMinMaxLength<{
+        minLength: 6;
+      }>;
+    provider: Attribute.String;
+    resetPasswordToken: Attribute.String & Attribute.Private;
+    role: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToOne',
+      'plugin::users-permissions.role'
+    >;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    username: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 3;
+      }>;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
-      'admin::permission': AdminPermission;
-      'admin::user': AdminUser;
-      'admin::role': AdminRole;
       'admin::api-token': AdminApiToken;
       'admin::api-token-permission': AdminApiTokenPermission;
+      'admin::permission': AdminPermission;
+      'admin::role': AdminRole;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'plugin::upload.file': PluginUploadFile;
-      'plugin::upload.folder': PluginUploadFolder;
-      'plugin::content-releases.release': PluginContentReleasesRelease;
-      'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
-      'plugin::i18n.locale': PluginI18NLocale;
-      'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
-      'plugin::users-permissions.role': PluginUsersPermissionsRole;
-      'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'admin::user': AdminUser;
       'api::aide-decision-etape.aide-decision-etape': ApiAideDecisionEtapeAideDecisionEtape;
       'api::cobenefice.cobenefice': ApiCobeneficeCobenefice;
       'api::evenement.evenement': ApiEvenementEvenement;
@@ -2170,10 +2162,18 @@ declare module '@strapi/types' {
       'api::materiau.materiau': ApiMateriauMateriau;
       'api::objectif-developpement-durable.objectif-developpement-durable': ApiObjectifDeveloppementDurableObjectifDeveloppementDurable;
       'api::region.region': ApiRegionRegion;
-      'api::retour-experience.retour-experience': ApiRetourExperienceRetourExperience;
       'api::retour-experience-diagnostic.retour-experience-diagnostic': ApiRetourExperienceDiagnosticRetourExperienceDiagnostic;
+      'api::retour-experience.retour-experience': ApiRetourExperienceRetourExperience;
       'api::solution-retour-experience.solution-retour-experience': ApiSolutionRetourExperienceSolutionRetourExperience;
       'api::webinaire.webinaire': ApiWebinaireWebinaire;
+      'plugin::content-releases.release': PluginContentReleasesRelease;
+      'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
+      'plugin::i18n.locale': PluginI18NLocale;
+      'plugin::upload.file': PluginUploadFile;
+      'plugin::upload.folder': PluginUploadFolder;
+      'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
+      'plugin::users-permissions.role': PluginUsersPermissionsRole;
+      'plugin::users-permissions.user': PluginUsersPermissionsUser;
     }
   }
 }

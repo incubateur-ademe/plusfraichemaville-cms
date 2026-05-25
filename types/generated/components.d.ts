@@ -1,10 +1,10 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Attribute, Schema } from '@strapi/strapi';
 
 export interface CommonCitation extends Schema.Component {
   collectionName: 'components_common_citations';
   info: {
-    displayName: 'citation';
     description: '';
+    displayName: 'citation';
   };
   attributes: {
     auteur: Attribute.String & Attribute.Required;
@@ -38,7 +38,6 @@ export interface FicheDiagnosticEtapeMiseEnOeuvre extends Schema.Component {
     displayName: 'Etape_mise_en_oeuvre';
   };
   attributes: {
-    titre: Attribute.String & Attribute.Required;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
@@ -48,6 +47,7 @@ export interface FicheDiagnosticEtapeMiseEnOeuvre extends Schema.Component {
           preset: 'light';
         }
       >;
+    titre: Attribute.String & Attribute.Required;
   };
 }
 
@@ -64,15 +64,10 @@ export interface FicheDiagnosticUtiliteMethode extends Schema.Component {
 export interface FicheSolutionAideRegionale extends Schema.Component {
   collectionName: 'components_fiche_solution_aide_regionales';
   info: {
-    displayName: 'aide_regionale';
     description: '';
+    displayName: 'aide_regionale';
   };
   attributes: {
-    region: Attribute.Relation<
-      'fiche-solution.aide-regionale',
-      'oneToOne',
-      'api::region.region'
-    >;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
@@ -82,6 +77,11 @@ export interface FicheSolutionAideRegionale extends Schema.Component {
           preset: 'light';
         }
       >;
+    region: Attribute.Relation<
+      'fiche-solution.aide-regionale',
+      'oneToOne',
+      'api::region.region'
+    >;
     titre: Attribute.String;
   };
 }
@@ -92,7 +92,6 @@ export interface FicheSolutionEtapeDiagnostic extends Schema.Component {
     displayName: 'etape_diagnostic';
   };
   attributes: {
-    titre: Attribute.String & Attribute.Required;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
@@ -102,17 +101,17 @@ export interface FicheSolutionEtapeDiagnostic extends Schema.Component {
           preset: 'light';
         }
       >;
+    titre: Attribute.String & Attribute.Required;
   };
 }
 
 export interface FicheSolutionEtapeEntretien extends Schema.Component {
   collectionName: 'components_fiche_solution_etape_entretiens';
   info: {
-    displayName: 'etape_entretien';
     description: '';
+    displayName: 'etape_entretien';
   };
   attributes: {
-    titre: Attribute.String & Attribute.Required;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
@@ -122,6 +121,7 @@ export interface FicheSolutionEtapeEntretien extends Schema.Component {
           preset: 'light';
         }
       >;
+    titre: Attribute.String & Attribute.Required;
   };
 }
 
@@ -131,7 +131,6 @@ export interface FicheSolutionEtapeMiseEnOeuvre extends Schema.Component {
     displayName: 'etape_mise_en_oeuvre';
   };
   attributes: {
-    titre: Attribute.String & Attribute.Required;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
@@ -141,14 +140,15 @@ export interface FicheSolutionEtapeMiseEnOeuvre extends Schema.Component {
           preset: 'light';
         }
       >;
+    titre: Attribute.String & Attribute.Required;
   };
 }
 
 export interface FicheSolutionOups extends Schema.Component {
   collectionName: 'components_fiche_solution_oups';
   info: {
-    displayName: 'oups';
     description: '';
+    displayName: 'oups';
   };
   attributes: {
     description: Attribute.RichText &
@@ -160,24 +160,23 @@ export interface FicheSolutionOups extends Schema.Component {
           preset: 'light';
         }
       >;
-    titre: Attribute.Text & Attribute.Required;
     solutions_reparatrices: Attribute.Relation<
       'fiche-solution.oups',
       'oneToMany',
       'api::fiche-solution.fiche-solution'
     >;
+    titre: Attribute.Text & Attribute.Required;
   };
 }
 
 export interface RetourExperienceCalendrier extends Schema.Component {
   collectionName: 'components_retour_experience_calendriers';
   info: {
-    displayName: 'Calendrier';
     description: '';
+    displayName: 'Calendrier';
   };
   attributes: {
     date: Attribute.String & Attribute.Required;
-    titre: Attribute.String & Attribute.Required;
     description: Attribute.RichText &
       Attribute.CustomField<
         'plugin::ckeditor.CKEditor',
@@ -186,31 +185,22 @@ export interface RetourExperienceCalendrier extends Schema.Component {
           preset: 'light';
         }
       >;
+    titre: Attribute.String & Attribute.Required;
   };
 }
 
 export interface RetourExperienceContact extends Schema.Component {
   collectionName: 'components_retour_experience_contacts';
   info: {
+    description: '';
     displayName: 'Contact';
     icon: 'phone';
-    description: '';
   };
   attributes: {
-    label: Attribute.String;
-    telephone: Attribute.String;
     email: Attribute.Email;
-    type_de_contact: Attribute.Enumeration<
-      [
-        'collectivite',
-        'conception_et_realisation',
-        'concertation_citoyenne',
-        'conseil',
-        'groupements',
-        'recherche_et_innovation',
-        'structure_publique'
-      ]
-    >;
+    label: Attribute.String;
+    nom: Attribute.String;
+    site_internet: Attribute.String;
     sous_type_de_contact: Attribute.Enumeration<
       [
         'agence_architecture',
@@ -240,19 +230,28 @@ export interface RetourExperienceContact extends Schema.Component {
         'syndicat_mixte'
       ]
     >;
-    site_internet: Attribute.String;
-    nom: Attribute.String;
+    telephone: Attribute.String;
+    type_de_contact: Attribute.Enumeration<
+      [
+        'collectivite',
+        'conception_et_realisation',
+        'concertation_citoyenne',
+        'conseil',
+        'groupements',
+        'recherche_et_innovation',
+        'structure_publique'
+      ]
+    >;
   };
 }
 
 export interface RetourExperienceSituation extends Schema.Component {
   collectionName: 'components_retour_experience_situations';
   info: {
-    displayName: 'Situation';
     description: '';
+    displayName: 'Situation';
   };
   attributes: {
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
@@ -262,6 +261,7 @@ export interface RetourExperienceSituation extends Schema.Component {
           preset: 'light';
         }
       >;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
   };
 }
 
