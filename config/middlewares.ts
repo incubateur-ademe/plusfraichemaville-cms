@@ -14,6 +14,7 @@ export default [
             "blob:",
             "market-assets.strapi.io",
             "pfmv-cms-prod.s3.fr-par.scw.cloud",
+            "cdn.plusfraichemaville.fr",
           ],
           "media-src": [
             "'self'",
