@@ -38,6 +38,12 @@
     },
     "heure_fin": {
       "type": "time"
+    },
+    "lien_btn_secondaire": {
+      "type": "string"
+    },
+    "label_btn_secondaire": {
+      "type": "string"
     }
   }
 }
