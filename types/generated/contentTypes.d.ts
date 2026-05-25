@@ -2123,6 +2123,8 @@ export interface ApiWebinaireWebinaire extends Schema.CollectionType {
     jour_evenement: Attribute.Date;
     heure_debut: Attribute.Time;
     heure_fin: Attribute.Time;
+    lien_btn_secondaire: Attribute.String;
+    label_btn_secondaire: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
