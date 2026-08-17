@@ -61,31 +61,6 @@ export interface FicheDiagnosticUtiliteMethode extends Schema.Component {
   };
 }
 
-export interface FicheSolutionAideRegionale extends Schema.Component {
-  collectionName: 'components_fiche_solution_aide_regionales';
-  info: {
-    description: '';
-    displayName: 'aide_regionale';
-  };
-  attributes: {
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    region: Attribute.Relation<
-      'fiche-solution.aide-regionale',
-      'oneToOne',
-      'api::region.region'
-    >;
-    titre: Attribute.String;
-  };
-}
-
 export interface FicheSolutionEtapeDiagnostic extends Schema.Component {
   collectionName: 'components_fiche_solution_etape_diagnostics';
   info: {
@@ -272,7 +247,6 @@ declare module '@strapi/types' {
       'common.image-with-caption': CommonImageWithCaption;
       'fiche-diagnostic.etape-mise-en-oeuvre': FicheDiagnosticEtapeMiseEnOeuvre;
       'fiche-diagnostic.utilite-methode': FicheDiagnosticUtiliteMethode;
-      'fiche-solution.aide-regionale': FicheSolutionAideRegionale;
       'fiche-solution.etape-diagnostic': FicheSolutionEtapeDiagnostic;
       'fiche-solution.etape-entretien': FicheSolutionEtapeEntretien;
       'fiche-solution.etape-mise-en-oeuvre': FicheSolutionEtapeMiseEnOeuvre;

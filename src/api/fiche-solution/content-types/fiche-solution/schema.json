@@ -200,14 +200,6 @@
       },
       "customField": "plugin::ckeditor.CKEditor"
     },
-    "lien_aide_territoire": {
-      "pluginOptions": {
-        "versions": {
-          "versioned": true
-        }
-      },
-      "type": "string"
-    },
     "lien_fond_vert": {
       "pluginOptions": {
         "versions": {
@@ -238,17 +230,6 @@
         }
       },
       "component": "fiche-solution.etape-diagnostic"
-    },
-    "aides_regionales": {
-      "displayName": "aide_regionale",
-      "type": "component",
-      "repeatable": true,
-      "pluginOptions": {
-        "versions": {
-          "versioned": true
-        }
-      },
-      "component": "fiche-solution.aide-regionale"
     },
     "rank": {
       "pluginOptions": {

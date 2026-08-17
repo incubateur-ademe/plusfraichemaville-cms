@@ -706,15 +706,6 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    aides_regionales: Attribute.Component<
-      'fiche-solution.aide-regionale',
-      true
-    > &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
     aides_territoires_mots_cles: Attribute.Text;
     baisse_temperature: Attribute.Decimal &
       Attribute.SetPluginOptions<{
@@ -918,12 +909,6 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         };
       }>;
     libelle_avantage_solution: Attribute.String;
-    lien_aide_territoire: Attribute.String &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
     lien_fond_vert: Attribute.String &
       Attribute.SetPluginOptions<{
         versions: {
