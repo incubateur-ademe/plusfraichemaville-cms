@@ -11,7 +11,6 @@
     "generate-types": "npx strapi-plugin-schemas-to-ts generateInterfaces --strapi-root-path . --destinationFolder types "
   },
   "dependencies": {
-    "@notum-cz/strapi-plugin-content-versioning": "^1.2.7",
     "@retikolo/drag-drop-content-types": "^1.5.0",
     "@sentry/node": "^7.112.2",
     "@sentry/tracing": "^7.112.2",
