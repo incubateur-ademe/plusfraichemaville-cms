@@ -4,8 +4,10 @@ module.exports = ({env}) => ({
       provider: "aws-s3",
       providerOptions: {
         s3Options: {
-          accessKeyId: env("SCALEWAY_ACCESS_KEY_ID"),
-          secretAccessKey: env("SCALEWAY_ACCESS_SECRET"),
+          credentials: {
+            accessKeyId: env("SCALEWAY_ACCESS_KEY_ID"),
+            secretAccessKey: env("SCALEWAY_ACCESS_SECRET"),
+          },
           endpoint: env("SCALEWAY_ENDPOINT"),
           region: env("SCALEWAY_REGION"),
           params: {
