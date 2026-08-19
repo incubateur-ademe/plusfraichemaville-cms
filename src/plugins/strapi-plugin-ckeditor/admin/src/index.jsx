@@ -1,10 +1,8 @@
-import { prefixPluginTranslations } from '@strapi/helper-plugin';
 import * as yup from 'yup';
 
 import React from 'react';
 import styled from 'styled-components';
-import { Icon } from '@strapi/design-system/Icon';
-import { Flex } from '@strapi/design-system/Flex';
+import { Flex } from '@strapi/design-system';
 import CKEditorIcon from './CKEditorIcon';
 
 const IconBox = styled( Flex )`
@@ -24,7 +22,7 @@ export default {
       icon: () => {
         return (
           <IconBox justifyContent="center" alignItems="center" width={ 7 } height={ 6 } hasRadius aria-hidden>
-            <Icon as={ CKEditorIcon } />
+            <CKEditorIcon />
           </IconBox>
         );
       },
@@ -37,10 +35,22 @@ export default {
         defaultMessage: 'The rich text editor for every use case'
       },
       components: {
-        Input: async () => import( './components/CKEditorInput' ),
+        Input: async () => await import( './components/CKEditorProvider' )
       },
       options: {
         base: [
+          {
+            intlLabel: {
+              id: 'ckeditor.licenseKey.label',
+              defaultMessage: 'License key',
+            },
+            description: {
+              id: 'ckeditor.licenseKey.description',
+              defaultMessage: "Don't have a license key? Visit https://portal.ckeditor.com/checkout?plan=free to receive it.",
+            },
+            name: 'options.licenseKey',
+            type: 'text',
+          },
           {
             intlLabel: {
               id: 'ckeditor.preset.label',
@@ -156,6 +166,10 @@ export default {
           preset: yup.string().required( {
             id: 'ckeditor.preset.error.required',
             defaultMessage: 'Editor preset is required',
+          } ),
+          licenseKey: yup.string().required( {
+            id: 'ckeditor.licenseKey.error.required',
+            defaultMessage: 'Editor license key is required. Visit https://portal.ckeditor.com/checkout?plan=free to receive it.',
           } ),
         } ),
       },

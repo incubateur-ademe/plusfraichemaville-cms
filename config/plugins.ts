@@ -37,10 +37,4 @@ module.exports = ({env}) => ({
       defaultLimit: 100,
     },
   },
-  "schemas-to-ts": {
-    enabled: true,
-    config: {
-      destinationFolder: '/types',
-    }
-  },
 });
