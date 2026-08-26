@@ -30,10 +30,6 @@ module.exports = ({env}) => ({
   "drag-drop-content-types": {
     enabled: true,
   },
-  ckeditor: {
-    enabled: true,
-    resolve: "./src/plugins/strapi-plugin-ckeditor",
-  },
   graphql: {
     config: {
       defaultLimit: 100,

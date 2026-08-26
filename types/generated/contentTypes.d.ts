@@ -1,4 +1,4 @@
-import type {Schema} from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
 export interface AdminApiToken extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_api_tokens';
@@ -575,10 +575,9 @@ export interface ApiEvenementEvenement extends Struct.CollectionTypeSchema {
     date_fin: Schema.Attribute.DateTime & Schema.Attribute.Required;
     description: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     image_principale: Schema.Attribute.Media<'images'> &
@@ -614,18 +613,16 @@ export interface ApiFicheDiagnosticFicheDiagnostic
     avantage_description: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     besoin: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     cout_max: Schema.Attribute.Integer &
@@ -662,10 +659,9 @@ export interface ApiFicheDiagnosticFicheDiagnostic
     description: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     description_courte: Schema.Attribute.String & Schema.Attribute.Required;
@@ -682,10 +678,9 @@ export interface ApiFicheDiagnosticFicheDiagnostic
       >;
     en_savoir_plus_description: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     etapes_mise_en_oeuvre: Schema.Attribute.Component<
@@ -704,10 +699,9 @@ export interface ApiFicheDiagnosticFicheDiagnostic
     image_principale: Schema.Attribute.Media<'images'>;
     indicateurs: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     lien_rex_diagnostics: Schema.Attribute.Relation<
@@ -722,10 +716,9 @@ export interface ApiFicheDiagnosticFicheDiagnostic
       Schema.Attribute.Private;
     materiel: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     methode: Schema.Attribute.Enumeration<
@@ -744,10 +737,9 @@ export interface ApiFicheDiagnosticFicheDiagnostic
     >;
     partenaire: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     publishedAt: Schema.Attribute.DateTime;
@@ -763,10 +755,9 @@ export interface ApiFicheDiagnosticFicheDiagnostic
     vigilance_description: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
   };
@@ -805,10 +796,9 @@ export interface ApiFicheSolutionFicheSolution
     contexte_description: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     contexte_titre: Schema.Attribute.String &
@@ -821,10 +811,9 @@ export interface ApiFicheSolutionFicheSolution
       Schema.Attribute.DefaultTo<'Pourquoi choisir cette solution ?'>;
     cout_entretien_description: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     cout_entretien_unite: Schema.Attribute.Enumeration<
@@ -892,10 +881,9 @@ export interface ApiFicheSolutionFicheSolution
       Schema.Attribute.Private;
     credits: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     delai_travaux_maximum: Schema.Attribute.Integer &
@@ -915,10 +903,9 @@ export interface ApiFicheSolutionFicheSolution
     description: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     description_courte: Schema.Attribute.String &
@@ -930,18 +917,16 @@ export interface ApiFicheSolutionFicheSolution
       }>;
     description_estimation: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     en_savoir_plus: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     etapes_diagnostic: Schema.Attribute.Component<
@@ -1012,10 +997,9 @@ export interface ApiFicheSolutionFicheSolution
       }>;
     point_vigilance: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     portee_baisse_temperature: Schema.Attribute.Enumeration<
@@ -1024,10 +1008,9 @@ export interface ApiFicheSolutionFicheSolution
     publishedAt: Schema.Attribute.DateTime;
     rafraichissement_attendu_description: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     rank: Schema.Attribute.Integer &
@@ -1099,10 +1082,9 @@ export interface ApiLienRexDiagnosticLienRexDiagnostic
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     fiche_diagnostic: Schema.Attribute.Relation<
@@ -1208,10 +1190,9 @@ export interface ApiMateriauMateriau extends Struct.CollectionTypeSchema {
     description: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     fiches_solution: Schema.Attribute.Relation<
@@ -1330,18 +1311,16 @@ export interface ApiRetourExperienceDiagnosticRetourExperienceDiagnostic
     annee_realisation: Schema.Attribute.String;
     apres: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     besoin: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     citations: Schema.Attribute.Component<'common.citation', true>;
@@ -1349,19 +1328,17 @@ export interface ApiRetourExperienceDiagnosticRetourExperienceDiagnostic
     climat_futur: Schema.Attribute.String;
     collectivite_info: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     contacts: Schema.Attribute.Component<'retour-experience.contact', true>;
     cout_description: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     cout_euro: Schema.Attribute.Integer;
@@ -1370,27 +1347,24 @@ export interface ApiRetourExperienceDiagnosticRetourExperienceDiagnostic
       Schema.Attribute.Private;
     credits: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     description: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     financements: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     guide_pdf: Schema.Attribute.Media<'files'>;
@@ -1408,20 +1382,18 @@ export interface ApiRetourExperienceDiagnosticRetourExperienceDiagnostic
       Schema.Attribute.Private;
     points_vigilance: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     publishedAt: Schema.Attribute.DateTime;
     rank: Schema.Attribute.Integer;
     resultats: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'standard';
+          preset: 'defaultHtml';
         }
       >;
     resultats_images: Schema.Attribute.Component<
@@ -1500,10 +1472,9 @@ export interface ApiRetourExperienceRetourExperience
       }>;
     contact: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     contacts: Schema.Attribute.Component<'retour-experience.contact', true>;
@@ -1519,27 +1490,24 @@ export interface ApiRetourExperienceRetourExperience
       Schema.Attribute.Private;
     credits: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     description: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     difficultes: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     echelle: Schema.Attribute.String &
@@ -1552,10 +1520,9 @@ export interface ApiRetourExperienceRetourExperience
       Schema.Attribute.DefaultTo<false>;
     financement: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     image_principale: Schema.Attribute.Media<'images'> &
@@ -1577,18 +1544,16 @@ export interface ApiRetourExperienceRetourExperience
     >;
     partenaires: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     porteur: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     publishedAt: Schema.Attribute.DateTime;
@@ -1601,10 +1566,9 @@ export interface ApiRetourExperienceRetourExperience
     region: Schema.Attribute.Relation<'oneToOne', 'api::region.region'>;
     ressources: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     retour_experiences: Schema.Attribute.Relation<
@@ -1697,10 +1661,9 @@ export interface ApiSolutionRetourExperienceSolutionRetourExperience
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     fiche_solution: Schema.Attribute.Relation<
@@ -1743,10 +1706,9 @@ export interface ApiWebinaireWebinaire extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     heure_debut: Schema.Attribute.Time;

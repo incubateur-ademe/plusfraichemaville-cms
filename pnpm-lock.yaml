@@ -11,6 +11,9 @@ importers:
 
   .:
     dependencies:
+      '@_sh/strapi-plugin-ckeditor':
+        specifier: ^8.0.0
+        version: 8.0.0(7071dac38e2b4de0b2e3ae8b38d332d1)
       '@radix-ui/react-tooltip':
         specifier: 1.0.7
         version: 1.0.7(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -73,16 +76,19 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
-  src/plugins/strapi-plugin-ckeditor:
-    dependencies:
-      '@ckeditor/ckeditor5-react':
-        specifier: ^9.3.0
-        version: 9.5.0(ckeditor5@48.4.0)(react@18.3.1)
-      '@strapi/strapi':
-        specifier: ^5.0.0 || ^5.0.0-beta || ^5.0.0-alpha || ^5.0.0-rc
-        version: 5.52.1(@babel/runtime@7.29.7)(@codemirror/autocomplete@6.20.3)(@codemirror/language@6.12.4)(@codemirror/lint@6.9.7)(@codemirror/search@6.7.1)(@codemirror/theme-one-dark@6.1.3)(@emotion/is-prop-valid@1.4.0)(@swc/helpers@0.5.23)(@types/hoist-non-react-statics@3.3.7(@types/react@18.3.31))(@types/node@26.2.0)(@types/react@18.3.31)(codemirror@5.65.21)(esbuild@0.28.2)(koa@2.16.4)(pg@8.12.0)(postcss@8.5.26)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.30.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(redux@4.2.1)(styled-components@6.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.50.0)(ts-toolbelt@9.6.0)(type-fest@0.21.3)
-
 packages:
+
+  '@_sh/strapi-plugin-ckeditor@8.0.0':
+    resolution: {integrity: sha512-NoCkOIU0P94vPmCaj/xIcEjuLT5ecHDTmNNK3wRYOEv91c/AL1m4M2hZaFawH7+mKrzEc4cjDunAxz/pt+Ebng==}
+    engines: {node: '>=20.0.0 <=26.x.x', npm: '>=6.0.0'}
+    peerDependencies:
+      '@strapi/design-system': ^2.0.0
+      '@strapi/icons': ^2.0.0
+      '@strapi/strapi': ^5.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
+      react-router-dom: ^6.0.0
+      styled-components: ^6.0.0
 
   '@ai-sdk/gateway@2.0.109':
     resolution: {integrity: sha512-jvTQnfmcKD/bc8fbp2bbaO8QvqSPaj7lv5rj9kj/GLHUfTGpjQV3pH7GdO4fDi1SX2PdHpPQY0y6rxJ05Xo5cg==}
@@ -687,11 +693,10 @@ packages:
   '@ckeditor/ckeditor5-paste-from-office@48.4.0':
     resolution: {integrity: sha512-+udEzlAbFqquNdVmW0r8yfdbSVprOgkKhK++l/DlLVv81L1lSaizcz36kM4U5/8D/lVYaFDC3ffa368qP7l+jQ==}
 
-  '@ckeditor/ckeditor5-react@9.5.0':
-    resolution: {integrity: sha512-0NEBg3EDQaQDwj9xswC34qspDiNgXMIn41lZ3pjNx915NWRabqQDnR5a8TisPaOlx3gHnIdOXJ0BH1wRHsJxhQ==}
-    engines: {node: '>=18.0.0'}
+  '@ckeditor/ckeditor5-react@11.2.0':
+    resolution: {integrity: sha512-EZrwjyAf8L3p+4E2v3rRb2XMKgFogojla84xmW9LoUyloayurJ1TlifNhmRGmS2paeUGxqRDHjBA0yn+SsTdLg==}
     peerDependencies:
-      ckeditor5: '>=42.0.0 || ^0.0.0-nightly'
+      ckeditor5: '>=46.0.0 || ^0.0.0-nightly || ^0.0.0-internal'
       react: ^16.13.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   '@ckeditor/ckeditor5-remove-format@48.4.0':
@@ -4245,6 +4250,9 @@ packages:
   domhandler@4.3.1:
     resolution: {integrity: sha512-GrwoxYN+uWlzO8uhUXRl0P+kHE4GtVPfYzVLcUxPL7KNdHKj66vvlhiweIHqYYXWlw+T8iLMp42Lm67ghw4WMQ==}
     engines: {node: '>= 4'}
+
+  dompurify@3.4.12:
+    resolution: {integrity: sha512-zQvGet8Z2sWbQhCmfFz/T5QWH2oBmjnqK3qvOjaqaNLrLEF912WamU+ohnTp0TCep/MFVHpdJuCZEdFOdTnEFg==}
 
   dompurify@3.4.13:
     resolution: {integrity: sha512-2vmYIoqjze2d+kakP8S/nS5shfsl587kzwEjcGlTdiksUVgFHnFCsLYDVj/JNqJVOQZGSYBTmuycv0PodwmnMQ==}
@@ -7823,6 +7831,22 @@ packages:
 
 snapshots:
 
+  '@_sh/strapi-plugin-ckeditor@8.0.0(7071dac38e2b4de0b2e3ae8b38d332d1)':
+    dependencies:
+      '@ckeditor/ckeditor5-react': 11.2.0(ckeditor5@48.4.0)(react@18.3.1)
+      '@strapi/design-system': 2.2.4(@babel/runtime@7.29.7)(@codemirror/autocomplete@6.20.3)(@codemirror/language@6.12.4)(@codemirror/lint@6.9.7)(@codemirror/search@6.7.1)(@codemirror/theme-one-dark@6.1.3)(@strapi/icons@2.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react@18.3.31)(codemirror@5.65.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      '@strapi/icons': 2.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      '@strapi/strapi': 5.52.1(@babel/runtime@7.29.7)(@codemirror/autocomplete@6.20.3)(@codemirror/language@6.12.4)(@codemirror/lint@6.9.7)(@codemirror/search@6.7.1)(@codemirror/theme-one-dark@6.1.3)(@emotion/is-prop-valid@1.4.0)(@swc/helpers@0.5.23)(@types/hoist-non-react-statics@3.3.7(@types/react@18.3.31))(@types/node@26.2.0)(@types/react@18.3.31)(codemirror@5.65.21)(esbuild@0.28.2)(koa@2.16.4)(pg@8.12.0)(postcss@8.5.26)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.30.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(redux@4.2.1)(styled-components@6.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.50.0)(ts-toolbelt@9.6.0)(type-fest@0.21.3)
+      ckeditor5: 48.4.0
+      dompurify: 3.4.12
+      lodash: 4.18.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-router-dom: 6.30.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      styled-components: 6.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    transitivePeerDependencies:
+      - supports-color
+
   '@ai-sdk/gateway@2.0.109(zod@3.25.76)':
     dependencies:
       '@ai-sdk/provider': 2.0.3
@@ -8977,7 +9001,7 @@ snapshots:
       '@ckeditor/ckeditor5-engine': 48.4.0
       '@ckeditor/ckeditor5-utils': 48.4.0
 
-  '@ckeditor/ckeditor5-react@9.5.0(ckeditor5@48.4.0)(react@18.3.1)':
+  '@ckeditor/ckeditor5-react@11.2.0(ckeditor5@48.4.0)(react@18.3.1)':
     dependencies:
       '@ckeditor/ckeditor5-integrations-common': 2.4.1(ckeditor5@48.4.0)
       ckeditor5: 48.4.0
@@ -13450,6 +13474,10 @@ snapshots:
   domhandler@4.3.1:
     dependencies:
       domelementtype: 2.3.0
+
+  dompurify@3.4.12:
+    optionalDependencies:
+      '@types/trusted-types': 2.0.7
 
   dompurify@3.4.13:
     optionalDependencies:

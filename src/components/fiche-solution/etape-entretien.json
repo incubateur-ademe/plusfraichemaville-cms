@@ -13,10 +13,9 @@
     "description": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor",
+      "customField": "plugin::ckeditor5.CKEditor",
       "required": true
     }
   }

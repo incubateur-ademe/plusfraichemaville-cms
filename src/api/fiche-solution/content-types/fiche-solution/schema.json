@@ -96,11 +96,10 @@
     "description": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
       "required": true,
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "baisse_temperature": {
       "pluginOptions": {
@@ -125,19 +124,17 @@
     "contexte_description": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
       "required": true,
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "rafraichissement_attendu_description": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "logo_partenaire": {
       "type": "media",
@@ -195,10 +192,9 @@
     "point_vigilance": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "lien_fond_vert": {
       "pluginOptions": {
@@ -269,10 +265,9 @@
     "cout_entretien_description": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "delai_travaux_minimum": {
       "type": "integer",
@@ -307,10 +302,9 @@
     "en_savoir_plus": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "libelle_avantage_solution": {
       "type": "string"
@@ -318,10 +312,9 @@
     "credits": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "cout_unite": {
       "type": "enumeration",
@@ -334,10 +327,9 @@
     "description_estimation": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "aides_territoires_mots_cles": {
       "type": "text"

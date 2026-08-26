@@ -1,4 +1,4 @@
-import type {Schema} from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
 export interface CommonCitation extends Struct.ComponentSchema {
   collectionName: 'components_common_citations';
@@ -11,10 +11,9 @@ export interface CommonCitation extends Struct.ComponentSchema {
     texte: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
   };
@@ -42,10 +41,9 @@ export interface FicheDiagnosticEtapeMiseEnOeuvre
     description: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     titre: Schema.Attribute.String & Schema.Attribute.Required;
@@ -71,10 +69,9 @@ export interface FicheSolutionEtapeDiagnostic extends Struct.ComponentSchema {
     description: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     titre: Schema.Attribute.String & Schema.Attribute.Required;
@@ -91,10 +88,9 @@ export interface FicheSolutionEtapeEntretien extends Struct.ComponentSchema {
     description: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     titre: Schema.Attribute.String & Schema.Attribute.Required;
@@ -110,10 +106,9 @@ export interface FicheSolutionEtapeMiseEnOeuvre extends Struct.ComponentSchema {
     description: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     titre: Schema.Attribute.String & Schema.Attribute.Required;
@@ -130,10 +125,9 @@ export interface FicheSolutionOups extends Struct.ComponentSchema {
     description: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     solutions_reparatrices: Schema.Attribute.Relation<
@@ -154,10 +148,9 @@ export interface RetourExperienceCalendrier extends Struct.ComponentSchema {
     date: Schema.Attribute.String & Schema.Attribute.Required;
     description: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     titre: Schema.Attribute.String & Schema.Attribute.Required;
@@ -230,10 +223,9 @@ export interface RetourExperienceSituation extends Struct.ComponentSchema {
     description: Schema.Attribute.RichText &
       Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;

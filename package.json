@@ -11,6 +11,7 @@
     "generate-types": "pnpm dlx @4very/strapi-plugin-schemas-to-ts generateInterfaces --strapi-root-path . --destinationFolder types "
   },
   "dependencies": {
+    "@_sh/strapi-plugin-ckeditor": "^8.0.0",
     "@retikolo/drag-drop-content-types": "^2.0.0",
     "@sentry/node": "^7.112.2",
     "@sentry/tracing": "^7.112.2",
