@@ -4,8 +4,10 @@ module.exports = ({env}) => ({
       provider: "aws-s3",
       providerOptions: {
         s3Options: {
-          accessKeyId: env("SCALEWAY_ACCESS_KEY_ID"),
-          secretAccessKey: env("SCALEWAY_ACCESS_SECRET"),
+          credentials: {
+            accessKeyId: env("SCALEWAY_ACCESS_KEY_ID"),
+            secretAccessKey: env("SCALEWAY_ACCESS_SECRET"),
+          },
           endpoint: env("SCALEWAY_ENDPOINT"),
           region: env("SCALEWAY_REGION"),
           params: {
@@ -28,19 +30,9 @@ module.exports = ({env}) => ({
   "drag-drop-content-types": {
     enabled: true,
   },
-  ckeditor: {
-    enabled: true,
-    resolve: "./src/plugins/strapi-plugin-ckeditor",
-  },
   graphql: {
     config: {
       defaultLimit: 100,
     },
-  },
-  "schemas-to-ts": {
-    enabled: true,
-    config: {
-      destinationFolder: '/types',
-    }
   },
 });

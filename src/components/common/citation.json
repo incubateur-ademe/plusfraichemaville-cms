@@ -13,11 +13,10 @@
     "texte": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
       "required": true,
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     }
   }
 }

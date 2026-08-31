@@ -31,11 +31,10 @@
     "description": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
       "required": true,
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "citations": {
       "type": "component",
@@ -45,10 +44,9 @@
     "collectivite_info": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "climat_actuel": {
       "type": "string"
@@ -62,50 +60,44 @@
     "cout_description": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "financements": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "besoin": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "resultats": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "standard"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "points_vigilance": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "apres": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "lien_rex_diagnostics": {
       "type": "relation",
@@ -126,10 +118,9 @@
     "credits": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "light"
+        "preset": "defaultHtml"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor5.CKEditor"
     },
     "guide_pdf": {
       "type": "media",

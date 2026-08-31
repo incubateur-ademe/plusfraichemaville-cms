@@ -1,6 +1,6 @@
-import type { Attribute, Schema } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
-export interface AdminApiToken extends Schema.CollectionType {
+export interface AdminApiToken extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_api_tokens';
   info: {
     description: '';
@@ -9,6 +9,9 @@ export interface AdminApiToken extends Schema.CollectionType {
     pluralName: 'api-tokens';
     singularName: 'api-token';
   };
+  options: {
+    draftAndPublish: false;
+  };
   pluginOptions: {
     'content-manager': {
       visible: false;
@@ -18,51 +21,57 @@ export interface AdminApiToken extends Schema.CollectionType {
     };
   };
   attributes: {
-    accessKey: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
+    accessKey: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'admin::api-token',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    description: Attribute.String &
-      Attribute.SetMinMaxLength<{
+    adminPermissions: Schema.Attribute.Relation<
+      'oneToMany',
+      'admin::permission'
+    >;
+    adminUserOwner: Schema.Attribute.Relation<'manyToOne', 'admin::user'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }> &
-      Attribute.DefaultTo<''>;
-    expiresAt: Attribute.DateTime;
-    lastUsedAt: Attribute.DateTime;
-    lifespan: Attribute.BigInteger;
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
+      Schema.Attribute.DefaultTo<''>;
+    encryptedKey: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    permissions: Attribute.Relation<
-      'admin::api-token',
+    expiresAt: Schema.Attribute.DateTime;
+    kind: Schema.Attribute.Enumeration<['content-api', 'admin']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'content-api'>;
+    lastUsedAt: Schema.Attribute.DateTime;
+    lifespan: Schema.Attribute.BigInteger;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'admin::api-token'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    permissions: Schema.Attribute.Relation<
       'oneToMany',
       'admin::api-token-permission'
     >;
-    type: Attribute.Enumeration<['read-only', 'full-access', 'custom']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'read-only'>;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'admin::api-token',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    type: Schema.Attribute.Enumeration<['read-only', 'full-access', 'custom']> &
+      Schema.Attribute.DefaultTo<'read-only'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
-export interface AdminApiTokenPermission extends Schema.CollectionType {
+export interface AdminApiTokenPermission extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_api_token_permissions';
   info: {
     description: '';
@@ -71,6 +80,9 @@ export interface AdminApiTokenPermission extends Schema.CollectionType {
     pluralName: 'api-token-permissions';
     singularName: 'api-token-permission';
   };
+  options: {
+    draftAndPublish: false;
+  };
   pluginOptions: {
     'content-manager': {
       visible: false;
@@ -80,34 +92,29 @@ export interface AdminApiTokenPermission extends Schema.CollectionType {
     };
   };
   attributes: {
-    action: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
+    action: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'admin::api-token-permission',
-      'oneToOne',
-      'admin::user'
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'admin::api-token-permission'
     > &
-      Attribute.Private;
-    token: Attribute.Relation<
-      'admin::api-token-permission',
-      'manyToOne',
-      'admin::api-token'
-    >;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'admin::api-token-permission',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    token: Schema.Attribute.Relation<'manyToOne', 'admin::api-token'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
-export interface AdminPermission extends Schema.CollectionType {
+export interface AdminPermission extends Struct.CollectionTypeSchema {
   collectionName: 'admin_permissions';
   info: {
     description: '';
@@ -116,6 +123,9 @@ export interface AdminPermission extends Schema.CollectionType {
     pluralName: 'permissions';
     singularName: 'permission';
   };
+  options: {
+    draftAndPublish: false;
+  };
   pluginOptions: {
     'content-manager': {
       visible: false;
@@ -125,37 +135,34 @@ export interface AdminPermission extends Schema.CollectionType {
     };
   };
   attributes: {
-    action: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
+    action: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    actionParameters: Attribute.JSON & Attribute.DefaultTo<{}>;
-    conditions: Attribute.JSON & Attribute.DefaultTo<[]>;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'admin::permission',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    properties: Attribute.JSON & Attribute.DefaultTo<{}>;
-    role: Attribute.Relation<'admin::permission', 'manyToOne', 'admin::role'>;
-    subject: Attribute.String &
-      Attribute.SetMinMaxLength<{
+    actionParameters: Schema.Attribute.JSON & Schema.Attribute.DefaultTo<{}>;
+    apiToken: Schema.Attribute.Relation<'manyToOne', 'admin::api-token'>;
+    conditions: Schema.Attribute.JSON & Schema.Attribute.DefaultTo<[]>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'admin::permission'> &
+      Schema.Attribute.Private;
+    properties: Schema.Attribute.JSON & Schema.Attribute.DefaultTo<{}>;
+    publishedAt: Schema.Attribute.DateTime;
+    role: Schema.Attribute.Relation<'manyToOne', 'admin::role'>;
+    subject: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'admin::permission',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
-export interface AdminRole extends Schema.CollectionType {
+export interface AdminRole extends Struct.CollectionTypeSchema {
   collectionName: 'admin_roles';
   info: {
     description: '';
@@ -164,6 +171,9 @@ export interface AdminRole extends Schema.CollectionType {
     pluralName: 'roles';
     singularName: 'role';
   };
+  options: {
+    draftAndPublish: false;
+  };
   pluginOptions: {
     'content-manager': {
       visible: false;
@@ -173,35 +183,93 @@ export interface AdminRole extends Schema.CollectionType {
     };
   };
   attributes: {
-    code: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
+    code: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'admin::role', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    description: Attribute.String;
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'admin::role'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    permissions: Attribute.Relation<
-      'admin::role',
-      'oneToMany',
-      'admin::permission'
-    >;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<'admin::role', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    users: Attribute.Relation<'admin::role', 'manyToMany', 'admin::user'>;
+    permissions: Schema.Attribute.Relation<'oneToMany', 'admin::permission'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    users: Schema.Attribute.Relation<'manyToMany', 'admin::user'>;
   };
 }
 
-export interface AdminTransferToken extends Schema.CollectionType {
+export interface AdminSession extends Struct.CollectionTypeSchema {
+  collectionName: 'strapi_sessions';
+  info: {
+    description: 'Session Manager storage';
+    displayName: 'Session';
+    name: 'Session';
+    pluralName: 'sessions';
+    singularName: 'session';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+    i18n: {
+      localized: false;
+    };
+  };
+  attributes: {
+    absoluteExpiresAt: Schema.Attribute.DateTime & Schema.Attribute.Private;
+    childId: Schema.Attribute.String & Schema.Attribute.Private;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    deviceId: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private;
+    expiresAt: Schema.Attribute.DateTime &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'admin::session'> &
+      Schema.Attribute.Private;
+    metadata: Schema.Attribute.JSON & Schema.Attribute.Private;
+    origin: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sessionId: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private &
+      Schema.Attribute.Unique;
+    status: Schema.Attribute.String & Schema.Attribute.Private;
+    type: Schema.Attribute.String & Schema.Attribute.Private;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    userId: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface AdminTransferToken extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_transfer_tokens';
   info: {
     description: '';
@@ -210,6 +278,9 @@ export interface AdminTransferToken extends Schema.CollectionType {
     pluralName: 'transfer-tokens';
     singularName: 'transfer-token';
   };
+  options: {
+    draftAndPublish: false;
+  };
   pluginOptions: {
     'content-manager': {
       visible: false;
@@ -219,48 +290,47 @@ export interface AdminTransferToken extends Schema.CollectionType {
     };
   };
   attributes: {
-    accessKey: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
+    accessKey: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'admin::transfer-token',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    description: Attribute.String &
-      Attribute.SetMinMaxLength<{
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }> &
-      Attribute.DefaultTo<''>;
-    expiresAt: Attribute.DateTime;
-    lastUsedAt: Attribute.DateTime;
-    lifespan: Attribute.BigInteger;
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
+      Schema.Attribute.DefaultTo<''>;
+    expiresAt: Schema.Attribute.DateTime;
+    lastUsedAt: Schema.Attribute.DateTime;
+    lifespan: Schema.Attribute.BigInteger;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'admin::transfer-token'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    permissions: Attribute.Relation<
-      'admin::transfer-token',
+    permissions: Schema.Attribute.Relation<
       'oneToMany',
       'admin::transfer-token-permission'
     >;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'admin::transfer-token',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
-export interface AdminTransferTokenPermission extends Schema.CollectionType {
+export interface AdminTransferTokenPermission
+  extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_transfer_token_permissions';
   info: {
     description: '';
@@ -269,6 +339,9 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
     pluralName: 'transfer-token-permissions';
     singularName: 'transfer-token-permission';
   };
+  options: {
+    draftAndPublish: false;
+  };
   pluginOptions: {
     'content-manager': {
       visible: false;
@@ -278,34 +351,29 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
     };
   };
   attributes: {
-    action: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
+    action: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'admin::transfer-token-permission',
-      'oneToOne',
-      'admin::user'
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'admin::transfer-token-permission'
     > &
-      Attribute.Private;
-    token: Attribute.Relation<
-      'admin::transfer-token-permission',
-      'manyToOne',
-      'admin::transfer-token'
-    >;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'admin::transfer-token-permission',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    token: Schema.Attribute.Relation<'manyToOne', 'admin::transfer-token'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
-export interface AdminUser extends Schema.CollectionType {
+export interface AdminUser extends Struct.CollectionTypeSchema {
   collectionName: 'admin_users';
   info: {
     description: '';
@@ -314,6 +382,9 @@ export interface AdminUser extends Schema.CollectionType {
     pluralName: 'users';
     singularName: 'user';
   };
+  options: {
+    draftAndPublish: false;
+  };
   pluginOptions: {
     'content-manager': {
       visible: false;
@@ -323,47 +394,57 @@ export interface AdminUser extends Schema.CollectionType {
     };
   };
   attributes: {
-    blocked: Attribute.Boolean & Attribute.Private & Attribute.DefaultTo<false>;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'admin::user', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    email: Attribute.Email &
-      Attribute.Required &
-      Attribute.Private &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
+    apiTokens: Schema.Attribute.Relation<'oneToMany', 'admin::api-token'> &
+      Schema.Attribute.Private;
+    blocked: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
-    firstname: Attribute.String &
-      Attribute.SetMinMaxLength<{
+    firstname: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    isActive: Attribute.Boolean &
-      Attribute.Private &
-      Attribute.DefaultTo<false>;
-    lastname: Attribute.String &
-      Attribute.SetMinMaxLength<{
+    isActive: Schema.Attribute.Boolean &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<false>;
+    lastname: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    password: Attribute.Password &
-      Attribute.Private &
-      Attribute.SetMinMaxLength<{
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'admin::user'> &
+      Schema.Attribute.Private;
+    password: Schema.Attribute.Password &
+      Schema.Attribute.Private &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
-    preferedLanguage: Attribute.String;
-    registrationToken: Attribute.String & Attribute.Private;
-    resetPasswordToken: Attribute.String & Attribute.Private;
-    roles: Attribute.Relation<'admin::user', 'manyToMany', 'admin::role'> &
-      Attribute.Private;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<'admin::user', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    username: Attribute.String;
+    preferedLanguage: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    registrationToken: Schema.Attribute.String & Schema.Attribute.Private;
+    resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
+    resetPasswordTokenExpiresAt: Schema.Attribute.DateTime &
+      Schema.Attribute.Private;
+    roles: Schema.Attribute.Relation<'manyToMany', 'admin::role'> &
+      Schema.Attribute.Private;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    username: Schema.Attribute.String;
   };
 }
 
 export interface ApiAideDecisionEtapeAideDecisionEtape
-  extends Schema.CollectionType {
+  extends Struct.CollectionTypeSchema {
   collectionName: 'aide_decision_etapes';
   info: {
     description: '';
@@ -375,46 +456,43 @@ export interface ApiAideDecisionEtapeAideDecisionEtape
     draftAndPublish: true;
   };
   attributes: {
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::aide-decision-etape.aide-decision-etape',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    description: Attribute.String;
-    etape_precedente: Attribute.Relation<
-      'api::aide-decision-etape.aide-decision-etape',
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String;
+    etape_precedente: Schema.Attribute.Relation<
       'manyToOne',
       'api::aide-decision-etape.aide-decision-etape'
     >;
-    etapes_suivantes: Attribute.Relation<
-      'api::aide-decision-etape.aide-decision-etape',
+    etapes_suivantes: Schema.Attribute.Relation<
       'oneToMany',
       'api::aide-decision-etape.aide-decision-etape'
     >;
-    fiches_solutions: Attribute.Relation<
-      'api::aide-decision-etape.aide-decision-etape',
+    fiches_solutions: Schema.Attribute.Relation<
       'oneToMany',
       'api::fiche-solution.fiche-solution'
     >;
-    image: Attribute.Media<'images'>;
-    nom: Attribute.String & Attribute.Required;
-    publishedAt: Attribute.DateTime;
-    question_suivante: Attribute.String;
-    rank: Attribute.Integer;
-    slug: Attribute.String & Attribute.Required & Attribute.Unique;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'api::aide-decision-etape.aide-decision-etape',
-      'oneToOne',
-      'admin::user'
+    image: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::aide-decision-etape.aide-decision-etape'
     > &
-      Attribute.Private;
+      Schema.Attribute.Private;
+    nom: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    question_suivante: Schema.Attribute.String;
+    rank: Schema.Attribute.Integer;
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
-export interface ApiCobeneficeCobenefice extends Schema.CollectionType {
+export interface ApiCobeneficeCobenefice extends Struct.CollectionTypeSchema {
   collectionName: 'cobenefices';
   info: {
     description: '';
@@ -426,26 +504,21 @@ export interface ApiCobeneficeCobenefice extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::cobenefice.cobenefice',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    description: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    fiches_solutions: Attribute.Relation<
-      'api::cobenefice.cobenefice',
+    fiches_solutions: Schema.Attribute.Relation<
       'manyToMany',
       'api::fiche-solution.fiche-solution'
     >;
-    icone: Attribute.Enumeration<
+    icone: Schema.Attribute.Enumeration<
       [
         'abriter_biodiversite',
         'ameliorer_bien_etre_sante',
@@ -462,25 +535,28 @@ export interface ApiCobeneficeCobenefice extends Schema.CollectionType {
         'rendre_espaces_publics_plus_accueillants',
         'rendre_ville_plus_ludique',
         'sensibiliser_vivant_nature',
-        'sequestrer_du_carbone'
+        'sequestrer_du_carbone',
       ]
     > &
-      Attribute.SetPluginOptions<{
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'api::cobenefice.cobenefice',
-      'oneToOne',
-      'admin::user'
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cobenefice.cobenefice'
     > &
-      Attribute.Private;
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
-export interface ApiEvenementEvenement extends Schema.CollectionType {
+export interface ApiEvenementEvenement extends Struct.CollectionTypeSchema {
   collectionName: 'evenements';
   info: {
     displayName: 'Ev\u00E9nement';
@@ -491,40 +567,38 @@ export interface ApiEvenementEvenement extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    bouton_lien: Attribute.String;
-    bouton_texte: Attribute.String;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::evenement.evenement',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    date_fin: Attribute.DateTime & Attribute.Required;
-    description: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    bouton_lien: Schema.Attribute.String;
+    bouton_texte: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date_fin: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    image_principale: Attribute.Media<'images'> & Attribute.Required;
-    publishedAt: Attribute.DateTime;
-    rank: Attribute.Integer;
-    type: Attribute.String & Attribute.Required;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'api::evenement.evenement',
-      'oneToOne',
-      'admin::user'
+    image_principale: Schema.Attribute.Media<'images'> &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::evenement.evenement'
     > &
-      Attribute.Private;
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    rank: Schema.Attribute.Integer;
+    type: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
 export interface ApiFicheDiagnosticFicheDiagnostic
-  extends Schema.CollectionType {
+  extends Struct.CollectionTypeSchema {
   collectionName: 'fiche_diagnostics';
   info: {
     description: '';
@@ -536,165 +610,161 @@ export interface ApiFicheDiagnosticFicheDiagnostic
     draftAndPublish: true;
   };
   attributes: {
-    avantage_description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    avantage_description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    besoin: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    besoin: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    cout_max: Attribute.Integer &
-      Attribute.SetMinMax<
+    cout_max: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    cout_min: Attribute.Integer &
-      Attribute.SetMinMax<
+    cout_min: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::fiche-diagnostic.fiche-diagnostic',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    delai_max: Attribute.Float &
-      Attribute.SetMinMax<
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    delai_max: Schema.Attribute.Float &
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    delai_min: Attribute.Float &
-      Attribute.SetMinMax<
+    delai_min: Schema.Attribute.Float &
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    description_courte: Attribute.String & Attribute.Required;
-    echelle: Attribute.Enumeration<['territoire', 'espace']>;
-    echelle_spatiale: Attribute.JSON &
-      Attribute.CustomField<
+    description_courte: Schema.Attribute.String & Schema.Attribute.Required;
+    echelle: Schema.Attribute.Enumeration<['territoire', 'espace']>;
+    echelle_spatiale: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
         'plugin::multi-select.multi-select',
         ['commune', 'espace_public']
       >;
-    echelle_thermique: Attribute.JSON &
-      Attribute.CustomField<
+    echelle_thermique: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
         'plugin::multi-select.multi-select',
         ['ilot_chaleur_urbain', 'confort_thermique']
       >;
-    en_savoir_plus_description: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    en_savoir_plus_description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    etapes_mise_en_oeuvre: Attribute.Component<
+    etapes_mise_en_oeuvre: Schema.Attribute.Component<
       'fiche-diagnostic.etape-mise-en-oeuvre',
       true
     >;
-    explication_cout: Attribute.String;
-    explication_source: Attribute.String;
-    fiches_diagnostics_associees: Attribute.Relation<
-      'api::fiche-diagnostic.fiche-diagnostic',
+    explication_cout: Schema.Attribute.String;
+    explication_source: Schema.Attribute.String;
+    fiches_diagnostics_associees: Schema.Attribute.Relation<
       'oneToMany',
       'api::fiche-diagnostic.fiche-diagnostic'
     >;
-    image_icone: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    image_principale: Attribute.Media<'images'>;
-    indicateurs: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    image_icone: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    image_principale: Schema.Attribute.Media<'images'>;
+    indicateurs: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    lien_rex_diagnostics: Attribute.Relation<
-      'api::fiche-diagnostic.fiche-diagnostic',
+    lien_rex_diagnostics: Schema.Attribute.Relation<
       'oneToMany',
       'api::lien-rex-diagnostic.lien-rex-diagnostic'
     >;
-    materiel: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::fiche-diagnostic.fiche-diagnostic'
+    > &
+      Schema.Attribute.Private;
+    materiel: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    methode: Attribute.Enumeration<
+    methode: Schema.Attribute.Enumeration<
       [
         'observation',
         'enquete',
         'simulation_numerique',
         'analyse_spatiale',
-        'modelisation_spatiale'
+        'modelisation_spatiale',
       ]
     >;
-    nom_scientifique: Attribute.String;
-    objectifs: Attribute.Component<'fiche-diagnostic.utilite-methode', true>;
-    partenaire: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    nom_scientifique: Schema.Attribute.String;
+    objectifs: Schema.Attribute.Component<
+      'fiche-diagnostic.utilite-methode',
+      true
+    >;
+    partenaire: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    publishedAt: Attribute.DateTime;
-    rank: Attribute.Integer;
-    slug: Attribute.String & Attribute.Required & Attribute.Unique;
-    titre: Attribute.String & Attribute.Required;
-    type_livrables: Attribute.String;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'api::fiche-diagnostic.fiche-diagnostic',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    vigilance_description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    publishedAt: Schema.Attribute.DateTime;
+    rank: Schema.Attribute.Integer;
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    titre: Schema.Attribute.String & Schema.Attribute.Required;
+    type_livrables: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    vigilance_description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
   };
 }
 
-export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
+export interface ApiFicheSolutionFicheSolution
+  extends Struct.CollectionTypeSchema {
   collectionName: 'fiche_solutions';
   info: {
     description: '';
@@ -706,300 +776,277 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    aides_regionales: Attribute.Component<
-      'fiche-solution.aide-regionale',
-      true
-    > &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    aides_territoires_mots_cles: Attribute.Text;
-    baisse_temperature: Attribute.Decimal &
-      Attribute.SetPluginOptions<{
+    aides_territoires_mots_cles: Schema.Attribute.Text;
+    baisse_temperature: Schema.Attribute.Decimal &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    cobenefices: Attribute.Relation<
-      'api::fiche-solution.fiche-solution',
+    cobenefices: Schema.Attribute.Relation<
       'manyToMany',
       'api::cobenefice.cobenefice'
     >;
-    contexte_description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    contexte_description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    contexte_titre: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
+    contexte_titre: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.DefaultTo<'Pourquoi choisir cette solution ?'>;
-    cout_entretien_description: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+      Schema.Attribute.DefaultTo<'Pourquoi choisir cette solution ?'>;
+    cout_entretien_description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    cout_entretien_unite: Attribute.Enumeration<
+    cout_entretien_unite: Schema.Attribute.Enumeration<
       [
         'metreCarre',
         'lineaire',
         'metreCube',
         'unite',
         'megaWattHeure',
-        'kiloWatt'
+        'kiloWatt',
       ]
     >;
-    cout_maximum: Attribute.Integer &
-      Attribute.SetPluginOptions<{
+    cout_maximum: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    cout_maximum_entretien: Attribute.Integer &
-      Attribute.SetPluginOptions<{
+    cout_maximum_entretien: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    cout_minimum: Attribute.Integer &
-      Attribute.SetPluginOptions<{
+    cout_minimum: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    cout_minimum_entretien: Attribute.Integer &
-      Attribute.SetPluginOptions<{
+    cout_minimum_entretien: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    cout_unite: Attribute.Enumeration<['metreCarre', 'megaWattHeure']> &
-      Attribute.DefaultTo<'metreCarre'>;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::fiche-solution.fiche-solution',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    credits: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    cout_unite: Schema.Attribute.Enumeration<['metreCarre', 'megaWattHeure']> &
+      Schema.Attribute.DefaultTo<'metreCarre'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    credits: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    delai_travaux_maximum: Attribute.Integer &
-      Attribute.SetMinMax<
+    delai_travaux_maximum: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    delai_travaux_minimum: Attribute.Integer &
-      Attribute.SetMinMax<
+    delai_travaux_minimum: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    description_courte: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
+    description_courte: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    description_estimation: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    description_estimation: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    en_savoir_plus: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    en_savoir_plus: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    etapes_diagnostic: Attribute.Component<
+    etapes_diagnostic: Schema.Attribute.Component<
       'fiche-solution.etape-diagnostic',
       true
     > &
-      Attribute.SetPluginOptions<{
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    etapes_entretien: Attribute.Component<
+    etapes_entretien: Schema.Attribute.Component<
       'fiche-solution.etape-entretien',
       true
     > &
-      Attribute.SetPluginOptions<{
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    etapes_mise_en_oeuvre: Attribute.Component<
+    etapes_mise_en_oeuvre: Schema.Attribute.Component<
       'fiche-solution.etape-mise-en-oeuvre',
       true
     > &
-      Attribute.SetPluginOptions<{
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    fiches_solutions_complementaires: Attribute.Relation<
-      'api::fiche-solution.fiche-solution',
+    fiches_solutions_complementaires: Schema.Attribute.Relation<
       'oneToMany',
       'api::fiche-solution.fiche-solution'
     >;
-    image_principale: Attribute.Media<'images'> &
-      Attribute.SetPluginOptions<{
+    image_principale: Schema.Attribute.Media<'images'> &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    libelle_avantage_solution: Attribute.String;
-    lien_aide_territoire: Attribute.String &
-      Attribute.SetPluginOptions<{
+    libelle_avantage_solution: Schema.Attribute.String;
+    lien_fond_vert: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    lien_fond_vert: Attribute.String &
-      Attribute.SetPluginOptions<{
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::fiche-solution.fiche-solution'
+    > &
+      Schema.Attribute.Private;
+    logo_partenaire: Schema.Attribute.Media<'images'> &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    logo_partenaire: Attribute.Media<'images'> &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    materiaux: Attribute.Relation<
-      'api::fiche-solution.fiche-solution',
+    materiaux: Schema.Attribute.Relation<
       'manyToMany',
       'api::materiau.materiau'
     >;
-    oups: Attribute.Component<'fiche-solution.oups', true> &
-      Attribute.SetPluginOptions<{
+    oups: Schema.Attribute.Component<'fiche-solution.oups', true> &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    point_vigilance: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    point_vigilance: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    portee_baisse_temperature: Attribute.Enumeration<
+    portee_baisse_temperature: Schema.Attribute.Enumeration<
       ['air', 'surface', 'interieur']
     >;
-    publishedAt: Attribute.DateTime;
-    rafraichissement_attendu_description: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    publishedAt: Schema.Attribute.DateTime;
+    rafraichissement_attendu_description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    rank: Attribute.Integer &
-      Attribute.SetPluginOptions<{
+    rank: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    slug: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    solution_retour_experiences: Attribute.Relation<
-      'api::fiche-solution.fiche-solution',
+    solution_retour_experiences: Schema.Attribute.Relation<
       'oneToMany',
       'api::solution-retour-experience.solution-retour-experience'
     >;
-    titre: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
+    titre: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    type_solution: Attribute.Enumeration<['bleue', 'verte', 'grise', 'douce']> &
-      Attribute.SetPluginOptions<{
+    type_solution: Schema.Attribute.Enumeration<
+      ['bleue', 'verte', 'grise', 'douce']
+    > &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    types_espace: Attribute.JSON &
-      Attribute.CustomField<
+    types_espace: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
         'plugin::multi-select.multi-select',
         [
           'Rond-point:rondpoint',
@@ -1008,21 +1055,17 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           'Rue:rue',
           'Place:place',
           "Cour d'\u00E9cole:ecole",
-          'Parc et jardin:parc'
+          'Parc et jardin:parc',
         ]
       >;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'api::fiche-solution.fiche-solution',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
 export interface ApiLienRexDiagnosticLienRexDiagnostic
-  extends Schema.CollectionType {
+  extends Struct.CollectionTypeSchema {
   collectionName: 'lien_rex_diagnostics';
   info: {
     description: '';
@@ -1034,42 +1077,38 @@ export interface ApiLienRexDiagnosticLienRexDiagnostic
     draftAndPublish: false;
   };
   attributes: {
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::lien-rex-diagnostic.lien-rex-diagnostic',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    description: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    fiche_diagnostic: Attribute.Relation<
-      'api::lien-rex-diagnostic.lien-rex-diagnostic',
+    fiche_diagnostic: Schema.Attribute.Relation<
       'manyToOne',
       'api::fiche-diagnostic.fiche-diagnostic'
     >;
-    retour_experience_diagnostic: Attribute.Relation<
-      'api::lien-rex-diagnostic.lien-rex-diagnostic',
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::lien-rex-diagnostic.lien-rex-diagnostic'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    retour_experience_diagnostic: Schema.Attribute.Relation<
       'manyToOne',
       'api::retour-experience-diagnostic.retour-experience-diagnostic'
     >;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'api::lien-rex-diagnostic.lien-rex-diagnostic',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
-export interface ApiMateriauMateriau extends Schema.CollectionType {
+export interface ApiMateriauMateriau extends Struct.CollectionTypeSchema {
   collectionName: 'materiaux';
   info: {
     description: '';
@@ -1081,116 +1120,113 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    cout_maximum_entretien: Attribute.Integer &
-      Attribute.SetPluginOptions<{
+    cout_maximum_entretien: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    cout_maximum_fourniture: Attribute.Integer &
-      Attribute.SetPluginOptions<{
+    cout_maximum_fourniture: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    cout_minimum_entretien: Attribute.Integer &
-      Attribute.SetPluginOptions<{
+    cout_minimum_entretien: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    cout_minimum_fourniture: Attribute.Integer &
-      Attribute.SetPluginOptions<{
+    cout_minimum_fourniture: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
+      Schema.Attribute.SetMinMax<
         {
           min: 0;
         },
         number
       >;
-    cout_unite: Attribute.Enumeration<
+    cout_unite: Schema.Attribute.Enumeration<
       [
         'metreCarre',
         'lineaire',
         'metreCube',
         'unite',
         'megaWattHeure',
-        'kiloWatt'
+        'kiloWatt',
       ]
     > &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::materiau.materiau',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    fiches_solution: Attribute.Relation<
-      'api::materiau.materiau',
+    fiches_solution: Schema.Attribute.Relation<
       'manyToMany',
       'api::fiche-solution.fiche-solution'
     >;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.SetPluginOptions<{
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    titre: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'api::materiau.materiau',
-      'oneToOne',
-      'admin::user'
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::materiau.materiau'
     > &
-      Attribute.Private;
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    titre: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
 export interface ApiObjectifDeveloppementDurableObjectifDeveloppementDurable
-  extends Schema.CollectionType {
+  extends Struct.CollectionTypeSchema {
   collectionName: 'objectif_developpement_durables';
   info: {
     displayName: 'Objectif Developpement Durable';
@@ -1201,35 +1237,34 @@ export interface ApiObjectifDeveloppementDurableObjectifDeveloppementDurable
     draftAndPublish: false;
   };
   attributes: {
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::objectif-developpement-durable.objectif-developpement-durable',
-      'oneToOne',
-      'admin::user'
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::objectif-developpement-durable.objectif-developpement-durable'
     > &
-      Attribute.Private;
-    description: Attribute.String & Attribute.Required;
-    numero: Attribute.Integer &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMax<
+      Schema.Attribute.Private;
+    numero: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMax<
         {
           max: 17;
           min: 1;
         },
         number
       >;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'api::objectif-developpement-durable.objectif-developpement-durable',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
-export interface ApiRegionRegion extends Schema.CollectionType {
+export interface ApiRegionRegion extends Struct.CollectionTypeSchema {
   collectionName: 'regions';
   info: {
     displayName: 'region';
@@ -1240,27 +1275,28 @@ export interface ApiRegionRegion extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    code: Attribute.String & Attribute.Required & Attribute.Unique;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::region.region',
-      'oneToOne',
-      'admin::user'
+    code: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::region.region'
     > &
-      Attribute.Private;
-    nom: Attribute.String;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'api::region.region',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+      Schema.Attribute.Private;
+    nom: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
 export interface ApiRetourExperienceDiagnosticRetourExperienceDiagnostic
-  extends Schema.CollectionType {
+  extends Struct.CollectionTypeSchema {
   collectionName: 'retour_experience_diagnostics';
   info: {
     description: '';
@@ -1272,117 +1308,110 @@ export interface ApiRetourExperienceDiagnosticRetourExperienceDiagnostic
     draftAndPublish: true;
   };
   attributes: {
-    annee_realisation: Attribute.String;
-    apres: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    annee_realisation: Schema.Attribute.String;
+    apres: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    besoin: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    besoin: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    citations: Attribute.Component<'common.citation', true>;
-    climat_actuel: Attribute.String;
-    climat_futur: Attribute.String;
-    collectivite_info: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    citations: Schema.Attribute.Component<'common.citation', true>;
+    climat_actuel: Schema.Attribute.String;
+    climat_futur: Schema.Attribute.String;
+    collectivite_info: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    contacts: Attribute.Component<'retour-experience.contact', true>;
-    cout_description: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    contacts: Schema.Attribute.Component<'retour-experience.contact', true>;
+    cout_description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    cout_euro: Attribute.Integer;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::retour-experience-diagnostic.retour-experience-diagnostic',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    credits: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    cout_euro: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    credits: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    financements: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    financements: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    guide_pdf: Attribute.Media<'files'>;
-    image_principale: Attribute.Media<'images'>;
-    lien_rex_diagnostics: Attribute.Relation<
-      'api::retour-experience-diagnostic.retour-experience-diagnostic',
+    guide_pdf: Schema.Attribute.Media<'files'>;
+    image_principale: Schema.Attribute.Media<'images'>;
+    lien_rex_diagnostics: Schema.Attribute.Relation<
       'oneToMany',
       'api::lien-rex-diagnostic.lien-rex-diagnostic'
     >;
-    lieu: Attribute.String & Attribute.Required;
-    points_vigilance: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    publishedAt: Attribute.DateTime;
-    rank: Attribute.Integer;
-    resultats: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'standard';
-        }
-      >;
-    resultats_images: Attribute.Component<'common.image-with-caption', true>;
-    slug: Attribute.String & Attribute.Required & Attribute.Unique;
-    titre: Attribute.String & Attribute.Required;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'api::retour-experience-diagnostic.retour-experience-diagnostic',
-      'oneToOne',
-      'admin::user'
+    lieu: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::retour-experience-diagnostic.retour-experience-diagnostic'
     > &
-      Attribute.Private;
+      Schema.Attribute.Private;
+    points_vigilance: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    publishedAt: Schema.Attribute.DateTime;
+    rank: Schema.Attribute.Integer;
+    resultats: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    resultats_images: Schema.Attribute.Component<
+      'common.image-with-caption',
+      true
+    >;
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    titre: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
 export interface ApiRetourExperienceRetourExperience
-  extends Schema.CollectionType {
+  extends Struct.CollectionTypeSchema {
   collectionName: 'retour_experiences';
   info: {
     description: '';
@@ -1394,19 +1423,22 @@ export interface ApiRetourExperienceRetourExperience
     draftAndPublish: true;
   };
   attributes: {
-    calendrier: Attribute.Component<'retour-experience.calendrier', true> &
-      Attribute.SetPluginOptions<{
+    calendrier: Schema.Attribute.Component<
+      'retour-experience.calendrier',
+      true
+    > &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    citations: Attribute.Component<'common.citation', true> &
-      Attribute.SetPluginOptions<{
+    citations: Schema.Attribute.Component<'common.citation', true> &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    climat_actuel: Attribute.Enumeration<
+    climat_actuel: Schema.Attribute.Enumeration<
       [
         'oceanique',
         'mediterraneen',
@@ -1414,15 +1446,15 @@ export interface ApiRetourExperienceRetourExperience
         'semi_continental',
         'equatorial',
         'tempere',
-        'tropical'
+        'tropical',
       ]
     > &
-      Attribute.SetPluginOptions<{
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    climat_futur: Attribute.Enumeration<
+    climat_futur: Schema.Attribute.Enumeration<
       [
         'oceanique',
         'mediterraneen',
@@ -1430,171 +1462,165 @@ export interface ApiRetourExperienceRetourExperience
         'semi_continental',
         'equatorial',
         'tempere',
-        'tropical'
+        'tropical',
       ]
     > &
-      Attribute.SetPluginOptions<{
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    contact: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    contact: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    contacts: Attribute.Component<'retour-experience.contact', true>;
-    cout: Attribute.String &
-      Attribute.SetPluginOptions<{
+    contacts: Schema.Attribute.Component<'retour-experience.contact', true>;
+    cout: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    cout_euro: Attribute.Integer;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::retour-experience.retour-experience',
-      'oneToOne',
-      'admin::user'
+    cout_euro: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    credits: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    difficultes: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    echelle: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    export_aquagir: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    financement: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    image_principale: Schema.Attribute.Media<'images'> &
+      Schema.Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::retour-experience.retour-experience'
     > &
-      Attribute.Private;
-    credits: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    description: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    difficultes: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    echelle: Attribute.String &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    export_aquagir: Attribute.Boolean & Attribute.DefaultTo<false>;
-    financement: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'light';
-        }
-      >;
-    image_principale: Attribute.Media<'images'> &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
-    location: Attribute.JSON;
-    odds: Attribute.Relation<
-      'api::retour-experience.retour-experience',
+      Schema.Attribute.Private;
+    location: Schema.Attribute.JSON;
+    odds: Schema.Attribute.Relation<
       'oneToMany',
       'api::objectif-developpement-durable.objectif-developpement-durable'
     >;
-    partenaires: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    partenaires: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    porteur: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    porteur: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    publishedAt: Attribute.DateTime;
-    rank: Attribute.Integer &
-      Attribute.SetPluginOptions<{
+    publishedAt: Schema.Attribute.DateTime;
+    rank: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    region: Attribute.Relation<
-      'api::retour-experience.retour-experience',
-      'oneToOne',
-      'api::region.region'
-    >;
-    ressources: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    region: Schema.Attribute.Relation<'oneToOne', 'api::region.region'>;
+    ressources: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    retour_experiences: Attribute.Relation<
-      'api::retour-experience.retour-experience',
+    retour_experiences: Schema.Attribute.Relation<
       'oneToMany',
       'api::retour-experience.retour-experience'
     >;
-    situation_apres: Attribute.Component<'retour-experience.situation'> &
-      Attribute.SetPluginOptions<{
+    situation_apres: Schema.Attribute.Component<
+      'retour-experience.situation',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    situation_avant: Attribute.Component<'retour-experience.situation'> &
-      Attribute.SetPluginOptions<{
+    situation_avant: Schema.Attribute.Component<
+      'retour-experience.situation',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    slug: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    solution_retour_experiences: Attribute.Relation<
-      'api::retour-experience.retour-experience',
+    solution_retour_experiences: Schema.Attribute.Relation<
       'oneToMany',
       'api::solution-retour-experience.solution-retour-experience'
     >;
-    temporalite: Attribute.Enumeration<
+    temporalite: Schema.Attribute.Enumeration<
       ['court_terme', 'moyen_terme', 'long_terme']
     > &
-      Attribute.SetPluginOptions<{
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    titre: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
+    titre: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    types_espaces: Attribute.JSON &
-      Attribute.CustomField<
+    types_espaces: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
         'plugin::multi-select.multi-select',
         [
           'Rond-point:rondpoint',
@@ -1603,26 +1629,22 @@ export interface ApiRetourExperienceRetourExperience
           'Rue:rue',
           'Place:place',
           "Cour d'\u00E9cole:ecole",
-          'Parc et jardin:parc'
+          'Parc et jardin:parc',
         ]
       >;
-    types_solutions: Attribute.JSON &
-      Attribute.CustomField<
+    types_solutions: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
         'plugin::multi-select.multi-select',
         ['bleue', 'douce', 'verte', 'grise']
       >;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'api::retour-experience.retour-experience',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
 export interface ApiSolutionRetourExperienceSolutionRetourExperience
-  extends Schema.CollectionType {
+  extends Struct.CollectionTypeSchema {
   collectionName: 'solution_retour_experiences';
   info: {
     description: '';
@@ -1634,44 +1656,40 @@ export interface ApiSolutionRetourExperienceSolutionRetourExperience
     draftAndPublish: false;
   };
   attributes: {
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::solution-retour-experience.solution-retour-experience',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    description: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    fiche_solution: Attribute.Relation<
-      'api::solution-retour-experience.solution-retour-experience',
+    fiche_solution: Schema.Attribute.Relation<
       'manyToOne',
       'api::fiche-solution.fiche-solution'
     >;
-    image: Attribute.Media<'images'>;
-    retour_experience: Attribute.Relation<
-      'api::solution-retour-experience.solution-retour-experience',
+    image: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::solution-retour-experience.solution-retour-experience'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    retour_experience: Schema.Attribute.Relation<
       'manyToOne',
       'api::retour-experience.retour-experience'
     >;
-    titre: Attribute.String & Attribute.Required;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'api::solution-retour-experience.solution-retour-experience',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    titre: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
-export interface ApiWebinaireWebinaire extends Schema.CollectionType {
+export interface ApiWebinaireWebinaire extends Struct.CollectionTypeSchema {
   collectionName: 'webinaires';
   info: {
     description: '';
@@ -1683,41 +1701,39 @@ export interface ApiWebinaireWebinaire extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::webinaire.webinaire',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    description: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
-          output: 'HTML';
-          preset: 'light';
+          preset: 'defaultHtml';
         }
       >;
-    heure_debut: Attribute.Time;
-    heure_fin: Attribute.Time;
-    jour_evenement: Attribute.Date;
-    label_btn_secondaire: Attribute.String;
-    lien_btn_secondaire: Attribute.String;
-    lien_inscription: Attribute.String;
-    lien_replay: Attribute.String;
-    publishedAt: Attribute.DateTime;
-    titre: Attribute.String;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'api::webinaire.webinaire',
-      'oneToOne',
-      'admin::user'
+    heure_debut: Schema.Attribute.Time;
+    heure_fin: Schema.Attribute.Time;
+    jour_evenement: Schema.Attribute.Date;
+    label_btn_secondaire: Schema.Attribute.String;
+    lien_btn_secondaire: Schema.Attribute.String;
+    lien_inscription: Schema.Attribute.String;
+    lien_replay: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::webinaire.webinaire'
     > &
-      Attribute.Private;
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    titre: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
-export interface PluginContentReleasesRelease extends Schema.CollectionType {
+export interface PluginContentReleasesRelease
+  extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
   info: {
     displayName: 'Release';
@@ -1736,38 +1752,36 @@ export interface PluginContentReleasesRelease extends Schema.CollectionType {
     };
   };
   attributes: {
-    actions: Attribute.Relation<
-      'plugin::content-releases.release',
+    actions: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::content-releases.release-action'
     >;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::content-releases.release',
-      'oneToOne',
-      'admin::user'
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::content-releases.release'
     > &
-      Attribute.Private;
-    name: Attribute.String & Attribute.Required;
-    releasedAt: Attribute.DateTime;
-    scheduledAt: Attribute.DateTime;
-    status: Attribute.Enumeration<
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    releasedAt: Schema.Attribute.DateTime;
+    scheduledAt: Schema.Attribute.DateTime;
+    status: Schema.Attribute.Enumeration<
       ['ready', 'blocked', 'failed', 'done', 'empty']
     > &
-      Attribute.Required;
-    timezone: Attribute.String;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'plugin::content-releases.release',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+      Schema.Attribute.Required;
+    timezone: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
 export interface PluginContentReleasesReleaseAction
-  extends Schema.CollectionType {
+  extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_release_actions';
   info: {
     displayName: 'Release Action';
@@ -1786,37 +1800,32 @@ export interface PluginContentReleasesReleaseAction
     };
   };
   attributes: {
-    contentType: Attribute.String & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::content-releases.release-action',
-      'oneToOne',
-      'admin::user'
+    contentType: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    entryDocumentId: Schema.Attribute.String;
+    isEntryValid: Schema.Attribute.Boolean;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::content-releases.release-action'
     > &
-      Attribute.Private;
-    entry: Attribute.Relation<
-      'plugin::content-releases.release-action',
-      'morphToOne'
-    >;
-    isEntryValid: Attribute.Boolean;
-    locale: Attribute.String;
-    release: Attribute.Relation<
-      'plugin::content-releases.release-action',
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    release: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::content-releases.release'
     >;
-    type: Attribute.Enumeration<['publish', 'unpublish']> & Attribute.Required;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'plugin::content-releases.release-action',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    type: Schema.Attribute.Enumeration<['publish', 'unpublish']> &
+      Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
-export interface PluginI18NLocale extends Schema.CollectionType {
+export interface PluginI18NLocale extends Struct.CollectionTypeSchema {
   collectionName: 'i18n_locale';
   info: {
     collectionName: 'locales';
@@ -1837,33 +1846,130 @@ export interface PluginI18NLocale extends Schema.CollectionType {
     };
   };
   attributes: {
-    code: Attribute.String & Attribute.Unique;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::i18n.locale',
-      'oneToOne',
-      'admin::user'
+    code: Schema.Attribute.String & Schema.Attribute.Unique;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::i18n.locale'
     > &
-      Attribute.Private;
-    name: Attribute.String &
-      Attribute.SetMinMax<
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.SetMinMax<
         {
           max: 50;
           min: 1;
         },
         number
       >;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'plugin::i18n.locale',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
-export interface PluginUploadFile extends Schema.CollectionType {
+export interface PluginReviewWorkflowsWorkflow
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'strapi_workflows';
+  info: {
+    description: '';
+    displayName: 'Workflow';
+    name: 'Workflow';
+    pluralName: 'workflows';
+    singularName: 'workflow';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    contentTypes: Schema.Attribute.JSON &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'[]'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::review-workflows.workflow'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    publishedAt: Schema.Attribute.DateTime;
+    stageRequiredToPublish: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::review-workflows.workflow-stage'
+    >;
+    stages: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::review-workflows.workflow-stage'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface PluginReviewWorkflowsWorkflowStage
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'strapi_workflows_stages';
+  info: {
+    description: '';
+    displayName: 'Stages';
+    name: 'Workflow Stage';
+    pluralName: 'workflow-stages';
+    singularName: 'workflow-stage';
+  };
+  options: {
+    draftAndPublish: false;
+    version: '1.1.0';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    color: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#4945FF'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::review-workflows.workflow-stage'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    permissions: Schema.Attribute.Relation<'manyToMany', 'admin::permission'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    workflow: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::review-workflows.workflow'
+    >;
+  };
+}
+
+export interface PluginUploadFile extends Struct.CollectionTypeSchema {
   collectionName: 'files';
   info: {
     description: '';
@@ -1871,6 +1977,9 @@ export interface PluginUploadFile extends Schema.CollectionType {
     pluralName: 'files';
     singularName: 'file';
   };
+  options: {
+    draftAndPublish: false;
+  };
   pluginOptions: {
     'content-manager': {
       visible: false;
@@ -1880,60 +1989,56 @@ export interface PluginUploadFile extends Schema.CollectionType {
     };
   };
   attributes: {
-    alternativeText: Attribute.String;
-    caption: Attribute.String;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::upload.file',
-      'oneToOne',
-      'admin::user'
+    alternativeText: Schema.Attribute.Text;
+    caption: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    ext: Schema.Attribute.String;
+    focalPoint: Schema.Attribute.JSON;
+    folder: Schema.Attribute.Relation<'manyToOne', 'plugin::upload.folder'> &
+      Schema.Attribute.Private;
+    folderPath: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    formats: Schema.Attribute.JSON;
+    hash: Schema.Attribute.String & Schema.Attribute.Required;
+    height: Schema.Attribute.Integer;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::upload.file'
     > &
-      Attribute.Private;
-    ext: Attribute.String;
-    folder: Attribute.Relation<
-      'plugin::upload.file',
-      'manyToOne',
-      'plugin::upload.folder'
-    > &
-      Attribute.Private;
-    folderPath: Attribute.String &
-      Attribute.Required &
-      Attribute.Private &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
-    formats: Attribute.JSON;
-    hash: Attribute.String & Attribute.Required;
-    height: Attribute.Integer;
-    mime: Attribute.String & Attribute.Required;
-    name: Attribute.String & Attribute.Required;
-    previewUrl: Attribute.String;
-    provider: Attribute.String & Attribute.Required;
-    provider_metadata: Attribute.JSON;
-    related: Attribute.Relation<'plugin::upload.file', 'morphToMany'>;
-    size: Attribute.Decimal & Attribute.Required;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'plugin::upload.file',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    url: Attribute.String & Attribute.Required;
-    width: Attribute.Integer;
+      Schema.Attribute.Private;
+    mime: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    previewUrl: Schema.Attribute.Text;
+    provider: Schema.Attribute.String & Schema.Attribute.Required;
+    provider_metadata: Schema.Attribute.JSON;
+    publishedAt: Schema.Attribute.DateTime;
+    related: Schema.Attribute.Relation<'morphToMany'>;
+    size: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    url: Schema.Attribute.Text & Schema.Attribute.Required;
+    width: Schema.Attribute.Integer;
   };
 }
 
-export interface PluginUploadFolder extends Schema.CollectionType {
+export interface PluginUploadFolder extends Struct.CollectionTypeSchema {
   collectionName: 'upload_folders';
   info: {
     displayName: 'Folder';
     pluralName: 'folders';
     singularName: 'folder';
   };
+  options: {
+    draftAndPublish: false;
+  };
   pluginOptions: {
     'content-manager': {
       visible: false;
@@ -1943,57 +2048,40 @@ export interface PluginUploadFolder extends Schema.CollectionType {
     };
   };
   attributes: {
-    children: Attribute.Relation<
-      'plugin::upload.folder',
+    children: Schema.Attribute.Relation<'oneToMany', 'plugin::upload.folder'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    files: Schema.Attribute.Relation<'oneToMany', 'plugin::upload.file'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::upload.folder'
-    >;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::upload.folder',
-      'oneToOne',
-      'admin::user'
     > &
-      Attribute.Private;
-    files: Attribute.Relation<
-      'plugin::upload.folder',
-      'oneToMany',
-      'plugin::upload.file'
-    >;
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
-    parent: Attribute.Relation<
-      'plugin::upload.folder',
-      'manyToOne',
-      'plugin::upload.folder'
-    >;
-    path: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
-    pathId: Attribute.Integer & Attribute.Required & Attribute.Unique;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'plugin::upload.folder',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    parent: Schema.Attribute.Relation<'manyToOne', 'plugin::upload.folder'>;
+    path: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pathId: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
 export interface PluginUsersPermissionsPermission
-  extends Schema.CollectionType {
+  extends Struct.CollectionTypeSchema {
   collectionName: 'up_permissions';
   info: {
     description: '';
@@ -2002,6 +2090,9 @@ export interface PluginUsersPermissionsPermission
     pluralName: 'permissions';
     singularName: 'permission';
   };
+  options: {
+    draftAndPublish: false;
+  };
   pluginOptions: {
     'content-manager': {
       visible: false;
@@ -2011,30 +2102,29 @@ export interface PluginUsersPermissionsPermission
     };
   };
   attributes: {
-    action: Attribute.String & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::users-permissions.permission',
-      'oneToOne',
-      'admin::user'
+    action: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::users-permissions.permission'
     > &
-      Attribute.Private;
-    role: Attribute.Relation<
-      'plugin::users-permissions.permission',
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    role: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'plugin::users-permissions.permission',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
-export interface PluginUsersPermissionsRole extends Schema.CollectionType {
+export interface PluginUsersPermissionsRole
+  extends Struct.CollectionTypeSchema {
   collectionName: 'up_roles';
   info: {
     description: '';
@@ -2043,6 +2133,9 @@ export interface PluginUsersPermissionsRole extends Schema.CollectionType {
     pluralName: 'roles';
     singularName: 'role';
   };
+  options: {
+    draftAndPublish: false;
+  };
   pluginOptions: {
     'content-manager': {
       visible: false;
@@ -2052,41 +2145,39 @@ export interface PluginUsersPermissionsRole extends Schema.CollectionType {
     };
   };
   attributes: {
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::users-permissions.role',
-      'oneToOne',
-      'admin::user'
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::users-permissions.role'
     > &
-      Attribute.Private;
-    description: Attribute.String;
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 3;
       }>;
-    permissions: Attribute.Relation<
-      'plugin::users-permissions.role',
+    permissions: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::users-permissions.permission'
     >;
-    type: Attribute.String & Attribute.Unique;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'plugin::users-permissions.role',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    users: Attribute.Relation<
-      'plugin::users-permissions.role',
+    publishedAt: Schema.Attribute.DateTime;
+    type: Schema.Attribute.String & Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    users: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::users-permissions.user'
     >;
   };
 }
 
-export interface PluginUsersPermissionsUser extends Schema.CollectionType {
+export interface PluginUsersPermissionsUser
+  extends Struct.CollectionTypeSchema {
   collectionName: 'up_users';
   info: {
     description: '';
@@ -2100,56 +2191,55 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     timestamps: true;
   };
   attributes: {
-    blocked: Attribute.Boolean & Attribute.DefaultTo<false>;
-    confirmationToken: Attribute.String & Attribute.Private;
-    confirmed: Attribute.Boolean & Attribute.DefaultTo<false>;
-    createdAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToOne',
-      'admin::user'
+    blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
+    confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 6;
+      }>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'plugin::users-permissions.user'
     > &
-      Attribute.Private;
-    email: Attribute.Email &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
+      Schema.Attribute.Private;
+    password: Schema.Attribute.Password &
+      Schema.Attribute.Private &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
-    password: Attribute.Password &
-      Attribute.Private &
-      Attribute.SetMinMaxLength<{
-        minLength: 6;
-      }>;
-    provider: Attribute.String;
-    resetPasswordToken: Attribute.String & Attribute.Private;
-    role: Attribute.Relation<
-      'plugin::users-permissions.user',
+    provider: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
+    role: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    updatedAt: Attribute.DateTime;
-    updatedBy: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    username: Attribute.String &
-      Attribute.Required &
-      Attribute.Unique &
-      Attribute.SetMinMaxLength<{
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    username: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetMinMaxLength<{
         minLength: 3;
       }>;
   };
 }
 
-declare module '@strapi/types' {
-  export module Shared {
-    export interface ContentTypes {
+declare module '@strapi/strapi' {
+  export namespace Public {
+    export interface ContentTypeSchemas {
       'admin::api-token': AdminApiToken;
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::permission': AdminPermission;
       'admin::role': AdminRole;
+      'admin::session': AdminSession;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
@@ -2169,6 +2259,8 @@ declare module '@strapi/types' {
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
+      'plugin::review-workflows.workflow': PluginReviewWorkflowsWorkflow;
+      'plugin::review-workflows.workflow-stage': PluginReviewWorkflowsWorkflowStage;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
