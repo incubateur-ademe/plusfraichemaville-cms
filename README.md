@@ -23,12 +23,20 @@ Cela permettra à l'instance en local de se connecter à la base de données, et
 Le schéma de la base sera automatiquement créé / mis à jour par Strapi au démarrage du serveur.
 
 
+### Installation des dépendances
+
+Ce projet utilise [pnpm](https://pnpm.io/) comme gestionnaire de paquets.
+
+```shell
+pnpm install
+```
+
 ### Démarrage
 
 Démarrez ensuite le serveur en mode développement :
 
 ```shell
-npm run develop
+pnpm run develop
 ```
 
 
@@ -36,7 +44,7 @@ npm run develop
 
 Les classes typescript peuvent être générées grâce au plugin schemas-to-ts, en lançant la commande suivante:
 ```shell
-npm run generate-types
+pnpm run generate-types
 ```
 
 Les fichiers générés dans le répertoires /types sont à copier tels quels dans le répertoire /lib/strapi/types du [repo NextJS](https://github.com/incubateur-ademe/plusfraichemaville-site) du site https://plusfraichemaville.fr  
