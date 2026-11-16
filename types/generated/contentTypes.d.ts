@@ -529,6 +529,44 @@ export interface ApiAideDecisionEtapeAideDecisionEtape
   };
 }
 
+export interface ApiCharteCharte extends Struct.CollectionTypeSchema {
+  collectionName: 'chartes';
+  info: {
+    displayName: 'Charte';
+    pluralName: 'chartes';
+    singularName: 'charte';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    annee_signature: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    departement: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::departement.departement'
+    > &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::charte.charte'
+    > &
+      Schema.Attribute.Private;
+    nom_collectivite: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    retour_experiences: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::retour-experience.retour-experience'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCobeneficeCobenefice extends Struct.CollectionTypeSchema {
   collectionName: 'cobenefices';
   info: {
@@ -1500,6 +1538,7 @@ export interface ApiRetourExperienceRetourExperience
           versioned: true;
         };
       }>;
+    charte: Schema.Attribute.Relation<'manyToOne', 'api::charte.charte'>;
     citations: Schema.Attribute.Component<'common.citation', true> &
       Schema.Attribute.SetPluginOptions<{
         versions: {
@@ -2336,6 +2375,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::aide-decision-etape.aide-decision-etape': ApiAideDecisionEtapeAideDecisionEtape;
+      'api::charte.charte': ApiCharteCharte;
       'api::cobenefice.cobenefice': ApiCobeneficeCobenefice;
       'api::departement.departement': ApiDepartementDepartement;
       'api::evenement.evenement': ApiEvenementEvenement;

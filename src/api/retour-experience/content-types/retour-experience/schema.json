@@ -13,57 +13,57 @@
   "pluginOptions": {},
   "attributes": {
     "titre": {
+      "type": "string",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "type": "string",
       "required": true
     },
     "slug": {
+      "type": "string",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "type": "string",
-      "unique": false,
-      "required": true
+      "required": true,
+      "unique": false
     },
     "image_principale": {
       "type": "media",
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
       "multiple": false,
       "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "pluginOptions": {
-        "versions": {
-          "versioned": true
-        }
-      }
+      ]
     },
     "types_solutions": {
       "type": "customField",
+      "customField": "plugin::multi-select.multi-select",
       "options": [
         "bleue",
         "douce",
         "verte",
         "grise"
       ],
-      "required": false,
-      "customField": "plugin::multi-select.multi-select"
+      "required": false
     },
     "citations": {
       "type": "component",
-      "repeatable": true,
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "component": "common.citation"
+      "component": "common.citation",
+      "repeatable": true
     },
     "region": {
       "type": "relation",
@@ -71,12 +71,12 @@
       "target": "api::region.region"
     },
     "climat_actuel": {
+      "type": "enumeration",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "type": "enumeration",
       "enum": [
         "oceanique",
         "mediterraneen",
@@ -88,12 +88,12 @@
       ]
     },
     "climat_futur": {
+      "type": "enumeration",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "type": "enumeration",
       "enum": [
         "oceanique",
         "mediterraneen",
@@ -105,20 +105,20 @@
       ]
     },
     "echelle": {
+      "type": "string",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
-      },
-      "type": "string"
+      }
     },
     "temporalite": {
+      "type": "enumeration",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "type": "enumeration",
       "enum": [
         "court_terme",
         "moyen_terme",
@@ -126,15 +126,16 @@
       ]
     },
     "cout": {
+      "type": "string",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
-      },
-      "type": "string"
+      }
     },
     "types_espaces": {
       "type": "customField",
+      "customField": "plugin::multi-select.multi-select",
       "options": [
         "Rond-point:rondpoint",
         "Bâtiment:batiment",
@@ -143,8 +144,7 @@
         "Place:place",
         "Cour d'école:ecole",
         "Parc et jardin:parc"
-      ],
-      "customField": "plugin::multi-select.multi-select"
+      ]
     },
     "retour_experiences": {
       "type": "relation",
@@ -158,34 +158,33 @@
     },
     "situation_avant": {
       "type": "component",
-      "repeatable": false,
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "component": "retour-experience.situation"
+      "component": "retour-experience.situation",
+      "repeatable": false
     },
     "situation_apres": {
       "type": "component",
-      "repeatable": false,
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "component": "retour-experience.situation"
+      "component": "retour-experience.situation",
+      "repeatable": false
     },
     "calendrier": {
-      "displayName": "Calendrier",
       "type": "component",
-      "repeatable": true,
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "component": "retour-experience.calendrier"
+      "component": "retour-experience.calendrier",
+      "repeatable": true
     },
     "solution_retour_experiences": {
       "type": "relation",
@@ -195,76 +194,76 @@
     },
     "description": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
       },
-      "required": true,
-      "customField": "plugin::ckeditor5.CKEditor"
+      "required": true
     },
     "porteur": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      }
     },
     "contact": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      }
     },
     "financement": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      }
     },
     "difficultes": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      }
     },
     "partenaires": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      }
     },
     "ressources": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      }
     },
     "credits": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      }
     },
     "rank": {
+      "type": "integer",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
-      },
-      "type": "integer"
+      }
     },
     "location": {
       "type": "json"
     },
     "contacts": {
       "type": "component",
-      "repeatable": true,
-      "component": "retour-experience.contact"
+      "component": "retour-experience.contact",
+      "repeatable": true
     },
     "cout_euro": {
       "type": "integer"
@@ -272,6 +271,12 @@
     "export_aquagir": {
       "type": "boolean",
       "default": false
+    },
+    "charte": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::charte.charte",
+      "inversedBy": "retour_experiences"
     }
   }
 }
