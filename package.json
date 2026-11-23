@@ -7,8 +7,7 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi",
-    "generate-types": "pnpm dlx @4very/strapi-plugin-schemas-to-ts generateInterfaces --strapi-root-path . --destinationFolder types "
+    "strapi": "strapi"
   },
   "dependencies": {
     "@_sh/strapi-plugin-ckeditor": "^8.0.0",

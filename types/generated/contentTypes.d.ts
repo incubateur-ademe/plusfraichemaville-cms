@@ -1109,7 +1109,7 @@ export interface ApiFicheSolutionFicheSolution
         }
       >;
     portee_baisse_temperature: Schema.Attribute.Enumeration<
-      ['air', 'surface', 'interieur']
+      ['air', 'surface', 'interieur', 'ressentie']
     >;
     publishedAt: Schema.Attribute.DateTime;
     rafraichissement_attendu_description: Schema.Attribute.RichText &
