@@ -13,36 +13,36 @@
   "pluginOptions": {},
   "attributes": {
     "titre": {
+      "type": "string",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "type": "string",
       "required": true
     },
     "slug": {
+      "type": "string",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "type": "string",
       "required": true,
       "unique": false
     },
     "image_principale": {
       "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ],
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
-      }
+      },
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "solution_retour_experiences": {
       "type": "relation",
@@ -51,32 +51,32 @@
       "mappedBy": "fiche_solution"
     },
     "cout_minimum": {
+      "type": "integer",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "type": "integer",
       "required": false,
       "min": 0
     },
     "cout_maximum": {
+      "type": "integer",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "type": "integer",
       "required": false,
       "min": 0
     },
     "type_solution": {
+      "type": "enumeration",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "type": "enumeration",
       "enum": [
         "bleue",
         "verte",
@@ -85,127 +85,126 @@
       ]
     },
     "description_courte": {
+      "type": "string",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "type": "string",
       "required": true
     },
     "description": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
       },
-      "required": true,
-      "customField": "plugin::ckeditor5.CKEditor"
+      "required": true
     },
     "baisse_temperature": {
+      "type": "decimal",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "type": "decimal",
-      "min": 0,
-      "required": false
+      "required": false,
+      "min": 0
     },
     "contexte_titre": {
+      "type": "string",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "type": "string",
       "default": "Pourquoi choisir cette solution ?",
       "required": true
     },
     "contexte_description": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
       },
-      "required": true,
-      "customField": "plugin::ckeditor5.CKEditor"
+      "required": true
     },
     "rafraichissement_attendu_description": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      }
     },
     "logo_partenaire": {
       "type": "media",
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
       "multiple": false,
       "required": false,
       "allowedTypes": [
         "images"
-      ],
+      ]
+    },
+    "cout_minimum_entretien": {
+      "type": "integer",
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "min": 0
+    },
+    "cout_maximum_entretien": {
+      "type": "integer",
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "min": 0
+    },
+    "etapes_mise_en_oeuvre": {
+      "type": "component",
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "component": "fiche-solution.etape-mise-en-oeuvre",
+      "repeatable": true
+    },
+    "etapes_entretien": {
+      "type": "component",
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "component": "fiche-solution.etape-entretien",
+      "repeatable": true
+    },
+    "point_vigilance": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
+    },
+    "lien_fond_vert": {
+      "type": "string",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       }
     },
-    "cout_minimum_entretien": {
-      "pluginOptions": {
-        "versions": {
-          "versioned": true
-        }
-      },
-      "type": "integer",
-      "min": 0
-    },
-    "cout_maximum_entretien": {
-      "pluginOptions": {
-        "versions": {
-          "versioned": true
-        }
-      },
-      "type": "integer",
-      "min": 0
-    },
-    "etapes_mise_en_oeuvre": {
-      "displayName": "etape_mise_en_oeuvre",
-      "type": "component",
-      "repeatable": true,
-      "pluginOptions": {
-        "versions": {
-          "versioned": true
-        }
-      },
-      "component": "fiche-solution.etape-mise-en-oeuvre"
-    },
-    "etapes_entretien": {
-      "displayName": "etape_entretien",
-      "type": "component",
-      "repeatable": true,
-      "pluginOptions": {
-        "versions": {
-          "versioned": true
-        }
-      },
-      "component": "fiche-solution.etape-entretien"
-    },
-    "point_vigilance": {
-      "type": "customField",
-      "options": {
-        "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
-    },
-    "lien_fond_vert": {
-      "pluginOptions": {
-        "versions": {
-          "versioned": true
-        }
-      },
-      "type": "string"
-    },
     "types_espace": {
       "type": "customField",
+      "customField": "plugin::multi-select.multi-select",
       "options": [
         "Rond-point:rondpoint",
         "Bâtiment:batiment",
@@ -214,26 +213,25 @@
         "Place:place",
         "Cour d'école:ecole",
         "Parc et jardin:parc"
-      ],
-      "customField": "plugin::multi-select.multi-select"
+      ]
     },
     "etapes_diagnostic": {
       "type": "component",
-      "repeatable": true,
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "component": "fiche-solution.etape-diagnostic"
+      "component": "fiche-solution.etape-diagnostic",
+      "repeatable": true
     },
     "rank": {
+      "type": "integer",
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
-      },
-      "type": "integer"
+      }
     },
     "materiaux": {
       "type": "relation",
@@ -254,38 +252,39 @@
     },
     "oups": {
       "type": "component",
-      "repeatable": true,
       "pluginOptions": {
         "versions": {
           "versioned": true
         }
       },
-      "component": "fiche-solution.oups"
+      "component": "fiche-solution.oups",
+      "repeatable": true
     },
     "cout_entretien_description": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      }
     },
     "delai_travaux_minimum": {
       "type": "integer",
-      "min": 0,
-      "required": false
+      "required": false,
+      "min": 0
     },
     "delai_travaux_maximum": {
       "type": "integer",
+      "required": false,
       "unique": false,
-      "min": 0,
-      "required": false
+      "min": 0
     },
     "portee_baisse_temperature": {
       "type": "enumeration",
       "enum": [
         "air",
         "surface",
-        "interieur"
+        "interieur",
+        "ressentie"
       ]
     },
     "cout_entretien_unite": {
@@ -301,35 +300,35 @@
     },
     "en_savoir_plus": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      }
     },
     "libelle_avantage_solution": {
       "type": "string"
     },
     "credits": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      }
     },
     "cout_unite": {
       "type": "enumeration",
+      "default": "metreCarre",
       "enum": [
         "metreCarre",
         "megaWattHeure"
-      ],
-      "default": "metreCarre"
+      ]
     },
     "description_estimation": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      }
     },
     "aides_territoires_mots_cles": {
       "type": "text"
