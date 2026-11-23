@@ -40,11 +40,11 @@ pnpm run develop
 ```
 
 
-## Classe typescript
+## Schéma GraphQL
 
-Les classes typescript peuvent être générées grâce au plugin schemas-to-ts, en lançant la commande suivante:
+Le fichier `schema.graphql`, à la racine du projet, est généré par le plugin GraphQL de Strapi (option `generateArtifacts` dans `config/plugins.ts`). Il est régénéré automatiquement à chaque démarrage en mode développement :
 ```shell
-pnpm run generate-types
+pnpm run develop
 ```
 
-Les fichiers générés dans le répertoires /types sont à copier tels quels dans le répertoire /lib/strapi/types du [repo NextJS](https://github.com/incubateur-ademe/plusfraichemaville-site) du site https://plusfraichemaville.fr  
+Ce fichier sert de source pour [GraphQL Code Generator](https://the-guild.dev/graphql/codegen) dans le [repo NextJS](https://github.com/incubateur-ademe/plusfraichemaville-site) du site https://plusfraichemaville.fr, qui génère les types des requêtes GraphQL.
